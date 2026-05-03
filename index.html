@@ -1860,10 +1860,10 @@ function App() {
                 </div>
 
                 {/* Question + Options */}
-                <div style={{flex:1,width:'100%',maxWidth:480,margin:'0 auto',overflowY:'auto'}} className="no-bar">
+                <div style={{flex:1,width:'100%',maxWidth:480,margin:'0 auto',overflowY:'scroll'}} className="no-bar">
                     {/* Question card */}
                     <div className={navDir==='back' ? 'slide-in-back' : 'slide-in'} key={`q-${qIdx}-${navDir}`} style={{background:'var(--card)',padding:'20px 20px 0'}}>
-                        <div style={{fontSize:18,fontWeight:700,color:'var(--text-dark)',lineHeight:1.65,whiteSpace:'pre-line',paddingBottom:16,borderBottom:'2px solid var(--border)',height:130,display:'flex',alignItems:'center'}}>
+                        <div style={{fontSize:20,fontWeight:700,color:'var(--text-dark)',lineHeight:1.6,paddingBottom:16,paddingTop:4,borderBottom:'2px solid var(--border)',minHeight:'clamp(90px,16vh,140px)',width:'100%',boxSizing:'border-box'}}>
                             {QUESTIONS[qIdx]}
                         </div>
                         <div style={{fontSize:11,color:'var(--text-light)',padding:'10px 0 4px'}}>請選擇最符合您真實狀況的選項</div>
