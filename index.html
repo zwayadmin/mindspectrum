@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>覺知心智光譜｜了解您的原生底色</title>
+    <title>覺知素養教育xSEL：心智光譜測驗</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -12,28 +15,36 @@
 
     <style>
         :root {
-            --primary:      #1A2740;   /* 深海藍 - 主色 */
-            --primary-mid:  #2D3F5C;   /* 中藍 */
-            --primary-light:#4A6080;   /* 淺藍 */
-            --accent:       #E8600A;   /* 展威橘 */
-            --accent-light: #F5914A;
-            --accent-pale:  #FFF0E6;
-            --gold:         #C8960A;   /* 金色強調 */
-            --gold-pale:    #FFF8E0;
-            --surface:      #F5F7FA;   /* 淺灰背景 */
-            --surface2:     #EAECF0;
-            --white:        #FFFFFF;
-            --text-dark:    #1A2740;
-            --text-mid:     #4A5568;
-            --text-light:   #8896A8;
-            --red:    #D63030;
-            --orange: #E8600A;
-            --green:  #2E8B5A;
-            --blue:   #3A70B0;
-            --red-pale:    #FFF0F0;
-            --orange-pale: #FFF0E6;
-            --green-pale:  #F0FAF4;
-            --blue-pale:   #EEF4FF;
+            --bg:        #EEF2FF;
+            --surface:   #E8EDFF;
+            --card:      #FFFFFF;
+            --border:    #DDE3FF;
+            --border-mid:#B8C4FF;
+            --text-dark: #1E1B4B;
+            --text-mid:  #6B7280;
+            --text-light:#9CA3AF;
+            --accent:    #6366F1;
+            --accent-dark:#4F46E5;
+            --accent-pale:#EEF2FF;
+            --red:    #E53E3E;
+            --orange: #DD6B20;
+            --green:  #38A169;
+            --blue:   #3182CE;
+            --red-pale:    #FFF4F4;
+            --orange-pale: #FFF6EE;
+            --green-pale:  #F0FAF5;
+            --blue-pale:   #EEF5FF;
+            --white:   #FFFFFF;
+            /* backward compat */
+            --charcoal:     var(--accent);
+            --charcoal-mid: var(--accent-dark);
+            --yellow:       var(--accent);
+            --yellow-dark:  var(--accent-dark);
+            --yellow-pale:  var(--accent-pale);
+            --yellow-soft:  var(--surface);
+            --cream:        var(--bg);
+            --blue2:        var(--accent);
+            --navy:         var(--accent-dark);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,115 +52,89 @@
         body, html {
             height: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
-            background: linear-gradient(160deg, #FFF6F0 0%, #F5F8FF 50%, #F0FBF5 100%);
-            background-image:
-                linear-gradient(160deg, rgba(255,240,230,0.9) 0%, rgba(245,248,255,0.85) 50%, rgba(240,251,245,0.9) 100%),
-                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Crect x='40' y='30' width='140' height='140' rx='22' fill='%23F2B8A8' opacity='0.18' transform='rotate(-12 110 100)'/%3E%3Crect x='210' y='10' width='110' height='110' rx='18' fill='%23F8D898' opacity='0.15' transform='rotate(6 265 65)'/%3E%3Crect x='370' y='50' width='130' height='130' rx='20' fill='%23B8DDB0' opacity='0.15' transform='rotate(-8 435 115)'/%3E%3Crect x='540' y='20' width='100' height='100' rx='16' fill='%23A8C8E8' opacity='0.15' transform='rotate(10 590 70)'/%3E%3Crect x='10' y='210' width='120' height='120' rx='20' fill='%23F8D898' opacity='0.13' transform='rotate(8 70 270)'/%3E%3Crect x='170' y='180' width='150' height='150' rx='24' fill='%23D8B8D8' opacity='0.12' transform='rotate(-5 245 255)'/%3E%3Crect x='360' y='200' width='120' height='120' rx='20' fill='%23F2B8A8' opacity='0.14' transform='rotate(14 420 260)'/%3E%3Crect x='530' y='170' width='140' height='140' rx='22' fill='%23B8DDB0' opacity='0.13' transform='rotate(-10 600 240)'/%3E%3Crect x='50' y='390' width='130' height='130' rx='22' fill='%23A8C8E8' opacity='0.14' transform='rotate(-6 115 455)'/%3E%3Crect x='220' y='370' width='110' height='110' rx='18' fill='%23F2B8A8' opacity='0.12' transform='rotate(9 275 425)'/%3E%3Crect x='380' y='380' width='140' height='140' rx='22' fill='%23F8D898' opacity='0.13' transform='rotate(-12 450 450)'/%3E%3Crect x='555' y='360' width='120' height='120' rx='20' fill='%23D8B8D8' opacity='0.11' transform='rotate(7 615 420)'/%3E%3Crect x='20' y='560' width='110' height='110' rx='18' fill='%23B8DDB0' opacity='0.12' transform='rotate(11 75 615)'/%3E%3Crect x='200' y='550' width='130' height='130' rx='22' fill='%23A8C8E8' opacity='0.11' transform='rotate(-8 265 615)'/%3E%3Crect x='380' y='560' width='115' height='115' rx='18' fill='%23F2B8A8' opacity='0.10' transform='rotate(6 437 617)'/%3E%3Crect x='545' y='540' width='135' height='135' rx='22' fill='%23F8D898' opacity='0.12' transform='rotate(-9 612 607)'/%3E%3C/svg%3E");
-            background-size: cover;
-            background-attachment: fixed;
+            background: var(--bg);
             -webkit-user-select: none;
             user-select: none;
             color: var(--text-dark);
         }
         input, textarea { -webkit-user-select: auto; user-select: auto; }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes popIn {
-            0%   { transform: scale(0.88); opacity: 0; }
-            70%  { transform: scale(1.03); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(16px); }
-            to   { opacity: 1; transform: translateX(0); }
-        }
-        .fade-up  { animation: fadeUp 0.4s cubic-bezier(.22,.68,0,1.15) both; }
-        .pop-in   { animation: popIn 0.38s cubic-bezier(.22,.68,0,1.2) both; }
-        .slide-in { animation: slideIn 0.35s cubic-bezier(.22,.68,0,1.15) both; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { 0% { transform: scale(0.88); opacity: 0; } 70% { transform: scale(1.03); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes slideIn     { from { opacity: 0; transform: translateX(16px); }  to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInBack { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .no-bar { -ms-overflow-style:none; scrollbar-width:none; }
-        .no-bar::-webkit-scrollbar { display:none; }
+        .fade-up       { animation: fadeUp     0.4s  cubic-bezier(.22,.68,0,1.15) both; }
+        .pop-in        { animation: popIn      0.38s cubic-bezier(.22,.68,0,1.2)  both; }
+        .slide-in      { animation: slideIn    0.3s  cubic-bezier(.22,.68,0,1.15) both; }
+        .slide-in-back { animation: slideInBack 0.3s cubic-bezier(.22,.68,0,1.15) both; }
 
-        /* ── Layout ──────────────────────── */
+        @media (hover: hover) {
+            .entry-card:hover    { background: var(--surface); }
+            .option-btn:hover    { background: var(--accent-pale); }
+            .btn-primary:hover   { background: var(--accent-dark); }
+            .btn-secondary:hover { background: var(--surface); }
+            .btn-outline:hover   { background: var(--surface); border-color: var(--border-mid); }
+            .btn-ghost:hover     { color: var(--text-mid); }
+            .identity-card:hover { background: var(--surface); border-color: var(--border-mid); }
+        }
+
+        .no-bar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-bar::-webkit-scrollbar { display: none; }
+
         .page {
             min-height: 100vh;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: var(--surface);
+            background: var(--bg);
         }
 
-        /* ── Top Header ──────────────────── */
+        /* ── Header: card bg + spectrum strip as top border ── */
         .top-header {
             width: 100%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
-            padding: 40px 24px 32px;
+            background: var(--card);
+            padding: 52px 24px 32px;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }
-        .top-header::before {
-            content: '';
-            position: absolute;
-            top: -40px; right: -40px;
-            width: 180px; height: 180px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.04);
-        }
-        .top-header::after {
-            content: '';
-            position: absolute;
-            bottom: -30px; left: -20px;
-            width: 120px; height: 120px;
-            border-radius: 50%;
-            background: rgba(232,96,10,0.08);
-        }
-        .spectrum-strip {
-            display: flex;
-            height: 3px;
-            margin: 16px auto 0;
-            max-width: 120px;
-            border-radius: 2px;
-            overflow: hidden;
-            gap: 2px;
+            border-bottom: 1px solid var(--border);
         }
 
-        /* ── Content ─────────────────────── */
+        /* ── Spectrum strip: full-width coloured top band ── */
+        .spectrum-strip {
+            display: flex;
+            width: 100%;
+            height: 8px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
         .content {
             width: 100%;
             max-width: 480px;
-            padding: 20px 18px 48px;
+            padding: 24px 18px 64px;
             flex: 1;
         }
 
-        /* ── Cards ───────────────────────── */
         .card {
-            background: var(--white);
-            border-radius: 16px;
-            border: 1px solid var(--surface2);
-            padding: 20px;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 22px;
             margin-bottom: 12px;
-            box-shadow: 0 1px 4px rgba(26,39,64,0.06);
-        }
-        .card-accent {
-            background: var(--white);
-            border-radius: 16px;
-            border: 1.5px solid var(--accent-pale);
-            padding: 20px;
-            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 12px rgba(99,102,241,0.07);
         }
 
-        /* ── Buttons ─────────────────────── */
         .btn-primary {
             width: 100%;
             background: var(--accent);
             color: #fff;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             padding: 16px;
             font-size: 16px;
             font-weight: 700;
@@ -159,16 +144,15 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            letter-spacing: 0.3px;
         }
-        .btn-primary:active { transform: scale(0.97); background: #C05008; }
+        .btn-primary:active { transform: scale(0.97); background: var(--accent-dark); }
 
         .btn-secondary {
             width: 100%;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 14px;
+            background: transparent;
+            color: var(--text-dark);
+            border: 1.5px solid var(--text-dark);
+            border-radius: 12px;
             padding: 16px;
             font-size: 16px;
             font-weight: 700;
@@ -179,14 +163,14 @@
             justify-content: center;
             gap: 8px;
         }
-        .btn-secondary:active { transform: scale(0.97); background: #0E1929; }
+        .btn-secondary:active { transform: scale(0.97); }
 
         .btn-outline {
             width: 100%;
             background: transparent;
             color: var(--text-mid);
-            border: 1.5px solid var(--surface2);
-            border-radius: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 13px;
             font-size: 14px;
             font-weight: 600;
@@ -214,23 +198,19 @@
             gap: 4px;
         }
 
-        /* ── Inputs ──────────────────────── */
         .input-field {
             width: 100%;
             padding: 13px 14px 13px 44px;
             font-size: 15px;
-            background: var(--surface);
-            border: 1.5px solid var(--surface2);
-            border-radius: 12px;
+            background: var(--accent-pale);
+            border: 1px solid var(--border);
+            border-radius: 10px;
             outline: none;
             color: var(--text-dark);
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: border-color 0.2s;
             font-family: inherit;
         }
-        .input-field:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(232,96,10,0.1);
-        }
+        .input-field:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.12); }
         .input-wrap { position: relative; }
         .input-icon {
             position: absolute;
@@ -240,67 +220,60 @@
             color: var(--text-light);
         }
 
-        /* ── Entry Cards (Home) ───────────── */
         .entry-card {
-            background: var(--white);
-            border-radius: 18px;
-            border: 1px solid var(--surface2);
-            padding: 20px;
-            margin-bottom: 12px;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 16px;
             text-decoration: none;
-            transition: all 0.18s;
-            box-shadow: 0 2px 8px rgba(26,39,64,0.06);
+            transition: background 0.15s;
+            border: 1px solid var(--border);
+            width: 100%;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(99,102,241,0.06);
         }
-        .entry-card:active, .entry-card:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,39,64,0.12); }
+        .entry-card:active { background: var(--surface); }
 
-        /* ── Quiz Option Buttons ─────────── */
+        .identity-card {
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+            box-shadow: 0 2px 10px rgba(99,102,241,0.06);
+        }
+        .identity-card:active { background: var(--surface); }
+
+        /* ── Quiz option buttons ── */
         .option-btn {
             width: 100%;
-            background: var(--white);
-            border: 1.5px solid var(--surface2);
-            border-radius: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 15px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
             transition: all 0.15s;
-            margin-bottom: 10px;
-            box-shadow: 0 1px 3px rgba(26,39,64,0.06);
+            margin-bottom: 8px;
         }
-        .option-btn:active { transform: scale(0.98); background: var(--accent-pale); border-color: var(--accent); }
+        .option-btn:active { transform: scale(0.98); background: var(--surface); }
 
-        /* ── Score Bar ───────────────────── */
-        .score-bar-track { width:100%; height:8px; border-radius:6px; overflow:hidden; margin-top:4px; background:var(--surface2); }
-        .score-bar-fill  { height:100%; border-radius:6px; transition:width 1s ease-out; }
-
-        /* ── Result type sections ─────────── */
         .type-section {
-            background: var(--white);
-            border-radius: 14px;
-            padding: 14px 16px;
+            background: var(--card);
+            border-radius: 0;
+            padding: 16px 18px;
             margin-bottom: 10px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 1px 4px rgba(26,39,64,0.05);
+            border: none;
+            border-left: 3px solid var(--border);
         }
 
-        /* ── Badge ───────────────────────── */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            background: var(--accent-pale);
-            color: var(--accent);
-        }
-
-        /* ── Divider ─────────────────────── */
         .divider {
             display: flex;
             align-items: center;
@@ -311,80 +284,229 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: var(--surface2);
+            background: var(--border);
         }
 
-        /* ━━━ RESPONSIVE: Desktop ━━━━━━━━━ */
-        @media (min-width: 768px) {
-            body { background: var(--primary); }
+        .tag-yellow {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            background: var(--surface);
+            color: var(--text-dark);
+            border: 1px solid var(--border);
+        }
 
+        @media (min-width: 768px) {
+            body { background: #E0E7FF; }
             .page {
                 min-height: 100vh;
-                background: var(--primary);
+                background: #E0E7FF;
                 justify-content: center;
                 align-items: center;
                 padding: 24px;
             }
-
-            /* Phone shell */
             .phone-shell {
                 width: 100%;
                 max-width: 520px;
-                background: var(--surface);
+                background: var(--card);
                 border-radius: 32px;
                 overflow: hidden;
-                box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
-                max-height: 90vh;
+                border: 1px solid #C7D2FE;
+                box-shadow: 0 32px 80px rgba(99,102,241,0.18), 0 0 0 1px rgba(255,255,255,0.8);
+                max-height: 92vh;
                 display: flex;
                 flex-direction: column;
             }
-            .phone-content {
-                overflow-y: auto;
-                flex: 1;
-            }
-            .phone-content.no-bar { -ms-overflow-style:none; scrollbar-width:none; }
-            .phone-content.no-bar::-webkit-scrollbar { display:none; }
-
-            /* Scale up text for projection */
-            .top-header { padding: 48px 32px 40px; }
-            .top-header .title-label { font-size: 13px !important; }
-            .top-header .title-main  { font-size: 34px !important; }
-            .top-header .title-sub   { font-size: 16px !important; }
-
-            .entry-card { padding: 24px; }
-            .entry-card .entry-title { font-size: 19px !important; }
-            .entry-card .entry-sub   { font-size: 14px !important; }
-
+            .phone-content { overflow-y: auto; flex: 1; }
+            .phone-content.no-bar { -ms-overflow-style: none; scrollbar-width: none; }
+            .phone-content.no-bar::-webkit-scrollbar { display: none; }
+            .top-header { padding: 52px 32px 36px; }
+            .content { padding: 28px 24px 64px; max-width: 100%; }
             .btn-primary, .btn-secondary { font-size: 17px; padding: 18px; }
             .option-btn { padding: 17px 20px; }
-            .option-btn .opt-label { font-size: 17px !important; }
-            .option-btn .opt-badge { font-size: 14px !important; padding: 4px 14px !important; }
-
-            .content { padding: 24px 24px 48px; max-width: 100%; }
+            .entry-card { padding: 20px 24px; }
         }
 
-        @media (min-width: 1024px) {
-            /* Wide screen: side-by-side layout */
-            .desktop-layout {
-                display: flex;
-                align-items: flex-start;
-                gap: 48px;
-                width: 100%;
-                max-width: 1100px;
-                padding: 0 32px;
-            }
-            .desktop-left {
-                flex: 1;
-                color: white;
-                padding-top: 32px;
-            }
-            .desktop-right {
-                width: 440px;
-                flex-shrink: 0;
-            }
-            .phone-shell {
-                max-width: 100%;
-            }
+        /* ═══════════════════════════════════════
+           孩子版 (ChildApp) 專用樣式
+           ═══════════════════════════════════════ */
+        @keyframes child-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+        .arrow-bounce { animation: child-bounce 1s infinite; }
+
+        @keyframes child-bounce-once { 0% { transform: translateY(0); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0); } }
+        .animate-bounce-once { animation: child-bounce-once 0.6s ease-out forwards; }
+
+        @keyframes child-pop-in { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .animate-pop-in { animation: child-pop-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes color-sweep { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+        .animate-rainbow {
+            background-image: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4B0082, #9400D3, #ff0000);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: color-sweep 3s linear infinite;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes child-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .animate-breathe { animation: child-breathe 1.5s ease-in-out infinite; }
+
+        @keyframes child-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .animate-float { animation: child-float 3s ease-in-out infinite; }
+
+        @keyframes child-spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: child-spin-slow 10s linear infinite; }
+
+        .nes-scrollbar::-webkit-scrollbar { width: 8px; }
+        .nes-scrollbar::-webkit-scrollbar-track { background: #eee; }
+        .nes-scrollbar::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+
+        .speech-bubble-tail {
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid white;
+            z-index: 40;
+        }
+        .speech-bubble-tail::before {
+            content: ''; position: absolute; top: -3px; left: -13px;
+            width: 0; height: 0;
+            border-left: 13px solid transparent; border-right: 13px solid transparent; border-bottom: 13px solid black;
+            z-index: -1;
+        }
+
+        .zhuyin-mode-on {
+            font-family: "BiauKai", "DFKai-SB", "KaiTi", "MoE Standard Kai", "Noto Serif TC", serif !important;
+            font-weight: bold;
+        }
+        .zhuyin-grid {
+            display: grid;
+            grid-template-columns: repeat(5, max-content);
+            justify-content: center;
+            justify-items: center;
+            row-gap: 0px;
+            column-gap: 2px;
+            width: fit-content;
+            margin: 0 auto;
+        }
+        .zhuyin-char-block {
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 2.8rem;
+            height: 3.0rem;
+            margin: 0 0 -10px 0;
+            vertical-align: middle;
+        }
+        .zhuyin-punct-block {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.8rem;
+            height: 3.0rem;
+            margin: 0 0 -10px 0;
+            vertical-align: middle;
+        }
+        .zhuyin-main-char { font-size: 1.4em; line-height: 1; }
+        .zhuyin-punct-char {
+            font-size: 1.4em; line-height: 1;
+            font-family: "BiauKai", "DFKai-SB", "KaiTi", "Noto Serif TC", serif;
+            font-weight: bold;
+        }
+        .zhuyin-phonetic-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 0.8em;
+            margin-left: 2px;
+            position: relative;
+            height: 100%;
+        }
+        .zhuyin-symbol {
+            font-family: "BiauKai", "DFKai-SB", "KaiTi", "Noto Serif TC", serif;
+            font-size: 0.55em;
+            line-height: 1;
+            color: #333;
+            font-weight: 900;
+        }
+        .zhuyin-tone {
+            position: absolute;
+            right: -0.8em;
+            font-family: "BiauKai", "DFKai-SB", "KaiTi", "Noto Serif TC", serif;
+            font-size: 0.65em;
+            color: #000;
+            font-weight: 900;
+            top: 48%;
+            transform: translateY(-50%);
+            text-shadow: 0.5px 0 0 #000;
+        }
+        .zhuyin-light-tone {
+            font-family: "BiauKai", "DFKai-SB", "KaiTi", "Noto Serif TC", serif;
+            font-size: 0.55em;
+            color: #000;
+            font-weight: 900;
+            margin-bottom: -2px;
+            text-shadow: 0.5px 0 0 #000;
+        }
+
+        .battle-btn {
+            background: white;
+            border: 2px solid black;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            box-shadow: 3px 3px 0 #000;
+            width: 100%;
+            height: 76px;
+            gap: 2px;
+        }
+        .battle-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
+        .battle-btn-5 { border-color: #c53030; background: linear-gradient(160deg,#fff5f5,#ffe0e0); }
+        .battle-btn-4 { border-color: #c05621; background: linear-gradient(160deg,#fffaf0,#feebc8); }
+        .battle-btn-3 { border-color: #718096; background: linear-gradient(160deg,#f7fafc,#edf2f7); }
+        .battle-btn-2 { border-color: #2b6cb0; background: linear-gradient(160deg,#ebf8ff,#bee3f8); }
+        .battle-btn-1 { border-color: #276749; background: linear-gradient(160deg,#f0fff4,#c6f6d5); }
+
+        @keyframes space-drift {
+            0% { background-position: 0 0, 40px 60px, 130px 270px; }
+            100% { background-position: 550px 550px, 390px 410px, 380px 520px; }
+        }
+        @keyframes sun-float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, 10px); }
+            100% { transform: translate(0, 0); }
+        }
+        .bg-space {
+            background-color: #1a1a2e;
+            background-image:
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            position: relative;
+            animation: space-drift 60s linear infinite;
+        }
+        .bg-space::before {
+            content: '';
+            position: absolute;
+            top: 50px; right: 30px;
+            width: 24px; height: 24px;
+            background: #FDB813;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #FDB813;
+            z-index: 0;
+            animation: sun-float 20s ease-in-out infinite;
         }
     </style>
 </head>
@@ -394,19 +516,17 @@
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
-/* ── 設定區 ─────────────────────────────────── */
 const GOOGLE_SCRIPT_URL  = "https://script.google.com/macros/s/AKfycbznZaOZDD91ueme98boz8OthigK2xP5Od__-OmD_Y82i10sP9Y6hYgMjv6HVdClFaIf/exec";
 const CHILD_VERSION_URL  = "https://sites.google.com/view/zwaymindspectrum2026monster/%E5%BF%83%E6%99%BA%E5%85%89%E8%AD%9C%E6%B8%AC%E9%A9%97-%E5%AD%A9%E5%AD%90%E7%89%88";
 const REVIEW_RECORDS_URL = "https://sites.google.com/view/mindtest-review/%E9%A6%96%E9%A0%81";
 const LINE_ADD_FRIEND_URL = "https://lin.ee/nnDYAZE";
 const QUIZ_SHARE_URL      = "https://zway-education.github.io/mindspectrum/";
-/* ───────────────────────────────────────────── */
 
 const TYPE_INFO = {
-    red:    { label:"紅色・開創型", emoji:"🔴", stress:"習慣說「快點」、「我說了算」、「為什麼還沒做好？」", strength:"具備極強的行動力、突破力與主導感。", practice:"練習「三秒鐘留白」。強迫自己閉嘴三秒，改問：「我現在是想解決問題，還是想接住這個孩子？」", barColor:"#D63030", bgColor:"#FFF0F0" },
-    orange: { label:"橙色・關懷型", emoji:"🟠", stress:"容易情緒波動，會說「你這樣讓媽媽很難過」、「你為什麼不理我？」", strength:"天生的雷達，對情感與連結有高度精準的感受力。", practice:"練習「劃分心理邊界」。告訴自己：「孩子的情緒是他的，我的愛不會因為他的情緒而改變。」", barColor:"#E8600A", bgColor:"#FFF0E6" },
-    green:  { label:"綠色・協調型", emoji:"🟢", stress:"追求和諧、怕衝突，習慣說「隨便啦」、「平安就好」。", strength:"關乎穩定與安全，能帶給家庭平靜的節奏感。", practice:"練習「刻意發聲」。溫柔且堅定地說出自己的底線與規則。", barColor:"#2E8B5A", bgColor:"#F0FAF4" },
-    blue:   { label:"藍色・分析型", emoji:"🔵", stress:"重視對錯與細節，會說「這不合邏輯」、「細節要注意」。", strength:"具備強大的結構思考與分析理解能力。", practice:"啟動「Bug 感謝祭」。陪孩子一起把錯誤看作是「測試數據」並優化。", barColor:"#3A70B0", bgColor:"#EEF4FF" },
+    red:    { label:"紅色・開創型", title:"紅色家長：追求效率的「小英雄守護者」", stress:"習慣說「快點」、「我說了算」、「為什麼還沒做好？」", strength:"具備極強的行動力、突破力與主導感。", practice:"練習「三秒鐘留白」。強迫自己閉嘴三秒，改問：「我現在是想解決問題，還是想接住這個孩子？」", barColor:"#D63030", darkColor:"#9B2121", bgColor:"#FFF0F0", borderColor:"rgba(214,48,48,0.18)" },
+    orange: { label:"橙色・關懷型", title:"橙色家長：渴望連結的「共情大師」", stress:"容易情緒波動，會說「你這樣讓媽媽很難過」、「你為什麼不理我？」", strength:"天生的雷達，對情感與連結有高度精準的感受力。", practice:"練習「劃分心理邊界」。告訴自己：「孩子的情緒是他的，我的愛不會因為他的情緒而改變。」", barColor:"#E8600A", darkColor:"#B84A00", bgColor:"#FFF0E6", borderColor:"rgba(232,96,10,0.18)" },
+    green:  { label:"綠色・協調型", title:"綠色家長：守護穩定的「定海神針」", stress:"追求和諧、怕衝突，習慣說「隨便啦」、「平安就好」。", strength:"關乎穩定與安全，能帶給家庭平靜的節奏感。", practice:"練習「刻意發聲」。溫柔且堅定地說出自己的底線與規則。", barColor:"#2E8B5A", darkColor:"#1A6B42", bgColor:"#F0FAF4", borderColor:"rgba(46,139,90,0.18)" },
+    blue:   { label:"藍色・分析型", title:"藍色家長：追求邏輯的「數據優化大師」", stress:"重視對錯與細節，會說「這不合邏輯」、「細節要注意」。", strength:"具備強大的結構思考與分析理解能力。", practice:"啟動「Bug 感謝祭」。陪孩子一起把錯誤看作是「測試數據」並優化。", barColor:"#3A70B0", darkColor:"#2A5A9A", bgColor:"#EEF4FF", borderColor:"rgba(58,112,176,0.18)" },
 };
 
 const QUESTIONS = [
@@ -425,10 +545,22 @@ const OPTIONS = [
 ];
 const REFERRAL_OPTIONS = ["校園講座","教師研習","覺知SEL課程","親友分享","FB/IG","其它"];
 
+const AGE_GROUPS = [
+    { key:'0-3',  label:'0–3 歲',  sublabel:'感官連結期' },
+    { key:'4-6',  label:'4–6 歲',  sublabel:'情緒學習期' },
+    { key:'7-12', label:'7–12 歲', sublabel:'自我認同期' },
+    { key:'teen', label:'青少年',   sublabel:'自主拉鋸期' },
+];
+const AGE_TIPS = {
+    '0-3':  ['身體接觸是最強語言：多抱、多對視，讓孩子感受安全', '情緒命名從現在開始：「你現在很傷心」讓孩子學會認識感受', '固定作息是根基，不是管控，給孩子內在的穩定感'],
+    '4-6':  ['情緒溫度計：用 1–5 分幫孩子說出心情大小', '一起編故事解決衝突，讓孩子當主角找答案', '不評判感受，只引導行為：「生氣可以，打人不行」'],
+    '7-12': ['給孩子家庭會議的發言權，讓他參與真實決定', '用提問代替說教：「你覺得下次可以怎麼做？」', '讓孩子承擔小錯誤的自然後果，培養責任感'],
+    'teen': ['對話時間比說教時間多三倍，先聽再說', '不評價朋友圈，只關注孩子本身的感受', '讓孩子知道：即使你不認同他的選擇，你依然站在他那邊'],
+};
+
 const sanitize = s => typeof s!=='string' ? s : s.replace(/[&<>'"]/g, t=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[t]));
 const validPhone = p => /^09\d{8}$/.test(p);
 
-/* ── Icons ─────────────────────────────────── */
 const Ico = {
     Chevron:  ()=><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="m9 18 6-6-6-6"/></svg>,
     ChevronL: ()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="m15 18-6-6 6-6"/></svg>,
@@ -445,26 +577,34 @@ const Ico = {
     Gift:   ()=><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>,
     Bolt:   ()=><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
     Line:   ()=><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>,
+    Warning:    ()=><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>,
+    Inbox:      ()=><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>,
+    Fb:         ()=><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>,
+    Copy:       ()=><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>,
+    SearchOff:  ()=><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M8 8l6 6M14 8l-6 6"/></svg>,
+    PersonAdult:()=><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+    PersonChild:()=><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="8" r="3"/></svg>,
 };
 
-/* ── Spectrum Header Strip ─────────────────── */
+/* ── Spectrum strip: full-width absolute top band ── */
 const SpectrumStrip = () => (
     <div className="spectrum-strip">
-        <div style={{flex:1,background:'#D63030'}}/>
-        <div style={{flex:1,background:'#E8600A'}}/>
-        <div style={{flex:1,background:'#2E8B5A'}}/>
-        <div style={{flex:1,background:'#3A70B0'}}/>
+        <div style={{flex:1,background:'#C0392B'}}/>
+        <div style={{flex:1,background:'#D46011'}}/>
+        <div style={{flex:1,background:'#1E8449'}}/>
+        <div style={{flex:1,background:'#1A6FA8'}}/>
     </div>
 );
 
-/* ── Score Bar ────────────────────────────── */
+/* ── Score bar (light bg) ── */
 function ScoreBar({ label, score, color }) {
     return (
         <div style={{marginBottom:10}}>
-            <div style={{display:'flex',justifyContent:'space-between',fontSize:13,fontWeight:700,color:'rgba(255,255,255,0.9)',marginBottom:4}}>
-                <span>{label}</span><span style={{fontVariantNumeric:'tabular-nums'}}>{score}</span>
+            <div style={{display:'flex',justifyContent:'space-between',fontSize:13,fontWeight:600,color:'var(--text-mid)',marginBottom:5}}>
+                <span>{label}</span>
+                <span style={{fontVariantNumeric:'tabular-nums',fontWeight:700,color:'var(--text-dark)'}}>{score}</span>
             </div>
-            <div style={{height:6,background:'rgba(255,255,255,0.15)',borderRadius:4,overflow:'hidden'}}>
+            <div style={{height:4,background:'var(--border)',borderRadius:4,overflow:'hidden'}}>
                 <div style={{height:'100%',background:color,width:`${(score/30)*100}%`,borderRadius:4,transition:'width 1s ease-out'}}/>
             </div>
         </div>
@@ -474,9 +614,13 @@ function ScoreBar({ label, score, color }) {
 /* ── Desktop detection (stable, computed once) ── */
 const isDesktop = window.innerWidth >= 768;
 
-/* ── Shell wrapper (defined outside App to keep identity stable) ── */
+/* ── Shell (defined outside App to keep identity stable) ── */
 function Shell({children}) {
-    if (!isDesktop) return <div className="page fade-up">{children}</div>;
+    if (!isDesktop) return (
+        <div className="page fade-up">
+            {children}
+        </div>
+    );
     return (
         <div className="page">
             <div className="phone-shell">
@@ -486,10 +630,819 @@ function Shell({children}) {
     );
 }
 
-/* ━━━ MAIN APP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* ════════════════════════════════
+   孩子版常數與元件
+════════════════════════════════ */
+
+const CHILD_GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxWvf1ulhsDkTdMT0Pckea-L32Q31Az-g09LrjIbfOBcMWg1k8Gnt9bumCQ4Id1bcdq/exec";
+
+const MONSTER_DATA = [
+  { id: 0, name: "嗶嗶小子", noun: "高頻能量 嗶嗶小子", img: "https://i.ibb.co/zW10PLVL/Beep-Boop.png", type: "fire", zhuyin: "<ruby>嗶<rt>ㄅㄧˋ</rt></ruby><ruby>嗶<rt>ㄅㄧˋ</rt></ruby><ruby>小<rt>ㄒㄧㄠˇ</rt></ruby><ruby>子<rt>ㄗˇ</rt></ruby>" },
+  { id: 1, name: "火花史萊姆", noun: "躁動火花 史萊姆", img: "https://i.ibb.co/Pz6QfL3t/Spark-Slime.png", type: "fire", zhuyin: "<ruby>火<rt>ㄏㄨㄛˇ</rt></ruby><ruby>花<rt>ㄏㄨㄚ</rt></ruby><ruby>史<rt>ㄕˇ</rt></ruby><ruby>萊<rt>ㄌㄞˊ</rt></ruby><ruby>姆<rt>ㄇㄨˇ</rt></ruby>" },
+  { id: 2, name: "迪斯可球怪", noun: "閃耀舞廳 迪斯可球", img: "https://i.ibb.co/F4psYTDw/Disco-Orb.png", type: "electric", zhuyin: "<ruby>迪<rt>ㄉㄧˊ</rt></ruby><ruby>斯<rt>ㄙ</rt></ruby><ruby>可<rt>ㄎㄜˇ</rt></ruby><ruby>球<rt>ㄑㄧㄡˊ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
+  { id: 3, name: "擴音喇叭鳥", noun: "聲波轟炸 擴音鳥", img: "https://i.ibb.co/fVSwHqyq/Megaphone-Bird-WAAAA.png", type: "fire", zhuyin: "<ruby>擴<rt>ㄎㄨㄛˋ</rt></ruby><ruby>音<rt>ㄧㄣ</rt></ruby><ruby>喇<rt>ㄌㄚˇ</rt></ruby><ruby>叭<rt>ㄅㄚ</rt></ruby><ruby>鳥<rt>ㄋㄧㄠˇ</rt></ruby>" },
+  { id: 4, name: "火箭衝衝", noun: "極速升空 火箭衝衝", img: "https://i.ibb.co/cKJmfk3G/Rocket-Zoom.png", type: "fire", zhuyin: "<ruby>火<rt>ㄏㄨㄛˇ</rt></ruby><ruby>箭<rt>ㄐㄧㄢˋ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby>" },
+  { id: 5, name: "苔石龜", noun: "靜謐磐石 苔石龜", img: "https://i.ibb.co/7xN8V7Cr/Mossy-Pebble-Turtle.png", type: "grass", zhuyin: "<ruby>苔<rt>ㄊㄞˊ</rt></ruby><ruby>石<rt>ㄕˊ</rt></ruby><ruby>龜<rt>ㄍㄨㄟ</rt></ruby>" },
+  { id: 6, name: "書本蟲", noun: "博學多聞 書本蟲", img: "https://i.ibb.co/SXnb5XNG/Bookwyrm.png", type: "water", zhuyin: "<ruby>書<rt>ㄕㄨ</rt></ruby><ruby>本<rt>ㄅㄣˇ</rt></ruby><ruby>蟲<rt>ㄔㄨㄥˊ</rt></ruby>" },
+  { id: 7, name: "隱形斗篷幽靈", noun: "羞澀隱者 斗篷幽靈", img: "https://i.ibb.co/wr7Tbs6p/Cloak-Ghost.png", type: "water", zhuyin: "<ruby>隱<rt>ㄧㄣˇ</rt></ruby><ruby>形<rt>ㄒㄧㄥˊ</rt></ruby><ruby>斗<rt>ㄉㄡˇ</rt></ruby><ruby>篷<rt>ㄆㄥˊ</rt></ruby><ruby>幽<rt>ㄧㄡ</rt></ruby><ruby>靈<rt>ㄌㄧㄥˊ</rt></ruby>" },
+  { id: 8, name: "雲朵瞌睡蟲", noun: "夢境漂浮 瞌睡蟲", img: "https://i.ibb.co/xSqyX047/Cloud-Snoozer.png", type: "grass", zhuyin: "<ruby>雲<rt>ㄩㄣˊ</rt></ruby><ruby>朵<rt>ㄉㄨㄛˇ</rt></ruby><ruby>瞌<rt>ㄎㄜ</rt></ruby><ruby>睡<rt>ㄕㄨㄟˋ</rt></ruby><ruby>蟲<rt>ㄔㄨㄥˊ</rt></ruby>" },
+  { id: 9, name: "冰塊方塊", noun: "絕對零度 冰塊方塊", img: "https://i.ibb.co/FqbkZZSM/Ice-Cube.png", type: "water", zhuyin: "<ruby>冰<rt>ㄅㄧㄥ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby>" },
+  { id: 10, name: "愛心雨雲", noun: "溫柔雨露 愛心雨雲", img: "https://i.ibb.co/MDC7DX86/Heart-Rain-Cloud.png", type: "electric", zhuyin: "<ruby>愛<rt>ㄞˋ</rt></ruby><ruby>心<rt>ㄒㄧㄣ</rt></ruby><ruby>雨<rt>ㄩˇ</rt></ruby><ruby>雲<rt>ㄩㄣˊ</rt></ruby>" },
+  { id: 11, name: "擁抱棉花糖", noun: "甜美療癒 棉花糖", img: "https://i.ibb.co/6c81zn40/Hug-Mallow.png", type: "electric", zhuyin: "<ruby>擁<rt>ㄩㄥˇ</rt></ruby><ruby>抱<rt>ㄅㄠˋ</rt></ruby><ruby>棉<rt>ㄇㄧㄢˊ</rt></ruby><ruby>花<rt>ㄏㄨㄚ</rt></ruby><ruby>糖<rt>ㄊㄤˊ</rt></ruby>" },
+  { id: 12, name: "變色情緒果凍", noun: "七彩波動 情緒果凍", img: "https://i.ibb.co/Df1pZ0wz/Mood-Jelly.png", type: "electric", zhuyin: "<ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>色<rt>ㄙㄜˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>緒<rt>ㄒㄩˋ</rt></ruby><ruby>果<rt>ㄍㄨㄛˇ</rt></ruby><ruby>凍<rt>ㄉㄨㄥˋ</rt></ruby>" },
+  { id: 13, name: "淚眼洋蔥", noun: "敏感內心 淚眼洋蔥", img: "https://i.ibb.co/m5grrmFM/Teeny-Onion.png", type: "electric", zhuyin: "<ruby>淚<rt>ㄌㄟˋ</rt></ruby><ruby>眼<rt>ㄧㄢˇ</rt></ruby><ruby>洋<rt>ㄧㄤˊ</rt></ruby><ruby>蔥<rt>ㄘㄨㄥ</rt></ruby>" },
+  { id: 14, name: "暖暖茶壺", noun: "暖心時刻 暖暖茶壺", img: "https://i.ibb.co/fdgXqcvN/Care-Pot.png", type: "electric", zhuyin: "<ruby>暖<rt>ㄋㄨㄢˇ</rt></ruby><ruby>暖<rt>ㄋㄨㄢˇ</rt></ruby><ruby>茶<rt>ㄔㄚˊ</rt></ruby><ruby>壺<rt>ㄏㄨˊ</rt></ruby>" },
+  { id: 15, name: "計算機機器人", noun: "精確運算 計算機", img: "https://i.ibb.co/Ld0dybyr/Calc-Bot-OK.png", type: "water", zhuyin: "<ruby>計<rt>ㄐㄧˋ</rt></ruby><ruby>算<rt>ㄙㄨㄢˋ</rt></ruby><ruby>機<rt>ㄐㄧ</rt></ruby><ruby>機<rt>ㄐㄧ</rt></ruby><ruby>器<rt>ㄑㄧˋ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby>" },
+  { id: 16, name: "齒輪貓頭鷹", noun: "精密結構 齒輪梟", img: "https://i.ibb.co/ycFcFwcp/Gear-Owl.png", type: "water", zhuyin: "<ruby>齒<rt>ㄔˇ</rt></ruby><ruby>輪<rt>ㄌㄨㄣˊ</rt></ruby><ruby>貓<rt>ㄇㄠ</rt></ruby><ruby>頭<rt>ㄊㄡˊ</rt></ruby><ruby>鷹<rt>ㄧㄥ</rt></ruby>" },
+  { id: 17, name: "聰明大腦", noun: "智慧中樞 聰明大腦", img: "https://i.ibb.co/PvF5cbZ4/Brainy-Float.png", type: "water", zhuyin: "<ruby>聰<rt>ㄘㄨㄥ</rt></ruby><ruby>明<rt>ㄇㄧㄥˊ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby><ruby>腦<rt>ㄋㄠˇ</rt></ruby>" },
+  { id: 18, name: "俄羅斯方塊獸", noun: "完美秩序 方塊獸", img: "https://i.ibb.co/hJcwzJqn/Tetris-Mon.png", type: "grass", zhuyin: "<ruby>俄<rt>ㄜˊ</rt></ruby><ruby>羅<rt>ㄌㄨㄛˊ</rt></ruby><ruby>斯<rt>ㄙ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby><ruby>獸<rt>ㄕㄡˋ</rt></ruby>" },
+  { id: 19, name: "檢查清單板", noun: "計畫通 檢查清單", img: "https://i.ibb.co/Jw8y8yvN/Checklist-Board.png", type: "grass", zhuyin: "<ruby>檢<rt>ㄐㄧㄢˇ</rt></ruby><ruby>查<rt>ㄔㄚˊ</rt></ruby><ruby>清<rt>ㄑㄧㄥ</rt></ruby><ruby>單<rt>ㄉㄢ</rt></ruby><ruby>板<rt>ㄅㄢˇ</rt></ruby>" },
+  { id: 20, name: "星空夢想家", noun: "無限星河 夢想家", img: "https://i.ibb.co/5WsXxH1L/Starry-Dreamer.png", type: "water", zhuyin: "<ruby>星<rt>ㄒㄧㄥ</rt></ruby><ruby>空<rt>ㄎㄨㄥ</rt></ruby><ruby>夢<rt>ㄇㄥˋ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>家<rt>ㄐㄧㄚ</rt></ruby>" },
+  { id: 21, name: "顏料潑灑怪", noun: "創意爆發 顏料怪", img: "https://i.ibb.co/rKdG2Bqd/Splat-Phantom.png", type: "fire", zhuyin: "<ruby>顏<rt>ㄧㄢˊ</rt></ruby><ruby>料<rt>ㄌㄧㄠˋ</rt></ruby><ruby>潑<rt>ㄆㄛ</rt></ruby><ruby>灑<rt>ㄙㄚˇ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
+  { id: 22, name: "飄浮大眼睛", noun: "洞察先機 大眼怪", img: "https://i.ibb.co/msDNCP5/Floating-Eye-dea.png", type: "water", zhuyin: "<ruby>飄<rt>ㄆㄧㄠ</rt></ruby><ruby>浮<rt>ㄈㄨˊ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby><ruby>眼<rt>ㄧㄢˇ</rt></ruby><ruby>睛<rt>ㄐㄧㄥ</rt></ruby>" },
+  { id: 23, name: "抽象拼貼獸", noun: "獨特視角 拼貼獸", img: "https://i.ibb.co/LzpmV7DS/Abstract-Collage.png", type: "fire", zhuyin: "<ruby>抽<rt>ㄔㄡ</rt></ruby><ruby>象<rt>ㄒㄧㄤˋ</rt></ruby><ruby>拼<rt>ㄆㄧㄣ</rt></ruby><ruby>貼<rt>ㄊㄧㄝ</rt></ruby><ruby>獸<rt>ㄕㄡˋ</rt></ruby>" },
+  { id: 24, name: "音符蝌蚪", noun: "美妙旋律 音符蝌蚪", img: "https://i.ibb.co/B2wcjQzM/Musical-Tadpole.png", type: "electric", zhuyin: "<ruby>音<rt>ㄧㄣ</rt></ruby><ruby>符<rt>ㄈㄨˊ</rt></ruby><ruby>蝌<rt>ㄎㄜ</rt></ruby><ruby>蚪<rt>ㄉㄡˇ</rt></ruby>" },
+  { id: 25, name: "發抖果凍", noun: "謹慎小心 發抖果凍", img: "https://i.ibb.co/NgYRHNBM/Shiver-Jelly.png", type: "grass", zhuyin: "<ruby>發<rt>ㄈㄚ</rt></ruby><ruby>抖<rt>ㄉㄡˇ</rt></ruby><ruby>果<rt>ㄍㄨㄛˇ</rt></ruby><ruby>凍<rt>ㄉㄨㄥˋ</rt></ruby>" },
+  { id: 26, name: "寄居蟹堡壘", noun: "絕對防禦 寄居蟹", img: "https://i.ibb.co/TBp5wcHz/Hermit-Fortress.png", type: "grass", zhuyin: "<ruby>寄<rt>ㄐㄧˋ</rt></ruby><ruby>居<rt>ㄐㄩ</rt></ruby><ruby>蟹<rt>ㄒㄧㄝˋ</rt></ruby><ruby>堡<rt>ㄅㄠˇ</rt></ruby><ruby>壘<rt>ㄌㄟˇ</rt></ruby>" },
+  { id: 27, name: "問號尾巴", noun: "探索未知 問號狐", img: "https://i.ibb.co/1GvXcq61/Question-Tail.png", type: "water", zhuyin: "<ruby>問<rt>ㄨㄣˋ</rt></ruby><ruby>號<rt>ㄏㄠˋ</rt></ruby><ruby>尾<rt>ㄨㄟˇ</rt></ruby><ruby>巴<rt>ㄅㄚ˙</rt></ruby>" },
+  { id: 28, name: "變形怪百變怪", noun: "適應萬變 百變怪", img: "https://i.ibb.co/70JWg1T/Ditto-Blob.png", type: "electric", zhuyin: "<ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>形<rt>ㄒㄧㄥˊ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby><ruby>百<rt>ㄅㄞˇ</rt></ruby><ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
+  { id: 29, name: "警報仙人掌", noun: "高度警戒 仙人掌", img: "https://i.ibb.co/XkMc5Gxd/Alarm-Cactus.png", type: "fire", zhuyin: "<ruby>警<rt>ㄐㄧㄥˇ</rt></ruby><ruby>報<rt>ㄅㄠˋ</rt></ruby><ruby>仙<rt>ㄒㄧㄢ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>掌<rt>ㄓㄤˇ</rt></ruby>" }
+];
+
+const getMonsterImg = (id) => MONSTER_DATA[id] ? MONSTER_DATA[id].img : MONSTER_DATA[0].img;
+
+const INTRO_BG_URL = "https://i.ibb.co/gbPj3CZv/Gemini-Generated-Image-ghygqcghygqcghyg.png";
+const TALK_BG_URL = "https://i.ibb.co/YFDpZvGr/Gemini-Generated-Image-wq8l7vwq8l7vwq8l.png";
+const INTRO_COLORS = ['bg-indigo-900', 'bg-red-900', 'bg-emerald-900', 'bg-slate-900', 'bg-purple-900', 'bg-cyan-900', 'bg-rose-900', 'bg-amber-900'];
+
+const QUESTIONS_DATA_SOURCE = [
+  { text: "做事情時，我希望可以快點完成", zhuyin: "<ruby>做<rt>ㄗㄨㄛˋ</rt></ruby><ruby>事<rt>ㄕˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>希<rt>ㄒㄧ</rt></ruby><ruby>望<rt>ㄨㄤˋ</rt></ruby><ruby>可<rt>ㄎㄜˇ</rt></ruby><ruby>以<rt>ㄧˇ</rt></ruby><ruby>快<rt>ㄎㄨㄞˋ</rt></ruby><ruby>點<rt>ㄉㄧㄢˇ</rt></ruby><ruby>完<rt>ㄨㄢˊ</rt></ruby><ruby>成<rt>ㄔㄥˊ</rt></ruby>" },
+  { text: "遇到問題時，我會想自己直接決定怎麼做", zhuyin: "<ruby>遇<rt>ㄩˋ</rt></ruby><ruby>到<rt>ㄉㄠˋ</rt></ruby><ruby>問<rt>ㄨㄣˋ</rt></ruby><ruby>題<rt>ㄊㄧˊ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>自<rt>ㄗˋ</rt></ruby><ruby>己<rt>ㄐㄧˇ</rt></ruby><ruby>直<rt>ㄓˊ</rt></ruby><ruby>接<rt>ㄐㄧㄝ</rt></ruby><ruby>決<rt>ㄐㄩㄝˊ</rt></ruby><ruby>定<rt>ㄉㄧㄥˋ</rt></ruby><ruby>怎<rt>ㄗㄣˇ</rt></ruby><ruby>麼<rt>˙ㄇㄜ</rt></ruby><ruby>做<rt>ㄗㄨㄛˋ</rt></ruby>" },
+  { text: "我比較在意事情能不能解決，而不是當下的感受", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>比<rt>ㄅㄧˇ</rt></ruby><ruby>較<rt>ㄐㄧㄠˋ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>意<rt>ㄧˋ</rt></ruby><ruby>事<rt>ㄕˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>能<rt>ㄋㄥˊ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>能<rt>ㄋㄥˊ</rt></ruby><ruby>解<rt>ㄐㄧㄝˇ</rt></ruby><ruby>決<rt>ㄐㄩㄝˊ</rt></ruby>，<ruby>而<rt>ㄦˊ</rt></ruby><ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>是<rt>ㄕˋ</rt></ruby><ruby>當<rt>ㄉㄤ</rt></ruby><ruby>下<rt>ㄒㄧㄚˋ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>感<rt>ㄍㄢˇ</rt></ruby><ruby>受<rt>ㄕㄡˋ</rt></ruby>" },
+  { text: "覺得別人太慢時，我會想自己來", zhuyin: "<ruby>覺<rt>ㄐㄩㄝˊ</rt></ruby><ruby>得<rt>˙ㄉㄜ</rt></ruby><ruby>別<rt>ㄅㄧㄝˊ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>太<rt>ㄊㄞˋ</rt></ruby><ruby>慢<rt>ㄇㄢˋ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>自<rt>ㄗˋ</rt></ruby><ruby>己<rt>ㄐㄧˇ</rt></ruby><ruby>來<rt>ㄌㄞˊ</rt></ruby>" },
+  { text: "我在意事情有沒有做到或完成", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>意<rt>ㄧˋ</rt></ruby><ruby>事<rt>ㄕˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>有<rt>ㄧㄡˇ</rt></ruby><ruby>沒<rt>ㄇㄟˊ</rt></ruby><ruby>有<rt>ㄧㄡˇ</rt></ruby><ruby>做<rt>ㄗㄨㄛˋ</rt></ruby><ruby>到<rt>ㄉㄠˋ</rt></ruby><ruby>或<rt>ㄏㄨㄛˋ</rt></ruby><ruby>完<rt>ㄨㄢˊ</rt></ruby><ruby>成<rt>ㄔㄥˊ</rt></ruby>" },
+  { text: "等待會讓我很不耐煩", zhuyin: "<ruby>等<rt>ㄉㄥˇ</rt></ruby><ruby>待<rt>ㄉㄞˋ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>讓<rt>ㄖㄤˋ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>很<rt>ㄏㄣˇ</rt></ruby><ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>耐<rt>ㄋㄞˋ</rt></ruby><ruby>煩<rt>ㄈㄢˊ</rt></ruby>" },
+  { text: "我的心情很容易被身邊的人影響", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>心<rt>ㄒㄧㄣ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>很<rt>ㄏㄣˇ</rt></ruby><ruby>容<rt>ㄖㄨㄥˊ</rt></ruby><ruby>易<rt>ㄧˋ</rt></ruby><ruby>被<rt>ㄅㄟˋ</rt></ruby><ruby>身<rt>ㄕㄣ</rt></ruby><ruby>邊<rt>ㄅㄧㄢ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>影<rt>ㄧㄥˇ</rt></ruby><ruby>響<rt>ㄒㄧㄤˇ</rt></ruby>" },
+  { text: "別人不理我時，我會覺得難過", zhuyin: "<ruby>別<rt>ㄅㄧㄝˊ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>理<rt>ㄌㄧˇ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>覺<rt>ㄐㄩㄝˊ</rt></ruby><ruby>得<rt>˙ㄉㄜ</rt></ruby><ruby>難<rt>ㄋㄢˊ</rt></ruby><ruby>過<rt>ㄍㄨㄛˋ</rt></ruby>" },
+  { text: "我很在意別人喜不喜歡我", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>很<rt>ㄏㄣˇ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>意<rt>ㄧˋ</rt></ruby><ruby>別<rt>ㄅㄧㄝˊ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>喜<rt>ㄒㄧˇ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>喜<rt>ㄒㄧˇ</rt></ruby><ruby>歡<rt>ㄏㄨㄢ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby>" },
+  { text: "只要氣氛不好，我就會覺得不舒服", zhuyin: "<ruby>只<rt>ㄓˇ</rt></ruby><ruby>要<rt>ㄧㄠˋ</rt></ruby><ruby>氣<rt>ㄑㄧˋ</rt></ruby><ruby>氛<rt>ㄈㄣ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>好<rt>ㄏㄠˇ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>就<rt>ㄐㄧㄡˋ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>覺<rt>ㄐㄩㄝˊ</rt></ruby><ruby>得<rt>˙ㄉㄜ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>舒<rt>ㄕㄨ</rt></ruby><ruby>服<rt>ㄈㄨˊ</rt></ruby>" },
+  { text: "別人不開心時，我會覺得是不是我做錯了", zhuyin: "<ruby>別<rt>ㄅㄧㄝˊ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>開<rt>ㄎㄞ</rt></ruby><ruby>心<rt>ㄒㄧㄣ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>覺<rt>ㄐㄩㄝˊ</rt></ruby><ruby>得<rt>˙ㄉㄜ</rt></ruby><ruby>是<rt>ㄕˋ</rt></ruby><ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>是<rt>ㄕˋ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>做<rt>ㄗㄨㄛˋ</rt></ruby><ruby>錯<rt>ㄘㄨㄛˋ</rt></ruby><ruby>了<rt>˙ㄌㄜ</rt></ruby>" },
+  { text: "對我來說，好關係比守規則重要", zhuyin: "<ruby>對<rt>ㄉㄨㄟˋ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>來<rt>ㄌㄞˊ</rt></ruby><ruby>說<rt>ㄕㄨㄛ</rt></ruby>，<ruby>好<rt>ㄏㄠˇ</rt></ruby><ruby>關<rt>ㄍㄨㄢ</rt></ruby><ruby>係<rt>ㄒㄧˋ</rt></ruby><ruby>比<rt>ㄅㄧˇ</rt></ruby><ruby>守<rt>ㄕㄡˇ</rt></ruby><ruby>規<rt>ㄍㄨㄟ</rt></ruby><ruby>則<rt>ㄗㄜˊ</rt></ruby><ruby>重<rt>ㄓㄨㄥˋ</rt></ruby><ruby>要<rt>ㄧㄠˋ</rt></ruby>" },
+  { text: "我不喜歡和別人起衝突", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>喜<rt>ㄒㄧˇ</rt></ruby><ruby>歡<rt>ㄏㄨㄢ</rt></ruby><ruby>和<rt>ㄏㄢˋ</rt></ruby><ruby>別<rt>ㄅㄧㄝˊ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>起<rt>ㄑㄧˇ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby><ruby>突<rt>ㄊㄨˊ</rt></ruby>" },
+  { text: "為了不要吵架，我常選擇退讓", zhuyin: "<ruby>為<rt>ㄨㄟˋ</rt></ruby><ruby>了<rt>˙ㄌㄜ</rt></ruby><ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>要<rt>ㄧㄠˋ</rt></ruby><ruby>吵<rt>ㄔㄠˇ</rt></ruby><ruby>架<rt>ㄐㄧㄚˋ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>常<rt>ㄔㄤˊ</rt></ruby><ruby>選<rt>ㄒㄩㄢˇ</rt></ruby><ruby>擇<rt>ㄗㄜˊ</rt></ruby><ruby>退<rt>ㄊㄨㄟˋ</rt></ruby><ruby>讓<rt>ㄖㄤˋ</rt></ruby>" },
+  { text: "遇到衝突時，我會選擇先不說話", zhuyin: "<ruby>遇<rt>ㄩˋ</rt></ruby><ruby>到<rt>ㄉㄠˋ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby><ruby>突<rt>ㄊㄨˊ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>選<rt>ㄒㄩㄢˇ</rt></ruby><ruby>擇<rt>ㄗㄜˊ</rt></ruby><ruby>先<rt>ㄒㄧㄢ</rt></ruby><ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>說<rt>ㄕㄨㄛ</rt></ruby><ruby>話<rt>ㄏㄨㄚˋ</rt></ruby>" },
+  { text: "我希望事情可以和平地過去", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>希<rt>ㄒㄧ</rt></ruby><ruby>望<rt>ㄨㄤˋ</rt></ruby><ruby>事<rt>ㄕˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>可<rt>ㄎㄜˇ</rt></ruby><ruby>以<rt>ㄧˇ</rt></ruby><ruby>和<rt>ㄏㄜˊ</rt></ruby><ruby>平<rt>ㄆㄧㄥˊ</rt></ruby><ruby>地<rt>˙ㄉㄜ</rt></ruby><ruby>過<rt>ㄍㄨㄛˋ</rt></ruby><ruby>去<rt>ㄑㄩˋ</rt></ruby>" },
+  { text: "即使我不同意，也不一定會說出口", zhuyin: "<ruby>即<rt>ㄐㄧˊ</rt></ruby><ruby>使<rt>ㄕˇ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>同<rt>ㄊㄨㄥˊ</rt></ruby><ruby>意<rt>ㄧˋ</rt></ruby>，<ruby>也<rt>ㄧㄝˇ</rt></ruby><ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>一<rt>ㄧ</rt></ruby><ruby>定<rt>ㄉㄧㄥˋ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>說<rt>ㄕㄨㄛ</rt></ruby><ruby>出<rt>ㄔㄨ</rt></ruby><ruby>口<rt>ㄎㄡˇ</rt></ruby>" },
+  { text: "我喜歡穩定、不太變動的狀態", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>喜<rt>ㄒㄧˇ</rt></ruby><ruby>歡<rt>ㄏㄨㄢ</rt></ruby><ruby>穩<rt>ㄨㄣˇ</rt></ruby><ruby>定<rt>ㄉㄧㄥˋ</rt></ruby>、<ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>太<rt>ㄊㄞˋ</rt></ruby><ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>動<rt>ㄉㄨㄥˋ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>狀<rt>ㄓㄨㄤˋ</rt></ruby><ruby>態<rt>ㄊㄞˋ</rt></ruby>" },
+  { text: "遇到問題時，我會先想原因", zhuyin: "<ruby>遇<rt>ㄩˋ</rt></ruby><ruby>到<rt>ㄉㄠˋ</rt></ruby><ruby>問<rt>ㄨㄣˋ</rt></ruby><ruby>題<rt>ㄊㄧˊ</rt></ruby><ruby>時<rt>ㄕˊ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>先<rt>ㄒㄧㄢ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>原<rt>ㄩㄢˊ</rt></ruby><ruby>因<rt>ㄧㄣ</rt></ruby>" },
+  { text: "我在意事情有沒有照正確的方法來做", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>意<rt>ㄧˋ</rt></ruby><ruby>事<rt>ㄕˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>有<rt>ㄧㄡˇ</rt></ruby><ruby>沒<rt>ㄇㄟˊ</rt></ruby><ruby>有<rt>ㄧㄡˇ</rt></ruby><ruby>照<rt>ㄓㄠˋ</rt></ruby><ruby>正<rt>ㄓㄥˋ</rt></ruby><ruby>確<rt>ㄑㄩㄝˋ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>法<rt>ㄈㄚˇ</rt></ruby><ruby>來<rt>ㄌㄞˊ</rt></ruby><ruby>做<rt>ㄗㄨㄛˋ</rt></ruby>" },
+  { text: "不合理的地方會讓我很在意", zhuyin: "<ruby>不<rt>ㄅㄨˋ</rt></ruby><ruby>合<rt>ㄏㄜˊ</rt></ruby><ruby>理<rt>ㄌㄧˇ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>地<rt>ㄉㄧˋ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>讓<rt>ㄖㄤˋ</rt></ruby><ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>很<rt>ㄏㄣˇ</rt></ruby><ruby>在<rt>ㄗㄞˋ</rt></ruby><ruby>意<rt>ㄧˋ</rt></ruby>" },
+  { text: "我喜歡把事情想清楚再行動", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>喜<rt>ㄒㄧˇ</rt></ruby><ruby>歡<rt>ㄏㄨㄢ</rt></ruby><ruby>把<rt>ㄅㄚˇ</rt></ruby><ruby>事<rt>ㄕˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>清<rt>ㄑㄧㄥ</rt></ruby><ruby>楚<rt>ㄔㄨˇ</rt></ruby><ruby>再<rt>ㄗㄞˋ</rt></ruby><ruby>行<rt>ㄒㄧㄥˊ</rt></ruby><ruby>動<rt>ㄉㄨㄥˋ</rt></ruby>" },
+  { text: "同樣的錯誤，我希望不要再犯", zhuyin: "<ruby>同<rt>ㄊㄨㄥˊ</rt></ruby><ruby>樣<rt>ㄧㄤˋ</rt></ruby><ruby>的<rt>˙ㄉㄜ</rt></ruby><ruby>錯<rt>ㄘㄨㄛˋ</rt></ruby><ruby>誤<rt>ㄨˋ</rt></ruby>，<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>希<rt>ㄒㄧ</rt></ruby><ruby>望<rt>ㄨㄤˋ</rt></ruby><ruby>不<rt>ㄅㄨˊ</rt></ruby><ruby>要<rt>ㄧㄠˋ</rt></ruby><ruby>再<rt>ㄗㄞˋ</rt></ruby><ruby>犯<rt>ㄈㄢˋ</rt></ruby>" },
+  { text: "我會一直思考怎麼做才能更好", zhuyin: "<ruby>我<rt>ㄨㄛˇ</rt></ruby><ruby>會<rt>ㄏㄨㄟˋ</rt></ruby><ruby>一<rt>ㄧ</rt></ruby><ruby>直<rt>ㄓˊ</rt></ruby><ruby>思<rt>ㄙ</rt></ruby><ruby>考<rt>ㄎㄠˇ</rt></ruby><ruby>怎<rt>ㄗㄣˇ</rt></ruby><ruby>麼<rt>˙ㄇㄜ</rt></ruby><ruby>做<rt>ㄗㄨㄛˋ</rt></ruby><ruby>才<rt>ㄘㄞˊ</rt></ruby><ruby>能<rt>ㄋㄥˊ</rt></ruby><ruby>更<rt>ㄍㄥˋ</rt></ruby><ruby>好<rt>ㄏㄠˇ</rt></ruby>" }
+];
+
+const renderZhuyinBlock = (zhuyinHtml) => {
+  const regex = /<ruby>(.*?)<rt>(.*?)<\/rt><\/ruby>|([^<]+)/g;
+  let match;
+  const parts = [];
+  while ((match = regex.exec(zhuyinHtml)) !== null) {
+    if (match[1]) {
+      const char = match[1];
+      let fullZhuyin = match[2];
+      let lightTone = '';
+      let tone = '';
+      let symbols = fullZhuyin;
+      if (fullZhuyin.startsWith('˙')) {
+        lightTone = '˙';
+        symbols = fullZhuyin.substring(1);
+      } else {
+        const lastChar = fullZhuyin.slice(-1);
+        if (['ˊ', 'ˇ', 'ˋ'].includes(lastChar)) {
+          tone = lastChar;
+          symbols = fullZhuyin.slice(0, -1);
+        }
+      }
+      const symbolList = symbols.split('');
+      parts.push(
+        <span key={parts.length} className="zhuyin-char-block">
+          <span className="zhuyin-main-char">{char}</span>
+          <span className="zhuyin-phonetic-col">
+            {lightTone && <span className="zhuyin-light-tone">{lightTone}</span>}
+            {symbolList.map((s, idx) => (<span key={idx} className="zhuyin-symbol">{s}</span>))}
+            {tone && <span className="zhuyin-tone">{tone}</span>}
+          </span>
+        </span>
+      );
+    } else if (match[0]) {
+      const chars = match[0].split('');
+      chars.forEach(char => {
+        if (char.trim() === '') return;
+        parts.push(
+          <span key={parts.length} className="zhuyin-punct-block">
+            <span className="zhuyin-punct-char">{char}</span>
+          </span>
+        );
+      });
+    }
+  }
+  return parts;
+};
+
+const BASE_RPG_DATA = QUESTIONS_DATA_SOURCE.map((data, i) => {
+  let type = 'normal';
+  if (i < 6) type = 'fire';
+  else if (i < 12) type = 'electric';
+  else if (i < 18) type = 'grass';
+  else type = 'water';
+  return { id: i + 1, type, text: data.text, zhuyin: data.zhuyin };
+});
+
+const RESULT_MONSTER_POOLS = {
+  fire: [MONSTER_DATA[0], MONSTER_DATA[1], MONSTER_DATA[3], MONSTER_DATA[4], MONSTER_DATA[21], MONSTER_DATA[23], MONSTER_DATA[29]],
+  electric: [MONSTER_DATA[2], MONSTER_DATA[10], MONSTER_DATA[11], MONSTER_DATA[12], MONSTER_DATA[13], MONSTER_DATA[14], MONSTER_DATA[24], MONSTER_DATA[28]],
+  grass: [MONSTER_DATA[5], MONSTER_DATA[8], MONSTER_DATA[18], MONSTER_DATA[19], MONSTER_DATA[25], MONSTER_DATA[26]],
+  water: [MONSTER_DATA[6], MONSTER_DATA[7], MONSTER_DATA[9], MONSTER_DATA[15], MONSTER_DATA[16], MONSTER_DATA[17], MONSTER_DATA[20], MONSTER_DATA[22], MONSTER_DATA[27]]
+};
+
+const CHILD_TYPE_INFO = {
+  fire: {
+    name: "紅色學生",
+    typeName: "紅色開創型",
+    color: "text-red-600", bg: "bg-red-100", border: "border-red-600", textColor: "text-red-900",
+    noun: "小英雄行動派",
+    core: "行動導向的「小英雄行動派」",
+    traits: "壓力下：容易著急，想馬上完成，等待讓你很不耐煩。",
+    behavior: "你的優勢：行動力超強，是讓事情真正發生的那個人！",
+    advice: "覺知練習：想衝動前先停三秒，問自己：準備好了嗎？\n小技巧：等待＝替下一步充電。"
+  },
+  electric: {
+    name: "橙色學生",
+    typeName: "橙色關懷型",
+    color: "text-orange-600", bg: "bg-orange-100", border: "border-orange-600", textColor: "text-orange-900",
+    noun: "情感雷達王",
+    core: "重視連結的「情感雷達王」",
+    traits: "壓力下：容易被別人的情緒影響，氣氛不對就渾身不對勁。",
+    behavior: "你的優勢：超靈敏情緒雷達，讓身邊的人感到被理解！",
+    advice: "覺知練習：提醒自己：別人的情緒是別人的功課，不代表我不好。\n小提醒：你的心情值得被保護。"
+  },
+  grass: {
+    name: "綠色學生",
+    typeName: "綠色協調型",
+    color: "text-green-600", bg: "bg-green-100", border: "border-green-600", textColor: "text-green-900",
+    noun: "穩定守護者",
+    core: "守護和平的「穩定守護者」",
+    traits: "壓力下：最怕衝突，常說「算了沒關係」，但心裡其實有感覺。",
+    behavior: "你的優勢：大家的定心丸，讓身邊的人都感到安全！",
+    advice: "覺知練習：練習溫柔說出感受，不用大聲也不用爭輸贏。\n試試說：「我覺得…我希望…」"
+  },
+  water: {
+    name: "藍色學生",
+    typeName: "藍色分析型",
+    color: "text-blue-600", bg: "bg-blue-100", border: "border-blue-600", textColor: "text-blue-900",
+    noun: "邏輯分析師",
+    core: "思考導向的「邏輯分析師」",
+    traits: "壓力下：反覆思考「這樣對嗎？」腦子停不下來，不容易放過自己的錯。",
+    behavior: "你的優勢：超強分析引擎，能看見別人注意不到的細節！",
+    advice: "覺知練習：把錯誤當學習資料，告訴自己：這只是升級中的測試版！\n小技巧：說一句「謝謝這個 Bug」。"
+  }
+};
+
+const Typewriter = ({ text, speed = 40, isTyping, onComplete }) => {
+  const [displayLen, setDisplayLen] = useState(0);
+  useEffect(() => setDisplayLen(0), [text]);
+  useEffect(() => {
+    if (!isTyping) { setDisplayLen(text.length); return; }
+    if (displayLen < text.length) {
+      const timer = setTimeout(() => setDisplayLen(prev => prev + 1), speed);
+      return () => clearTimeout(timer);
+    } else { if (isTyping && onComplete) onComplete(); }
+  }, [displayLen, isTyping, text, speed, onComplete]);
+  return <span>{text.substring(0, displayLen)}</span>;
+};
+
+/* ════════════════════════════════
+   ChildApp 元件
+════════════════════════════════ */
+function ChildApp({ onBack }) {
+  const { useMemo } = React;
+  const [scene, setScene] = useState('intro');
+  const [dialogueQueue, setDialogueQueue] = useState([]);
+  const [currentDialogue, setCurrentDialogue] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+
+  const [userData, setUserData] = useState({ name: '', role: '孩子', session: '', parentCheck: false });
+  const [quizAnswers, setQuizAnswers] = useState({});
+  const [currentQIndex, setCurrentQIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const [showStartModal, setShowStartModal] = useState(true);
+  const [showGuideModal, setShowGuideModal] = useState(false);
+  const [showScreenshotModal, setShowScreenshotModal] = useState(false);
+
+  const [pokemonName, setPokemonName] = useState('???');
+  const [pokemonLevel, setPokemonLevel] = useState(5);
+  const [resultPokemon, setResultPokemon] = useState(null);
+  const [finalResult, setFinalResult] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [selectedScore, setSelectedScore] = useState(null);
+  const [isZhuyinMode, setIsZhuyinMode] = useState(false);
+
+  useEffect(() => {
+    MONSTER_DATA.forEach(monster => {
+      const img = new Image();
+      img.src = monster.img;
+    });
+  }, []);
+
+  const randomWildIndices = useMemo(() => {
+    const indices = Array.from({ length: 30 }, (_, i) => i);
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+    return indices.slice(0, 24);
+  }, []);
+
+  const introBgClass = useMemo(() => INTRO_COLORS[Math.floor(Math.random() * INTRO_COLORS.length)], []);
+
+  const playSound = (type) => { if (navigator.vibrate && (type === 'hit' || type === 'select')) navigator.vibrate(type === 'hit' ? 50 : 10); };
+
+  useEffect(() => {
+    if (scene === 'battle') {
+      const monsterIdx = randomWildIndices[currentQIndex];
+      const monster = MONSTER_DATA[monsterIdx];
+      setPokemonName(monster.name);
+      setPokemonLevel(Math.floor(Math.random() * 95) + 5);
+    }
+  }, [currentQIndex, scene, randomWildIndices]);
+
+  useEffect(() => {
+    if (dialogueQueue.length > 0) { setCurrentDialogue(dialogueQueue[0]); setIsTyping(true); }
+    else if (scene === 'intro_talk') setScene('input_name');
+  }, [dialogueQueue, scene]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const scrollableDivs = document.querySelectorAll('.overflow-y-auto');
+    scrollableDivs.forEach(div => div.scrollTop = 0);
+  }, [scene]);
+
+  const handleClickDialogue = () => {
+    if (isTyping) {
+      setIsTyping(false);
+    } else {
+      playSound('select');
+      if (dialogueQueue.length > 1) {
+        setDialogueQueue(prev => prev.slice(1));
+      } else {
+        setScene('input_name');
+      }
+    }
+  };
+
+  const handleStartClick = () => { playSound('select'); startGame(); };
+  const handleModalConfirm = () => { playSound('select'); setShowStartModal(false); };
+
+  const startGame = () => {
+    setScene('intro_talk');
+    setDialogueQueue([
+      "測測看，你是哪一種底色的學生？\n我是心智光譜的守護者。",
+      "在壓力、被催促、被要求或被比較的那一刻，\n我們常會不自覺回到最熟悉的「自動反應」。",
+      "請依照你在緊張、被要求或不順時的\n「第一直覺反應」作答。",
+      "看看你的原生底色是什麼？\n準備好了嗎？我們出發吧！"
+    ]);
+  };
+
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    if (!userData.name) return;
+    playSound('select');
+    setScene('battle');
+  };
+
+  const handleBattleOption = (score) => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSelectedScore(score);
+    playSound('hit');
+    const q = BASE_RPG_DATA[currentQIndex];
+    if (!q) return;
+    setQuizAnswers(prev => ({ ...prev, [q.id]: score }));
+    setTimeout(() => {
+      if (currentQIndex < BASE_RPG_DATA.length - 1) {
+        setCurrentQIndex(prev => prev + 1);
+        setSelectedScore(null);
+        setIsTransitioning(false);
+      } else {
+        const currentAnswers = { ...quizAnswers, [q.id]: score };
+        let scores = { fire: 0, electric: 0, grass: 0, water: 0 };
+        BASE_RPG_DATA.forEach(q => {
+          const s = currentAnswers[q.id] || 0;
+          if (q.type === 'fire') scores.fire += s;
+          if (q.type === 'electric') scores.electric += s;
+          if (q.type === 'grass') scores.grass += s;
+          if (q.type === 'water') scores.water += s;
+        });
+        const types = [
+          { id: 'fire', score: scores.fire },
+          { id: 'electric', score: scores.electric },
+          { id: 'grass', score: scores.grass },
+          { id: 'water', score: scores.water }
+        ];
+        types.sort((a, b) => b.score - a.score);
+        const winnerTypeId = types[0].id;
+        const pool = RESULT_MONSTER_POOLS[winnerTypeId];
+        const randomPoke = pool[Math.floor(Math.random() * pool.length)];
+        setFinalResult({ scores: types, mainTypeId: winnerTypeId, subTypeId: types[1].id, pokemon: randomPoke });
+        setResultPokemon(randomPoke);
+        const totalScore = types.reduce((s, t) => s + t.score, 0);
+        const scoreMap = {};
+        types.forEach(t => scoreMap[t.id] = t.score);
+        fetch(CHILD_GOOGLE_SCRIPT_URL, {
+          method: 'POST', mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            nickname: userData.name, identity: "孩子",
+            email: "無", phone: "無", session: "無", parentCheck: "已確認",
+            totalScore, red: scoreMap.fire, orange: scoreMap.electric,
+            green: scoreMap.grass, blue: scoreMap.water,
+            answers: { ...quizAnswers, [q.id]: score },
+            resultPokemon: randomPoke.name,
+            uid: 'trainer_' + Math.random().toString(36).substr(2, 9),
+            submittedAt: new Date().toISOString()
+          })
+        }).catch(() => {});
+        setScene('dex');
+        setIsTransitioning(false);
+      }
+    }, 400);
+  };
+
+  const handlePrevious = () => {
+    if (isTransitioning || currentQIndex <= 0) return;
+    setIsTransitioning(true);
+    playSound('select');
+    setTimeout(() => { setCurrentQIndex(prev => prev - 1); setIsTransitioning(false); }, 300);
+  };
+
+  const handleFinalSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMsg('');
+    if (!finalResult) { alert("發生錯誤：結果尚未產生"); return; }
+    setLoading(true);
+    const totalScore = finalResult.scores.reduce((sum, item) => sum + item.score, 0);
+    const scoreMap = {};
+    finalResult.scores.forEach(item => scoreMap[item.id] = item.score);
+    const sheetData = {
+      nickname: userData.name, identity: "孩子",
+      email: "無", phone: "無", session: "無", parentCheck: "已確認",
+      totalScore, red: scoreMap.fire, orange: scoreMap.electric,
+      green: scoreMap.grass, blue: scoreMap.water,
+      answers: quizAnswers,
+      resultPokemon: finalResult.pokemon.name,
+      uid: 'trainer_' + Math.random().toString(36).substr(2, 9),
+      submittedAt: new Date().toISOString()
+    };
+    const submitPromise = fetch(CHILD_GOOGLE_SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(sheetData)
+    });
+    const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve("timeout"), 3000));
+    try {
+      await Promise.race([submitPromise, timeoutPromise]);
+      setScene('dex');
+    } catch (error) {
+      console.error(error);
+      alert("連線不穩定，但您可以繼續查看分析結果！");
+      setScene('dex');
+    } finally { setLoading(false); }
+  };
+
+  const handleRestart = () => {
+    playSound('select');
+    setUserData({ name: '', role: '孩子', session: '', parentCheck: false });
+    setQuizAnswers({});
+    setCurrentQIndex(0);
+    setLoading(false);
+    setShowStartModal(true);
+    setShowGuideModal(false);
+    setShowScreenshotModal(false);
+    setResultPokemon(null);
+    setFinalResult(null);
+    setErrorMsg('');
+    setIsTransitioning(false);
+    setDialogueQueue([]);
+    setCurrentDialogue('');
+    setIsTyping(false);
+    setScene('intro');
+  };
+
+  if (scene === 'intro') {
+    return (
+      <div className={`h-full w-full ${introBgClass} flex flex-col items-center justify-center p-6 text-white relative transition-colors duration-1000`} style={{fontFamily:"'DotGothic16', sans-serif"}}>
+        <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{backgroundImage: `url('${INTRO_BG_URL}')`}}></div>
+        <div className="z-10 text-center space-y-6 animate-bounce-once w-full max-w-md px-4">
+          <h1 className="font-bold drop-shadow-[4px_4px_0_rgba(0,0,0,1)] leading-tight">
+            <span className="block text-xl md:text-2xl text-white mb-1">覺知SEL</span>
+            <span className="block text-4xl md:text-6xl text-yellow-400 mb-2">覺知心智光譜</span>
+            <span className="block text-lg md:text-xl text-yellow-300">像素怪獸版</span>
+          </h1>
+          <div className="relative w-full flex flex-col items-center gap-4 justify-center">
+            {!showStartModal && (
+              <>
+                <div className="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center shadow-[4px_4px_0_rgba(0,0,0,0.5)] overflow-hidden relative">
+                  <img src={getMonsterImg(28)} className="w-24 h-24 object-contain" alt="Start" style={{imageRendering: 'pixelated'}} />
+                </div>
+                <button onClick={handleStartClick} className="px-8 py-4 bg-white text-black font-bold text-xl border-4 border-gray-400 hover:bg-gray-200 active:translate-y-1 shadow-[4px_4px_0_#000] animate-breathe">
+                  <span className="text-sm md:text-base animate-rainbow font-extrabold block mb-1">按 START 開始冒險</span>
+                  <span className="text-2xl tracking-widest">START</span>
+                </button>
+              </>
+            )}
+            {showStartModal && (
+              <div className="bg-white/95 border-4 border-black p-6 rounded-xl shadow-[8px_8px_0_rgba(0,0,0,0.5)] w-full max-w-sm mx-auto animate-pop-in text-gray-800 flex flex-col items-center">
+                <div className="text-5xl mb-3 animate-float"></div>
+                <div className="text-base font-black mb-2 text-center text-gray-900 tracking-widest">任務說明</div>
+                <div className="w-full border-2 border-dashed border-gray-300 rounded-lg p-4 mb-5 space-y-2">
+                  <p className="text-sm text-gray-700 leading-relaxed"> 這是一個關於「你自己」的探索任務</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">⚡ 遇到 24 隻怪獸，每隻怪獸帶來一個問題</p>
+                  <p className="text-sm text-gray-700 leading-relaxed"> 依照你的<span className="font-black text-red-600">第一直覺</span>作答，不用想太久</p>
+                  <p className="text-sm text-gray-700 leading-relaxed"> 最後發現你的心智光譜底色！</p>
+                </div>
+                <button onClick={handleModalConfirm} className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black text-lg py-3 border-4 border-yellow-700 rounded-lg active:translate-y-1 shadow-[4px_4px_0_#000] transition-colors tracking-widest">
+                  ▶ 開始冒險！
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="absolute bottom-4 text-center w-full px-2">
+          <div className="text-xs text-gray-500 mb-1">© 覺知心智光譜2026_v2</div>
+          <div className="text-[10px] text-gray-400 opacity-70 leading-tight">
+            此測驗僅供教育練習使用，非官方內容。<br/>
+            Pixel Art Monsters © 2026
+          </div>
+          <button onClick={() => onBack && onBack()} style={{fontSize:11,color:'rgba(255,255,255,0.5)',background:'none',border:'none',cursor:'pointer',marginTop:4}}>← 返回首頁</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (scene === 'intro_talk') {
+    return (
+      <div className="h-full w-full bg-white flex flex-col p-4" onClick={handleClickDialogue} style={{fontFamily:"'DotGothic16', sans-serif"}}>
+        <div className="flex-1 border-4 border-black mb-4 relative flex items-center justify-center overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url('${TALK_BG_URL}')` }}>
+          <div className="absolute inset-0 bg-white/70 pointer-events-none"></div>
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative bg-gray-800 p-2 rounded-xl border-b-4 border-r-4 border-gray-900 shadow-xl scale-90">
+              <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-20 h-6 flex justify-between px-2 -z-10">
+                <div className="w-0.5 h-8 bg-gray-400 rotate-[-30deg] origin-bottom border border-gray-600"></div>
+                <div className="w-0.5 h-8 bg-gray-400 rotate-[30deg] origin-bottom border border-gray-600"></div>
+              </div>
+              <div className="bg-gray-700 p-1.5 rounded-lg border-2 border-gray-600 shadow-inner">
+                <div className="relative bg-white w-48 h-48 rounded-md overflow-hidden border-2 border-black shadow-[inset_0_0_20px_rgba(0,0,0,0.15)] flex items-center justify-center">
+                  <div className="absolute inset-0 z-20 pointer-events-none opacity-10" style={{backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px'}}></div>
+                  <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/20 to-transparent pointer-events-none z-20"></div>
+                  <img src={getMonsterImg(20)} className="w-4/5 h-4/5 object-contain relative z-0" alt="Guide" style={{imageRendering: 'pixelated'}} />
+                </div>
+              </div>
+              <div className="flex items-center justify-between mt-1 px-1">
+                <div className="flex space-x-1"><div className="w-8 h-1.5 bg-gray-950 rounded-full"></div></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-gray-600 rounded-full border-b border-black"></div>
+                  <div className="w-3 h-3 bg-gray-600 rounded-full border-b border-black"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="h-1/3 border-4 border-black bg-white p-4 relative cursor-pointer hover:bg-gray-50 shadow-[4px_4px_0_#000]">
+          <div className="border-2 border-dashed border-gray-400 h-full p-4 text-xl md:text-2xl font-black leading-loose tracking-wider text-indigo-900 drop-shadow-sm flex items-start overflow-y-auto">
+            <Typewriter text={currentDialogue} speed={30} isTyping={isTyping} onComplete={() => setIsTyping(false)} />
+            {!isTyping && <div className="absolute bottom-4 right-4 text-red-500 arrow-bounce text-2xl">▼</div>}
+          </div>
+        </div>
+        <p className="text-center text-gray-400 text-xs mt-2 animate-pulse"> 點擊對話框繼續...</p>
+      </div>
+    );
+  }
+
+  if (scene === 'input_name') {
+    return (
+      <div className="h-full w-full bg-gray-100 flex flex-col items-center justify-center p-6" style={{fontFamily:"'DotGothic16', sans-serif"}}>
+        <div className="w-full max-w-sm bg-white border-4 border-black p-6 shadow-[8px_8px_0_rgba(0,0,0,0.2)]">
+          <h2 className="text-xl mb-6 text-center border-b-4 border-gray-200 pb-2">訓練家註冊</h2>
+          <form onSubmit={handleNameSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm mb-2">你的名字是？</label>
+              <input type="text" className="w-full bg-gray-100 border-2 border-black p-3 font-bold focus:bg-white outline-none" placeholder="小光" value={userData.name} onChange={e => setUserData({...userData, name: e.target.value})} autoFocus required />
+            </div>
+            <button type="submit" className="w-full bg-blue-500 text-white border-b-4 border-blue-700 py-3 mt-8 active:border-b-0 active:translate-y-1">決定！</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  if (scene === 'battle') {
+    const question = BASE_RPG_DATA[currentQIndex];
+    if (!question) return null;
+    const maxHP = BASE_RPG_DATA.length;
+    const progress = ((currentQIndex + 1) / maxHP) * 100;
+    const wildMonsterIdx = randomWildIndices[currentQIndex];
+    const wildMonsterImg = getMonsterImg(wildMonsterIdx);
+    const currentMonster = MONSTER_DATA[wildMonsterIdx];
+    return (
+      <div id="battle-screen" className="h-full w-full bg-space flex flex-col relative transition-opacity duration-100" style={{fontFamily:"'DotGothic16', sans-serif"}}>
+        <div className="p-2 pt-4 flex justify-between items-center text-xs font-bold relative z-20">
+          <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-1 border-2 border-gray-400 border-b-gray-600 border-r-gray-600 rounded shadow-md">
+            <div className="w-3 h-3 rounded-full bg-red-500 border border-red-700 shadow-inner animate-pulse"></div>
+            <span className="text-gray-800 text-sm tracking-widest">BATTLE <span className="text-red-600">{currentQIndex + 1}</span>/{BASE_RPG_DATA.length}</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2 py-1 border-2 border-gray-400 border-b-gray-600 border-r-gray-600 rounded shadow-md">
+            <span className="font-black text-yellow-600 text-sm drop-shadow-[1px_1px_0_rgba(0,0,0,0.5)]">HP</span>
+            <div className="w-32 h-4 bg-gray-800 border-2 border-gray-500 border-t-black border-l-black rounded-full relative overflow-hidden">
+              <div className={`h-full transition-all duration-500 ease-out flex items-center relative ${progress > 50 ? 'bg-yellow-400' : progress > 60 ? 'bg-green-500' : progress > 30 ? 'bg-blue-400' : 'bg-blue-300'}`} style={{ width: `${progress}%` }}>
+                <div className="absolute top-0 left-0 w-full h-1/2 bg-white opacity-30"></div>
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => setIsZhuyinMode(!isZhuyinMode)}
+            className={`ml-2 px-2 py-1 rounded border-2 text-xs font-bold transition-colors shadow-md ${isZhuyinMode ? 'bg-yellow-400 border-yellow-600 text-black' : 'bg-gray-200 border-gray-400 text-gray-600'}`}
+          >
+            {isZhuyinMode ? '注音 ON' : '注音 OFF'}
+          </button>
+        </div>
+        <div className="flex-1 flex flex-col relative overflow-hidden min-h-0">
+          <div className="flex items-center justify-center p-2 pt-3">
+            <div className="relative z-10 flex flex-col items-center">
+              <div className="relative bg-gray-800 p-2 rounded-2xl border-b-4 border-r-4 border-gray-900 shadow-xl">
+                <div className="bg-gray-700 p-1.5 rounded-xl border-2 border-gray-600 shadow-inner">
+                  <div className="relative bg-white rounded-lg overflow-hidden border-2 border-black shadow-[inset_0_0_20px_rgba(0,0,0,0.12)]" style={{width:'min(220px,62vw)',height:'min(180px,50vw)'}}>
+                    <div className="absolute inset-0 z-20 pointer-events-none opacity-10" style={{backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px'}}></div>
+                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/20 to-transparent pointer-events-none z-20"></div>
+                    {!isZhuyinMode && (
+                      <div className="absolute top-2 left-2 z-10 bg-black/50 text-white px-2 py-1 rounded text-xs backdrop-blur-md border border-white/30 font-bold min-w-[60px]">
+                        <div className="text-center">{pokemonName}</div>
+                        <div className="text-yellow-300 text-center mt-0.5">Lv.{pokemonLevel}</div>
+                      </div>
+                    )}
+                    {isZhuyinMode && (
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 bg-white/80 text-black px-4 py-1 rounded-full text-sm font-bold border-2 border-black shadow-sm whitespace-nowrap flex gap-2">
+                        <span>{pokemonName}</span>
+                        <span className="text-orange-600">Lv.{pokemonLevel}</span>
+                      </div>
+                    )}
+                    <div className="w-full h-full flex items-center justify-center animate-float">
+                      <div className="absolute bottom-8 w-32 h-4 bg-black/10 rounded-full blur-md scale-x-75 animate-pulse"></div>
+                      <img src={wildMonsterImg} className="w-4/5 h-4/5 object-contain relative z-0" alt="Monster" style={{imageRendering: 'pixelated'}} />
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between mt-1 px-1">
+                  <div className="flex space-x-1">
+                    <div className="w-8 h-1.5 bg-gray-950 rounded-full"></div>
+                    <div className="w-8 h-1.5 bg-gray-950 rounded-full"></div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="text-[8px] text-gray-400 font-black tracking-widest">MONSTER-V</div>
+                    <div className="w-3 h-3 bg-gray-600 rounded-full border-b border-black"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex-1 z-30 px-3 pb-2 w-full flex items-center">
+            <div className="bg-white border-4 border-black py-3 px-4 shadow-xl flex items-center justify-center relative rounded-xl w-full">
+              <div className="speech-bubble-tail"></div>
+              <div className={`w-full flex flex-wrap justify-start items-center content-center ${isZhuyinMode ? 'zhuyin-grid zhuyin-mode-on' : 'text-center'}`} style={{maxWidth: '100%', margin: '0 auto'}}>
+                {isZhuyinMode ? (
+                  renderZhuyinBlock(question.zhuyin)
+                ) : (
+                  <p className="w-full text-base leading-relaxed font-bold text-gray-900 tracking-wide text-center">
+                    {question.text}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-gray-800 p-3 border-t-4 border-black pb-4 relative z-20">
+          <div className="grid grid-cols-5 gap-1 w-full mb-3">
+            {[
+              {score:5, label:"非常像我", cls:"battle-btn-5", selBg:"#c53030"},
+              {score:4, label:"有點像我", cls:"battle-btn-4", selBg:"#c05621"},
+              {score:3, label:"普通",     cls:"battle-btn-3", selBg:"#4a5568"},
+              {score:2, label:"不太像我", cls:"battle-btn-2", selBg:"#2b6cb0"},
+              {score:1, label:"不像我",   cls:"battle-btn-1", selBg:"#276749"},
+            ].map(({score, label, cls, selBg}) => {
+              const isSel = selectedScore === score;
+              return (
+                <button key={score} onClick={() => handleBattleOption(score)}
+                  className={`battle-btn ${cls}`}
+                  style={{height:64, ...(isSel ? {background:selBg, borderColor:selBg, transform:'translate(2px,2px)', boxShadow:'1px 1px 0 #000'} : {})}}>
+                  <span style={{fontSize:'18px', fontWeight:900, lineHeight:1, color: isSel?'#fff':'#1a202c'}}>{score}</span>
+                  <span style={{fontSize:'8px', fontWeight:700, color: isSel?'rgba(255,255,255,0.9)':'#4a5568', textAlign:'center', lineHeight:1.2}}>{label}</span>
+                  {isSel && <span style={{fontSize:'7px', color:'rgba(255,255,255,0.8)', fontWeight:900}}>選擇中</span>}
+                </button>
+              );
+            })}
+          </div>
+          {currentQIndex > 0 ? (
+            <button onClick={handlePrevious} className="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 rounded border-2 border-gray-500 active:bg-gray-800 transition-colors flex items-center justify-center gap-2 text-sm">
+              <span>◀</span> 上一題
+            </button>
+          ) : (<div className="h-9"></div>)}
+        </div>
+      </div>
+    );
+  }
+
+  if (scene === 'contact') {
+    if (!finalResult) return <div>載入中...</div>;
+    const pokemon = finalResult.pokemon;
+    const mainType = CHILD_TYPE_INFO[finalResult.mainTypeId];
+    return (
+      <div className="h-full w-full bg-white flex flex-col items-center p-6 overflow-y-auto" style={{fontFamily:"'DotGothic16', sans-serif"}}>
+        <div className="w-full max-w-sm border-4 border-black bg-white shadow-[8px_8px_0_#333]">
+          <div className="bg-blue-600 text-white p-3 text-center border-b-4 border-black">
+            <h2 className="text-xl">登入名人堂</h2>
+          </div>
+          <form className="p-6 space-y-4" onSubmit={handleFinalSubmit} noValidate>
+            <div className="text-center mb-4">
+              {resultPokemon && <img src={resultPokemon.img} className="w-48 h-48 mx-auto animate-bounce-once object-contain" alt={resultPokemon.name} style={{imageRendering: 'pixelated'}} />}
+              <div className="text-sm mt-4 p-4 bg-gray-50 rounded-xl border-2 border-gray-200 text-left shadow-sm">
+                <p className="font-bold text-center mb-2 text-gray-500 tracking-widest text-xs">您的光譜測驗結果為</p>
+                <div className={`text-xl font-bold text-center mb-1 ${mainType.color}`}>{mainType.typeName}</div>
+                <h3 className={`text-2xl font-black text-center mb-4 text-black tracking-wider`}>{pokemon.noun}</h3>
+                <div className="text-center text-xs text-gray-400">登入後查看詳細分析</div>
+              </div>
+            </div>
+            {errorMsg && <div className="bg-red-100 border-l-4 border-red-500 text-red-700 p-3 text-sm font-bold animate-pulse"><p>⚠ {errorMsg}</p></div>}
+            <div className="bg-blue-50 p-4 rounded-lg border-2 border-blue-200 text-center shadow-inner">
+              <p className="text-sm font-bold text-gray-500 mb-1">準備以以下訓練家身份登錄：</p>
+              <p className="text-2xl font-black text-blue-800 tracking-widest">{userData.name}</p>
+            </div>
+            <button type="submit" disabled={loading} className="w-full bg-green-500 hover:bg-green-600 border-b-4 border-green-700 text-white font-bold py-3 px-4 rounded mt-4 active:translate-y-1 active:border-b-0 disabled:opacity-50">
+              {loading ? "圖鑑登記中，請稍候..." : "確認姓名並查看圖鑑"}
+            </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  if (scene === 'dex') {
+    if (!finalResult) return <div>載入中...</div>;
+    const results = finalResult.scores;
+    const mainType = CHILD_TYPE_INFO[finalResult.mainTypeId];
+    const pokemon = finalResult.pokemon;
+    const statsOrder = ['fire', 'electric', 'grass', 'water'];
+    const displayStats = statsOrder.map(id => results.find(r => r.id === id));
+    return (
+      <div className="h-full w-full bg-red-600 flex flex-col p-4 overflow-y-auto nes-scrollbar" style={{fontFamily:"'DotGothic16', sans-serif"}}>
+        <div className="bg-white rounded-lg border-4 border-black p-1 shadow-inner flex flex-col mb-4" id="resultCard">
+          <div className="flex gap-2 mb-2 p-2 border-b border-gray-200">
+            <div className="w-6 h-6 rounded-full bg-blue-500 border-2 border-white shadow animate-pulse"></div>
+            <div className="w-3 h-3 rounded-full bg-red-500 border border-red-700 shadow-inner animate-pulse"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500 border border-yellow-700 shadow-inner animate-pulse"></div>
+          </div>
+          <div className="bg-green-100 border-4 border-gray-400 p-4 rounded mb-4 flex-1">
+            <div className="text-center mb-4">
+              <p className="text-xs text-gray-600 mb-1">分析結果 No.{(pokemon.id + 1).toString().padStart(3, '0')}</p>
+              <h3 className={`text-lg font-black ${mainType.color} mb-1`}>{mainType.typeName}</h3>
+              <h2 className={`text-2xl font-bold ${mainType.textColor}`}>{pokemon.noun}</h2>
+            </div>
+            <div className="flex justify-center my-3 relative">
+              <div className={`w-40 h-40 bg-white rounded-full flex items-center justify-center shadow-xl overflow-hidden relative`}>
+                <div className="absolute inset-0 bg-white opacity-20 animate-spin-slow"></div>
+                <img src={pokemon.img} className="w-32 h-32 object-contain transform scale-125" alt={pokemon.name} style={{imageRendering: 'pixelated'}} />
+              </div>
+              <div className="absolute -bottom-2 bg-black text-white px-3 py-1 text-xs rounded-full border border-white">{pokemon.name}</div>
+            </div>
+            <div className="bg-white/90 border-2 border-black p-5 rounded-lg mb-4 text-justify font-medium tracking-wide text-gray-800 shadow-sm space-y-4">
+              <div className="border-b-2 border-gray-200 pb-3 mb-2">
+                <h4 className="text-xs font-bold text-gray-400 mb-1 uppercase tracking-widest">核心特質</h4>
+                <p className={`text-xl md:text-2xl font-black leading-relaxed ${mainType.color}`}>{mainType.core}</p>
+              </div>
+              <div>
+                <h4 className={`text-lg font-bold mb-1 ${mainType.color}`}>壓力下的表現</h4>
+                <p className={`text-base md:text-lg font-medium ${mainType.textColor} leading-relaxed whitespace-pre-line`}>{mainType.traits}</p>
+              </div>
+              <div>
+                <h4 className={`text-lg font-bold mb-1 ${mainType.color}`}>你的優勢</h4>
+                <p className={`text-base md:text-lg font-medium ${mainType.textColor} leading-relaxed whitespace-pre-line`}>{mainType.behavior}</p>
+              </div>
+              <div className={`${mainType.bg} p-4 rounded-xl border-2 ${mainType.border.replace('text-', 'border-').replace('600', '200')}`}>
+                <h4 className={`text-lg font-black mb-2 ${mainType.color}`}>覺知練習</h4>
+                {mainType.advice.split('\n').map((line, i) => {
+                  const isTip = line.startsWith('小') || line.startsWith('試');
+                  return isTip
+                    ? <div key={i} className={`mt-2 rounded-xl px-3 py-2 text-sm font-bold border ${mainType.bg} border-current/20 ${mainType.textColor}`}>{line}</div>
+                    : <p key={i} className={`text-base font-bold leading-relaxed ${mainType.textColor} ${i>0?'mt-1':''}`}>{line}</p>;
+                })}
+              </div>
+            </div>
+            <div className="bg-gray-100 p-3 rounded-lg border-2 border-gray-400 border-b-gray-600 border-r-gray-600 shadow-inner mb-4">
+              <p className="text-xs font-bold border-b-2 border-gray-300 pb-1 mb-2 text-gray-700">種族值 (STATS)</p>
+              {displayStats.map((r) => (
+                <div key={r.id} className="flex items-center text-xs mb-2 last:mb-0">
+                  <span className="w-12 font-bold text-gray-600">{CHILD_TYPE_INFO[r.id].name.substr(0,2)}</span>
+                  <div className="flex-1 h-4 bg-gray-800 border-2 border-gray-500 border-t-black border-l-black rounded-full relative overflow-hidden">
+                    <div className={`h-full transition-all duration-1000 ease-out relative ${CHILD_TYPE_INFO[r.id].bg.replace('bg-', 'bg-').replace('100', '500')}`} style={{ width: `${(r.score/30)*100}%` }}>
+                      <div className="absolute top-0 left-0 w-full h-1/2 bg-white opacity-30"></div>
+                    </div>
+                  </div>
+                  <span className="ml-2 w-5 text-right font-bold text-gray-800">{r.score}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div id="saveButtons" className="flex flex-col gap-2 mt-4">
+          <button onClick={handleRestart} className="w-full bg-gray-800 text-white py-3 font-bold border-4 border-gray-600 hover:bg-black active:border-gray-900"> 重新開始遊戲</button>
+          <button
+            onClick={() => { playSound('select'); setShowScreenshotModal(true); }}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 font-bold border-4 border-purple-800 active:bg-purple-900"
+          >
+            提醒截圖
+          </button>
+          <button onClick={() => { playSound('select'); setShowGuideModal(true); }} className="block w-full text-center bg-blue-600 text-white py-3 font-bold border-4 border-blue-800 hover:bg-blue-700 active:border-blue-900 no-underline"> 覺知小語</button>
+          <button onClick={() => onBack && onBack()} className="w-full bg-white text-gray-700 py-3 font-bold border-4 border-gray-400 hover:bg-gray-100 active:bg-gray-200 mt-1">← 返回首頁</button>
+        </div>
+        {showGuideModal && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 animate-pop-in">
+            <div className="bg-white border-4 border-black p-6 rounded-xl max-w-sm w-full relative">
+              <button onClick={() => setShowGuideModal(false)} className="absolute top-2 right-2 text-gray-500 hover:text-black font-bold text-2xl"></button>
+              <h3 className="text-xl font-black text-indigo-700 mb-4 text-center border-b-2 border-indigo-100 pb-2">給學生的覺知小語</h3>
+              <div className="space-y-4 text-gray-700 leading-relaxed font-medium">
+                <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-4 text-center">
+                  <p className="text-base font-black text-indigo-900 leading-relaxed">
+                    「你不是哪一種顏色，<br/>你只是正在用這一種方式面對世界。」
+                  </p>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  在 AI 時代，正確答案不再稀缺——<br/>
+                  真正重要的是：你能不能<span className="font-black text-gray-900">看見自己</span>、<span className="font-black text-gray-900">理解自己</span>，並一步步成為更穩定的自己。
+                </p>
+                <div className="border-t-2 border-dashed border-gray-200 pt-3 space-y-2">
+                  <p className="text-xs font-black text-gray-500 tracking-widest">★ 覺知三步驟 ★</p>
+                  <div className="flex items-start gap-2">
+                    <span className="text-base"></span>
+                    <p className="text-sm"><span className="font-black">覺察：</span>注意到自己現在的反應</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-base"></span>
+                    <p className="text-sm"><span className="font-black">暫停：</span>在反應前給自己一個呼吸的空間</p>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-base"></span>
+                    <p className="text-sm"><span className="font-black">選擇：</span>用自己想要的方式回應</p>
+                  </div>
+                </div>
+                <p className="text-xs text-center text-gray-400 font-bold">每一次練習，都讓你更靠近那個最棒的自己 </p>
+              </div>
+              <button onClick={() => setShowGuideModal(false)} className="w-full bg-gray-800 text-white font-bold py-3 mt-6 rounded-lg active:bg-black">我知道了！</button>
+            </div>
+          </div>
+        )}
+        {showScreenshotModal && (
+          <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 animate-pop-in">
+            <div className="bg-white border-4 border-black p-6 rounded-xl max-w-sm w-full relative text-center">
+              <div className="text-5xl mb-4"></div>
+              <h3 className="text-xl font-black text-gray-800 mb-2">記得截圖喔！</h3>
+              <div className="bg-yellow-50 border-2 border-yellow-300 rounded-xl p-3 mb-4 text-left space-y-1">
+                <p className="text-sm font-bold text-yellow-800">截圖要包含：</p>
+                <p className="text-sm text-gray-700"> <span className="font-bold text-red-600">你的光譜類型</span>（例：紅色開創型）</p>
+                <p className="text-sm text-gray-700"> <span className="font-bold text-blue-600">四色分數條</span>（STATS 種族值）</p>
+                <p className="text-sm text-gray-700"> <span className="font-bold text-green-600">你的怪獸夥伴</span>圖片</p>
+              </div>
+              <p className="text-xs text-gray-500 mb-4">截圖後可以拿去跟爸媽分享，看看你們的底色有沒有相同的地方！</p>
+              <button onClick={() => setShowScreenshotModal(false)} className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg border-b-4 border-green-700 active:border-b-0 active:translate-y-1">好，我截圖了！</button>
+              <div style={{marginTop:10,padding:'10px 14px',background:'#EEF2FF',borderRadius:10,border:'1px solid #C7D2FE',textAlign:'center'}}>
+                <div style={{fontSize:11,fontWeight:700,color:'#4F46E5',marginBottom:2}}>截完圖可以給爸媽看</div>
+                <div style={{fontSize:10,color:'#6366F1'}}>家長版有親子底色配對分析！</div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return null;
+}
+
+/* ════════════════════════════════
+   Main App
+════════════════════════════════ */
 function App() {
     const [step, setStep]           = useState('home');
-    const [mode, setMode]           = useState('quiz'); // 'quiz' | 'direct'
+    const [mode, setMode]           = useState('quiz');
     const [name, setName]           = useState('');
     const [email, setEmail]         = useState('');
     const [phone, setPhone]         = useState('');
@@ -499,20 +1452,24 @@ function App() {
     const [scores, setScores]       = useState({red:0,orange:0,green:0,blue:0});
     const [total, setTotal]         = useState(0);
     const [navigating, setNav]      = useState(false);
+    const [navDir, setNavDir]       = useState('fwd');
+    const [childAge, setChildAge]   = useState(null);
+    const [showShare, setShowShare] = useState(false);
+    const [copied, setCopied]       = useState(false);
     const [referral, setReferral]   = useState([]);
     const [refErr, setRefErr]       = useState(false);
     const [showConfirm, setConfirm] = useState(false);
     const [showSS, setShowSS]       = useState(false);
     const [engPwd, setEngPwd]       = useState('');
     const [showEng, setShowEng]     = useState(false);
-    // 歷史紀錄查詢
     const [lookNick, setLookNick]   = useState('');
     const [lookEmail, setLookEmail] = useState('');
     const [lookChild, setLookChild] = useState('');
-    const [lookResult, setLookResult] = useState(null); // null | 'loading' | {data} | {error}
+    const [lookResult, setLookResult] = useState(null);
     const [lookErr, setLookErr]     = useState('');
-    const [lookWho, setLookWho]     = useState(null); // null | 'adult' | 'child'
+    const [lookWho, setLookWho]     = useState(null);
     const [uid]                     = useState(()=>'u_'+Math.random().toString(36).slice(2,9));
+    const [showChildApp, setShowChildApp] = useState(false);
 
     const sortedTypes = () =>
         ['red','orange','green','blue']
@@ -525,28 +1482,30 @@ function App() {
         setTotal(0); setReferral([]); setRefErr(false);
         setConfirm(false); setShowSS(false); setShowEng(false); setEngPwd(''); setBotTrap('');
         setLookNick(''); setLookEmail(''); setLookChild(''); setLookResult(null); setLookErr(''); setLookWho(null);
+        setNavDir('fwd'); setChildAge(null); setShowShare(false); setCopied(false);
     };
 
     const doLookup = async () => {
         if (!lookNick.trim()) { setLookErr('請填寫暱稱'); return; }
         if (lookWho === 'adult') {
             if (!lookEmail.trim() || !lookEmail.includes('@')) { setLookErr('請填寫有效的家長 Email'); return; }
-        } else {
-            if (!lookChild.trim() || !lookChild.includes('@')) { setLookErr('請填寫有效的孩子信箱'); return; }
         }
+        // 孩子版不需要 Email，後端以「無」作為孩子紀錄的識別
         setLookErr('');
         setLookResult('loading');
         try {
-            const params = new URLSearchParams({
-                nickname: lookNick.trim(),
-                email: lookWho === 'adult' ? lookEmail.trim() : '無',
-                childEmail: lookWho === 'child' ? lookChild.trim() : '無',
-            });
-            const res = await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`);
-            const json = await res.json();
-            setLookResult(json);
+            const emailParam = lookWho === 'adult' ? lookEmail.trim() : '無';
+            const url = `${GOOGLE_SCRIPT_URL}?action=lookup&name=${encodeURIComponent(lookNick.trim())}&email=${encodeURIComponent(emailParam)}`;
+            const res = await fetch(url);
+            const txt = await res.text();
+            let data;
+            try { data = JSON.parse(txt); } catch(pe) { throw new Error('後端回應格式異常'); }
+            if (data && data.error) { setLookResult({ error: data.error }); return; }
+            if (!Array.isArray(data) || data.length === 0) { setLookResult({ error: 'not found' }); return; }
+            const sortedRecords = [...data].sort((a, b) => (b.date||'').localeCompare(a.date||''));
+            setLookResult({ records: sortedRecords });
         } catch(e) {
-            setLookResult({error: '查詢失敗，請檢查網路連線後再試。'});
+            setLookResult({ error: '查詢失敗，請檢查網路連線後再試。' });
         }
     };
 
@@ -561,6 +1520,7 @@ function App() {
     const handleAnswer = (score) => {
         if (navigating) return;
         setNav(true);
+        setNavDir('fwd');
         const updated = {...answers, [qIdx+1]: score};
         setAnswers(updated);
         setTimeout(()=>{
@@ -623,87 +1583,168 @@ function App() {
     const info = top ? TYPE_INFO[top.id] : null;
     const progress = Math.round(((qIdx+1)/QUESTIONS.length)*100);
 
-    /* isDesktop is stable — computed once at module load */
+    /* ─────────── CHILD APP ─────────── */
+    if (showChildApp) return (
+        <div style={{position:'fixed',inset:0,zIndex:200,background:'#e0e0e0',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <div style={isDesktop
+                ? {width:'100%',maxWidth:480,height:'92vh',overflow:'hidden',borderRadius:32,boxShadow:'0 32px 80px rgba(0,0,0,0.45)',display:'flex',flexDirection:'column'}
+                : {width:'100%',height:'100%',display:'flex',flexDirection:'column'}
+            }>
+                <ChildApp onBack={() => setShowChildApp(false)} />
+            </div>
+        </div>
+    );
 
-    /* ━━━ 首頁 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ─────────── HOME ─────────── */
     if (step==='home') return (
         <Shell>
             {/* Header */}
-            <div className="top-header">
-                <div className="title-main" style={{fontSize:32,fontWeight:900,color:'#fff',lineHeight:1.2}}>覺知SEL</div>
-                <div className="title-sub" style={{fontSize:14,color:'rgba(255,255,255,0.75)',marginTop:8,fontWeight:500}}>看見自己與孩子的內在狀態</div>
+            <div className="top-header" style={{paddingTop:36,paddingBottom:24}}>
                 <SpectrumStrip/>
+                {/* 公司 LOGO */}
+                <div style={{marginBottom:16}}>
+                    <img
+                        src="https://i.ibb.co/4RTWqrWB/LOGO-1.jpg"
+                        alt="台灣展威文化教育"
+                        style={{height:42,width:'auto',maxWidth:'72%',objectFit:'contain',display:'block',margin:'0 auto'}}
+                    />
+                </div>
+                {/* 產品名稱 */}
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:9,marginBottom:8}}>
+                    <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                        <div style={{width:5,height:18,background:'var(--red)',borderRadius:'3px 3px 0 0'}}/>
+                        <div style={{width:5,height:12,background:'var(--orange)',borderRadius:'3px 3px 0 0'}}/>
+                        <div style={{width:5,height:24,background:'var(--green)',borderRadius:'3px 3px 0 0'}}/>
+                        <div style={{width:5,height:16,background:'var(--blue)',borderRadius:'3px 3px 0 0'}}/>
+                    </div>
+                    <div style={{textAlign:'left'}}>
+                        <div style={{fontSize:22,fontWeight:900,color:'var(--text-dark)',lineHeight:1.05,letterSpacing:'-0.5px'}}>心智光譜</div>
+                        <div style={{fontSize:8,color:'var(--accent)',letterSpacing:'2.5px',fontWeight:700,textTransform:'uppercase',marginTop:2}}>MIND SPECTRUM · SEL</div>
+                    </div>
+                </div>
+                <div style={{fontSize:13,color:'var(--text-mid)',fontWeight:400,lineHeight:1.6}}>看見自己與孩子的內在狀態</div>
             </div>
 
-            <div className="content">
+            {/* Content */}
+            <div className="content" style={{display:'flex',flexDirection:'column',paddingBottom:28}}>
                 {/* 我是家長 */}
-                <button className="entry-card fade-up" onClick={()=>{setMode('quiz');setStep('register');}} style={{border:'none',width:'100%',textAlign:'left'}}>
-                    <div style={{width:48,height:48,background:'#EEF4FF',borderRadius:14,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3A70B0" strokeWidth="2" strokeLinecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+                <button className="entry-card fade-up" onClick={()=>{setMode('quiz');setStep('register');}}>
+                    <div style={{width:48,height:48,background:'var(--accent-pale)',borderRadius:12,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,border:'1px solid var(--border)'}}>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--text-dark)" strokeWidth="1.75" strokeLinecap="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2"/>
+                            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                            <line x1="12" y1="12" x2="12" y2="16"/>
+                            <line x1="10" y1="14" x2="14" y2="14"/>
+                        </svg>
                     </div>
                     <div style={{flex:1}}>
-                        <div className="entry-title" style={{fontSize:17,fontWeight:800,color:'var(--text-dark)',marginBottom:2}}>我是家長</div>
-                        <div className="entry-sub" style={{fontSize:12,color:'var(--text-light)'}}>進入成人版測驗</div>
+                        <div style={{fontSize:17,fontWeight:700,color:'var(--text-dark)',marginBottom:3}}>我是家長</div>
+                        <div style={{fontSize:12,color:'var(--text-light)',fontWeight:400}}>進入成人版測驗</div>
                     </div>
-                    <span style={{color:'var(--text-light)',flexShrink:0}}><Ico.Chevron/></span>
+                    <span style={{color:'var(--border-mid)',flexShrink:0}}><Ico.Chevron/></span>
                 </button>
 
                 {/* 我是孩子 */}
-                <a href={CHILD_VERSION_URL} target="_blank" rel="noopener noreferrer" className="entry-card" style={{animationDelay:'0.05s'}}>
-                    <div style={{width:48,height:48,background:'#F0FAF4',borderRadius:14,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-                        <Ico.Smile/>
+                <button className="entry-card" style={{animationDelay:'0.05s', textDecoration:'none', cursor:'pointer'}} onClick={() => setShowChildApp(true)}>
+                    <div style={{width:48,height:48,background:'var(--green-pale)',borderRadius:12,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,border:'1px solid rgba(56,161,105,0.2)'}}>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="1.75" strokeLinecap="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
                     </div>
                     <div style={{flex:1}}>
-                        <div className="entry-title" style={{fontSize:17,fontWeight:800,color:'var(--text-dark)',marginBottom:2}}>我是孩子</div>
-                        <div className="entry-sub" style={{fontSize:12,color:'var(--text-light)'}}>進入孩子版測驗</div>
+                        <div style={{fontSize:17,fontWeight:700,color:'var(--text-dark)',marginBottom:3}}>我是孩子</div>
+                        <div style={{fontSize:12,color:'var(--text-light)',fontWeight:400}}>進入孩子版測驗</div>
                     </div>
-                    <span style={{color:'var(--text-light)',flexShrink:0}}><Ico.Chevron/></span>
-                </a>
-
-                {/* 領取心智譜說明 */}
-                <button className="fade-up" onClick={()=>{setMode('direct');setStep('register');}}
-                    style={{width:'100%',background:'#3A70B0',color:'#fff',border:'none',borderRadius:14,padding:'15px',fontSize:15,fontWeight:700,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:8,marginBottom:10,animationDelay:'0.1s'}}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                    領取心智譜說明
+                    <span style={{color:'var(--border-mid)',flexShrink:0}}><Ico.Chevron/></span>
                 </button>
 
-                {/* 查詢過往紀錄 */}
-                <button onClick={()=>setStep('lookup')}
-                   style={{display:'flex',alignItems:'center',justifyContent:'center',gap:6,width:'100%',background:'rgba(0,0,0,0.05)',color:'var(--text-mid)',borderRadius:14,padding:'13px',fontSize:14,fontWeight:600,border:'1px solid var(--surface2)',cursor:'pointer'}}>
-                    <Ico.Search/> 查詢過往紀錄
-                </button>
+                {/* 測驗特點 */}
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:8,margin:'14px 0'}}>
+                    {[
+                        {num:'3',  unit:'分鐘', label:'快速完成', color:'var(--blue)'},
+                        {num:'24', unit:'題',   label:'情境選擇', color:'var(--green)'},
+                        {num:'4',  unit:'種',   label:'教養底色', color:'var(--orange)'},
+                    ].map((f,i)=>(
+                        <div key={i} style={{background:'var(--card)',borderRadius:14,padding:'14px 6px',textAlign:'center',border:'1px solid var(--border)',boxShadow:'0 2px 8px rgba(99,102,241,0.05)'}}>
+                            <div style={{fontSize:22,fontWeight:900,color:f.color,lineHeight:1.1}}>
+                                {f.num}<span style={{fontSize:13,fontWeight:700}}>{f.unit}</span>
+                            </div>
+                            <div style={{fontSize:10,color:'var(--text-light)',marginTop:5,fontWeight:600,letterSpacing:'0.5px'}}>{f.label}</div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* 引導小文字 */}
+                <p style={{fontSize:12,color:'var(--text-light)',textAlign:'center',lineHeight:1.7,marginBottom:14,padding:'0 4px'}}>
+                    在教養衝突的那一秒，你的直覺反應<br/>揭露了你的底色——先了解自己，才能陪伴孩子。
+                </p>
+
+                {/* 次要行動列 */}
+                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+                    <button onClick={()=>{setMode('direct');setStep('register');}}
+                        style={{background:'var(--accent)',color:'#fff',border:'none',borderRadius:12,padding:'14px 10px',fontSize:13,fontWeight:700,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:7,transition:'all 0.16s'}}>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                        領取光譜說明
+                    </button>
+                    <button onClick={()=>setStep('lookup')}
+                        style={{display:'flex',alignItems:'center',justifyContent:'center',gap:7,background:'var(--card)',color:'var(--text-mid)',borderRadius:12,padding:'14px 10px',fontSize:13,fontWeight:600,border:'1px solid var(--border)',cursor:'pointer',transition:'all 0.15s'}}>
+                        <Ico.Search/> 查詢過往紀錄
+                    </button>
+                </div>
             </div>
         </Shell>
     );
 
-    /* ━━━ 填資料 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ─────────── REGISTER ─────────── */
     if (step==='register') return (
         <Shell>
             <div className="top-header">
-                <div className="title-label" style={{fontSize:11,letterSpacing:'3px',color:'rgba(255,255,255,0.5)',marginBottom:8,fontWeight:700}}>
-                    {mode==='quiz' ? '成人版測驗' : '領取心智光譜說明'}
+                <SpectrumStrip/>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:10}}>
+                    <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                        <div style={{width:5,height:14,background:'var(--red)',borderRadius:'2px 2px 0 0'}}/>
+                        <div style={{width:5,height:9,background:'var(--orange)',borderRadius:'2px 2px 0 0'}}/>
+                        <div style={{width:5,height:18,background:'var(--green)',borderRadius:'2px 2px 0 0'}}/>
+                        <div style={{width:5,height:12,background:'var(--blue)',borderRadius:'2px 2px 0 0'}}/>
+                    </div>
+                    <div style={{fontSize:11,letterSpacing:'2px',color:'var(--accent)',fontWeight:700,textTransform:'uppercase'}}>
+                        {mode==='quiz' ? '覺知SEL' : '說明領取'}
+                    </div>
                 </div>
-                <div className="title-main" style={{fontSize:24,fontWeight:900,color:'#fff'}}>
-                    {mode==='quiz' ? '填寫後進入測驗' : '填寫基本資料'}
+                <div style={{fontSize:26,fontWeight:900,color:'var(--text-dark)',marginBottom:8}}>
+                    {mode==='quiz' ? '覺知心智光譜 - 家長' : '填寫基本資料'}
                 </div>
-                <div className="title-sub" style={{fontSize:13,color:'rgba(255,255,255,0.6)',marginTop:8,lineHeight:1.6}}>
+                <div style={{fontSize:13,color:'var(--text-mid)',lineHeight:1.7}}>
                     {mode==='quiz'
-                        ? '請依照壓力下的直覺作答，\n無需過度思考。'
+                        ? '看見自己與孩子的內在狀態'
                         : '填寫完成後，\n心智光譜說明將寄至您的 Email。'}
                 </div>
-                <SpectrumStrip/>
             </div>
 
             <div className="content">
-                <div className="card" style={{padding:'24px 20px'}}>
+                {/* 介紹說明框 (quiz mode only) */}
+                {mode==='quiz' && (
+                    <div style={{background:'var(--surface)',borderRadius:16,padding:'18px 20px',marginBottom:16,border:'1px solid var(--border)'}}>
+                        <div style={{fontSize:16,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>測測看，您是哪一種底色的家長？</div>
+                        <div style={{fontSize:13,color:'var(--text-mid)',lineHeight:1.75}}>在衝突發生的那一秒，我們往往會回到最習慣的「自動反應」。請依照壓力下的直覺反應作答。</div>
+                    </div>
+                )}
+                <div className="card" style={{padding:'28px 22px'}}>
                     <form onSubmit={handleRegisterSubmit}>
-                        {/* Bot trap */}
+                        {/* Honeypot */}
                         <div style={{position:'absolute',opacity:0,height:0,overflow:'hidden'}}>
                             <input tabIndex="-1" autoComplete="off" value={botTrap} onChange={e=>setBotTrap(e.target.value)}/>
                         </div>
 
-                        <div style={{marginBottom:14}}>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>姓名</label>
+                        {/* 姓名 */}
+                        <div style={{marginBottom:16}}>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:7}}>您的姓名</label>
                             <div className="input-wrap">
                                 <span className="input-icon"><Ico.User/></span>
                                 <input type="text" required className="input-field" placeholder="例如：王小明"
@@ -711,8 +1752,10 @@ function App() {
                             </div>
                         </div>
 
-                        <div style={{marginBottom:14}}>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>電子信箱
+                        {/* Email */}
+                        <div style={{marginBottom:16}}>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:7}}>
+                                您的信箱
                                 <span style={{fontSize:11,fontWeight:400,color:'var(--text-light)',marginLeft:4}}>（說明將寄至此信箱）</span>
                             </label>
                             <div className="input-wrap">
@@ -722,137 +1765,220 @@ function App() {
                             </div>
                         </div>
 
-                        <div style={{marginBottom:22}}>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>聯繫電話</label>
+                        {/* 孩子年齡（quiz mode only, optional） */}
+                        {mode==='quiz' && (
+                            <div style={{marginBottom:16}}>
+                                <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:8}}>
+                                    孩子的年齡
+                                    <span style={{fontSize:11,fontWeight:400,color:'var(--text-light)',marginLeft:4}}>（選填，用於顯示分齡建議）</span>
+                                </label>
+                                <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:8}}>
+                                    {AGE_GROUPS.map(ag=>{
+                                        const sel = childAge===ag.key;
+                                        return (
+                                            <button key={ag.key} type="button"
+                                                onClick={()=>setChildAge(sel?null:ag.key)}
+                                                style={{
+                                                    padding:'10px 4px',borderRadius:12,border:`1.5px solid ${sel?'var(--accent)':'var(--border)'}`,
+                                                    background: sel?'var(--accent-pale)':'var(--card)',
+                                                    cursor:'pointer',textAlign:'center',transition:'all 0.15s'
+                                                }}>
+                                                <div style={{fontSize:12,fontWeight:800,color:sel?'var(--accent)':'var(--text-dark)'}}>{ag.label}</div>
+                                                <div style={{fontSize:10,color:sel?'var(--accent)':'var(--text-light)',marginTop:2}}>{ag.sublabel}</div>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* 電話 */}
+                        <div style={{marginBottom:24}}>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:7}}>聯繫電話</label>
                             <div className="input-wrap">
                                 <span className="input-icon"><Ico.Phone/></span>
                                 <input type="tel" required className="input-field" placeholder="09xxxxxxxx" maxLength="10"
                                     value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g,'').slice(0,10))}/>
                             </div>
                             {phone.length>0 && !validPhone(phone) &&
-                                <p style={{fontSize:12,color:'#D63030',marginTop:4,fontWeight:600}}>請填寫正確的手機號碼格式</p>}
+                                <p style={{fontSize:12,color:'#D63030',marginTop:5,fontWeight:600}}>請填寫正確的手機號碼格式</p>}
                         </div>
 
                         <button type="submit" className="btn-primary">
-                            {mode==='quiz' ? <><Ico.Bolt/> 開始測驗</> : <><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5" rx="1"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg> 確認領取說明</>}
+                            {mode==='quiz'
+                                ? <><Ico.Bolt/> 開始測驗</>
+                                : <><Ico.Gift/> 確認領取說明</>}
                         </button>
+
+                        {/* 隱私聲明 */}
+                        <p style={{fontSize:11,color:'var(--text-light)',textAlign:'center',marginTop:14,lineHeight:1.7}}>
+                            您的姓名、信箱與電話僅用於寄送測驗說明及課程資訊，<br/>
+                            不會提供予第三方，亦不作其他商業用途。
+                        </p>
                     </form>
                 </div>
 
                 <button onClick={reset} className="btn-ghost"><Ico.ChevronL/> 返回</button>
 
                 <div style={{textAlign:'center',marginTop:16}}>
-                    <button onClick={()=>setShowEng(true)} style={{fontSize:10,color:'var(--surface2)',background:'none',border:'none',cursor:'pointer'}}>工程師</button>
+                    <button onClick={()=>setShowEng(true)} style={{fontSize:10,color:'var(--border)',background:'none',border:'none',cursor:'pointer'}}>工程師</button>
                 </div>
             </div>
 
+            {/* Engineer modal */}
             {showEng && (
-                <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.6)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:99,padding:20}}
+                <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.65)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:99,padding:20}}
                      onClick={()=>{setShowEng(false);setEngPwd('');}}>
-                    <div className="card pop-in" style={{maxWidth:300,width:'100%',padding:24}} onClick={e=>e.stopPropagation()}>
-                        <div style={{fontSize:16,fontWeight:700,color:'var(--text-dark)',marginBottom:12,textAlign:'center'}}>工程師測試模式</div>
+                    <div className="card pop-in" style={{maxWidth:300,width:'100%',padding:28}} onClick={e=>e.stopPropagation()}>
+                        <div style={{fontSize:16,fontWeight:800,color:'var(--text-dark)',marginBottom:14,textAlign:'center'}}>工程師測試模式</div>
                         <input type="password" className="input-field" style={{paddingLeft:14,textAlign:'center',letterSpacing:4}}
                             placeholder="密碼" value={engPwd} onChange={e=>setEngPwd(e.target.value)}/>
-                        <button onClick={runEngineer} className="btn-primary" style={{marginTop:12,fontSize:14}}>生成測試資料</button>
+                        <button onClick={runEngineer} className="btn-primary" style={{marginTop:14,fontSize:14}}>生成測試資料</button>
                     </div>
                 </div>
             )}
         </Shell>
     );
 
-    /* ━━━ 測驗 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ─────────── QUIZ ─────────── */
     if (step==='quiz') return (
         <Shell>
-            <div style={{background:'var(--primary)'}}>
-                {/* 進度 Header */}
-                <div style={{background:'var(--primary)',padding:'20px 20px 16px',width:'100%'}}>
-                    <div style={{maxWidth:480,margin:'0 auto'}}>
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
-                            <span style={{fontSize:12,fontWeight:700,color:'rgba(255,255,255,0.6)',letterSpacing:1}}>題目 {qIdx+1} / {QUESTIONS.length}</span>
-                            <span style={{fontSize:12,fontWeight:700,color:'rgba(255,255,255,0.6)'}}>{progress}%</span>
+            <div style={{background:'var(--card)',minHeight:'100%',display:'flex',flexDirection:'column'}}>
+                {/* Progress header */}
+                <div style={{background:'var(--accent-pale)',width:'100%',flexShrink:0,borderBottom:'1px solid var(--border)'}}>
+                    <div style={{maxWidth:480,margin:'0 auto',padding:'12px 18px 10px'}}>
+                        {/* Counter + label */}
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+                            <span style={{fontSize:11,fontWeight:700,color:'var(--text-light)',letterSpacing:'1px',textTransform:'uppercase'}}>整體進度</span>
+                            <span style={{fontSize:11,fontWeight:700,color:'#6366F1',fontFamily:'monospace'}}>{qIdx+1} / {QUESTIONS.length}</span>
                         </div>
-                        {/* Progress bar */}
-                        <div style={{position:'relative',height:28}}>
-                            <div style={{position:'absolute',bottom:0,width:'100%',height:5,background:'rgba(255,255,255,0.12)',borderRadius:4,overflow:'hidden'}}>
-                                <div style={{height:'100%',background:'var(--accent)',width:`${progress}%`,borderRadius:4,transition:'width 0.3s ease'}}/>
-                            </div>
-                            <div style={{position:'absolute',top:0,transition:'left 0.3s ease',left:`calc(${progress}% - 12px)`}}>
-                                <div style={{background:'var(--accent)',borderRadius:'50%',width:22,height:22,display:'flex',alignItems:'center',justifyContent:'center',boxShadow:'0 2px 8px rgba(232,96,10,0.4)'}}>
-                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                                </div>
-                            </div>
+                        {/* Progress bar — style5 inspired */}
+                        <div style={{height:5,background:'var(--border)',border:'1px solid var(--border-mid)',borderRadius:0,overflow:'hidden'}}>
+                            <div style={{height:'100%',background:'#6366F1',width:`${progress}%`,transition:'width 0.3s ease'}}/>
                         </div>
                     </div>
                 </div>
 
-                {/* 題目 + 選項 */}
-                <div style={{flex:1,width:'100%',padding:'20px 18px 36px',maxWidth:480,margin:'0 auto',overflowY:'auto'}} className="no-bar">
-                    {/* 題目卡 */}
-                    <div className="card slide-in" key={qIdx} style={{textAlign:'center',padding:'28px 20px',marginBottom:18,background:'rgba(255,255,255,0.06)',border:'1px solid rgba(255,255,255,0.1)',minHeight:120,display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>
-                        <div style={{fontSize:11,fontWeight:700,color:'var(--accent)',letterSpacing:2,marginBottom:10,textTransform:'uppercase'}}>題目 {qIdx+1}</div>
-                        <div className="opt-label" style={{fontSize:20,fontWeight:800,color:'#fff',lineHeight:1.55,whiteSpace:'pre-line'}}>{QUESTIONS[qIdx]}</div>
+                {/* Question + Options */}
+                <div style={{flex:1,width:'100%',maxWidth:480,margin:'0 auto',overflowY:'auto'}} className="no-bar">
+                    {/* Question card */}
+                    <div className={navDir==='back' ? 'slide-in-back' : 'slide-in'} key={`q-${qIdx}-${navDir}`} style={{background:'var(--card)',padding:'20px 20px 0'}}>
+                        <div style={{fontSize:18,fontWeight:700,color:'var(--text-dark)',lineHeight:1.65,whiteSpace:'pre-line',paddingBottom:16,borderBottom:'2px solid var(--border)',minHeight:120,display:'flex',alignItems:'center'}}>
+                            {QUESTIONS[qIdx]}
+                        </div>
+                        <div style={{fontSize:11,color:'var(--text-light)',padding:'10px 0 4px'}}>請選擇最符合您真實狀況的選項</div>
                     </div>
 
-                    {/* 選項 */}
-                    {OPTIONS.map((o,i)=>(
-                        <button key={o.score} className="option-btn slide-in" style={{animationDelay:`${i*0.04}s`,background:'rgba(255,255,255,0.07)',border:'1px solid rgba(255,255,255,0.12)'}}
-                            onClick={()=>handleAnswer(o.score)} disabled={navigating}>
-                            <span className="opt-label" style={{fontSize:16,fontWeight:700,color:'#fff'}}>{o.label}</span>
-                            <span className="opt-badge" style={{background:'rgba(232,96,10,0.25)',color:'#F5914A',borderRadius:10,padding:'3px 12px',fontSize:12,fontWeight:700}}>{o.score} 分</span>
-                        </button>
-                    ))}
+                    {/* Options — table-row style */}
+                    <div style={{background:'var(--card)',paddingBottom:8}}>
+                        {OPTIONS.map((o,i)=>{
+                            const letters = ['A','B','C','D','E'];
+                            const selected = answers[qIdx+1] === o.score;
+                            return (
+                                <button key={o.score}
+                                    className={`option-btn ${navDir==='back'?'slide-in-back':'slide-in'}`}
+                                    style={{
+                                        animationDelay:`${i*0.04}s`,
+                                        borderRadius:0,
+                                        borderLeft: selected ? '3px solid var(--accent)' : '3px solid transparent',
+                                        borderRight:'none',
+                                        borderBottom:'1px solid var(--border)',
+                                        padding:'14px 13px 14px 13px',
+                                        marginBottom:0,
+                                        display:'flex',alignItems:'center',gap:12,
+                                        background: selected ? 'var(--accent-pale)' : 'var(--card)',
+                                        transition:'background 0.15s'
+                                    }}
+                                    onClick={()=>handleAnswer(o.score)} disabled={navigating}>
+                                    <span style={{
+                                        width:28,height:28,
+                                        background: selected ? 'var(--accent)' : 'var(--accent-pale)',
+                                        border: selected ? 'none' : '1px solid var(--border)',
+                                        borderRadius:4,display:'flex',alignItems:'center',justifyContent:'center',
+                                        fontSize:12,fontWeight:800,
+                                        color: selected ? '#fff' : 'var(--accent)',
+                                        flexShrink:0,fontFamily:'monospace',
+                                        transition:'all 0.15s'
+                                    }}>
+                                        {letters[i]}
+                                    </span>
+                                    <span style={{fontSize:15,fontWeight: selected?700:600, color: selected?'var(--accent-dark)':'var(--text-dark)',flex:1,textAlign:'left'}}>{o.label}</span>
+                                    <span style={{fontSize:12,fontWeight:700,color: selected?'var(--accent)':'var(--text-light)'}}>{o.score} 分</span>
+                                </button>
+                            );
+                        })}
+                    </div>
 
                     {qIdx>0 && (
-                        <button onClick={()=>setQIdx(q=>q-1)} className="btn-ghost" style={{color:'rgba(255,255,255,0.4)',marginTop:8}}>
-                            <Ico.ChevronL/> 返回上一題
-                        </button>
+                        <div style={{padding:'4px 16px 16px'}}>
+                            <button onClick={()=>{ setNavDir('back'); setQIdx(q=>q-1); }} className="btn-ghost" style={{color:'var(--text-light)'}}>
+                                <Ico.ChevronL/> 返回上一題
+                            </button>
+                        </div>
                     )}
                 </div>
             </div>
         </Shell>
     );
 
-    /* ━━━ 確認資料（做完測驗後） ━━━━━━━━━━━━━━━ */
+    /* ─────────── CONTACT ─────────── */
     if (step==='contact') {
         const s = sortedTypes();
         return (
             <Shell>
-                {/* 結果預覽 Header */}
                 <div className="top-header">
+                    <SpectrumStrip/>
                     {mode==='quiz' && <>
-                        <div style={{fontSize:12,color:'rgba(255,255,255,0.55)',marginBottom:6,fontWeight:600}}>測驗初步結果</div>
-                        <div style={{fontSize:26,fontWeight:900,color:'#fff',marginBottom:12}}>{s[0].label}</div>
-                        <div style={{maxWidth:320,margin:'0 auto'}}>
-                            <ScoreBar label="開創型（紅）" score={scores.red}    color="#D63030"/>
-                            <ScoreBar label="關懷型（橙）" score={scores.orange} color="#F5914A"/>
-                            <ScoreBar label="協調型（綠）" score={scores.green}  color="#4CAF7D"/>
-                            <ScoreBar label="分析型（藍）" score={scores.blue}   color="#80B8E8"/>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:8}}>
+                            <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                                <div style={{width:5,height:14,background:'var(--red)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:9,background:'var(--orange)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:18,background:'var(--green)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:12,background:'var(--blue)',borderRadius:'2px 2px 0 0'}}/>
+                            </div>
+                            <div style={{fontSize:11,letterSpacing:'2px',color:'var(--accent)',fontWeight:700,textTransform:'uppercase'}}>測驗初步結果</div>
+                        </div>
+                        <div style={{fontSize:26,fontWeight:900,color:'var(--text-dark)',marginBottom:14}}>{s[0].label}</div>
+                        <div style={{maxWidth:300,margin:'0 auto'}}>
+                            <ScoreBar label="開創型（紅）" score={scores.red}    color="var(--red)"/>
+                            <ScoreBar label="關懷型（橙）" score={scores.orange} color="var(--orange)"/>
+                            <ScoreBar label="協調型（綠）" score={scores.green}  color="var(--green)"/>
+                            <ScoreBar label="分析型（藍）" score={scores.blue}   color="var(--blue)"/>
                         </div>
                     </>}
                     {mode==='direct' && <>
-                        <div style={{fontSize:12,color:'rgba(255,255,255,0.55)',marginBottom:8,fontWeight:600,letterSpacing:2}}>領取心智光譜說明</div>
-                        <div style={{fontSize:24,fontWeight:900,color:'#fff'}}>確認您的資料</div>
-                        <div style={{fontSize:13,color:'rgba(255,255,255,0.6)',marginTop:8}}>說明將寄至您填寫的 Email</div>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:10}}>
+                            <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                                <div style={{width:5,height:14,background:'var(--red)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:9,background:'var(--orange)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:18,background:'var(--green)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:12,background:'var(--blue)',borderRadius:'2px 2px 0 0'}}/>
+                            </div>
+                            <div style={{fontSize:11,letterSpacing:'2px',color:'var(--accent)',fontWeight:700,textTransform:'uppercase'}}>領取心智光譜說明</div>
+                        </div>
+                        <div style={{fontSize:26,fontWeight:900,color:'var(--text-dark)',marginBottom:6}}>確認您的資料</div>
+                        <div style={{fontSize:13,color:'var(--text-mid)'}}>說明將寄至您填寫的 Email</div>
                     </>}
-                    <SpectrumStrip/>
                 </div>
 
                 <div className="content">
-                    <div className="card" style={{padding:'20px'}}>
-                        <div style={{fontSize:13,fontWeight:700,color:'var(--accent)',marginBottom:14,display:'flex',alignItems:'center',gap:6}}>
+                    <div className="card" style={{padding:'22px'}}>
+                        <div style={{fontSize:13,fontWeight:700,color:'var(--green)',marginBottom:16,display:'flex',alignItems:'center',gap:6}}>
                             <Ico.Check/> 確認資料
                         </div>
 
-                        <div style={{marginBottom:10}}>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:4}}>姓名</label>
+                        <div style={{marginBottom:12}}>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>姓名</label>
                             <input className="input-field" style={{paddingLeft:14}} value={name} onChange={e=>setName(e.target.value)} placeholder="您的姓名"/>
                         </div>
-                        <div style={{marginBottom:10}}>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:4}}>Email <span style={{fontWeight:400,color:'var(--text-light)'}}>（說明寄送用）</span></label>
+                        <div style={{marginBottom:12}}>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>
+                                Email <span style={{fontWeight:400,color:'var(--text-light)'}}>（說明寄送用）</span>
+                            </label>
                             <input className="input-field" style={{paddingLeft:14}} value={email} onChange={e=>setEmail(e.target.value)} placeholder="example@mail.com"/>
                         </div>
                         <div>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:4}}>聯繫電話</label>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>聯繫電話</label>
                             <input className="input-field" style={{paddingLeft:14}} value={phone}
                                 onChange={e=>setPhone(e.target.value.replace(/\D/g,'').slice(0,10))} placeholder="09xxxxxxxx" maxLength="10"/>
                         </div>
@@ -867,23 +1993,23 @@ function App() {
                     <button onClick={reset} className="btn-ghost">返回首頁</button>
                 </div>
 
-                {/* 來源 Modal */}
+                {/* Confirm modal */}
                 {showConfirm && (
-                    <div style={{position:'fixed',inset:0,background:'rgba(10,18,32,0.75)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:99,padding:20}}
+                    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.7)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:99,padding:20}}
                          onClick={()=>setConfirm(false)}>
                         <div className="card pop-in" style={{maxWidth:360,width:'100%',padding:'28px 24px'}} onClick={e=>e.stopPropagation()}>
-                            <div style={{textAlign:'center',marginBottom:16}}>
-                                <div style={{width:48,height:48,background:'var(--surface)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 10px'}}>
+                            <div style={{textAlign:'center',marginBottom:18}}>
+                                <div style={{width:52,height:52,background:'var(--surface)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 12px',border:'1.5px solid var(--border)'}}>
                                     <Ico.Mail/>
                                 </div>
-                                <div style={{fontSize:17,fontWeight:800,color:'var(--text-dark)'}}>確認送出</div>
+                                <div style={{fontSize:18,fontWeight:800,color:'var(--text-dark)'}}>確認送出</div>
                                 <div style={{fontSize:13,color:'var(--text-mid)',marginTop:6,lineHeight:1.6}}>
-                                    說明將寄至 <span style={{color:'var(--accent)',fontWeight:700}}>{email}</span>
+                                    說明將寄至 <span style={{color:'var(--charcoal)',fontWeight:800}}>{email}</span>
                                 </div>
                             </div>
 
-                            {/* 來源 */}
-                            <div style={{background:refErr?'#FFF5F5':'var(--surface)',borderRadius:14,padding:'14px',border:refErr?'1.5px solid #FECACA':'1.5px solid var(--surface2)',marginBottom:16}}>
+                            {/* Referral */}
+                            <div style={{background:refErr?'#FFF5F5':'var(--surface)',borderRadius:16,padding:'16px',border:refErr?'1.5px solid #FECACA':'1.5px solid var(--border)',marginBottom:16}}>
                                 <div style={{fontSize:13,fontWeight:700,color:refErr?'#D63030':'var(--text-dark)',marginBottom:10}}>
                                     如何得知本測驗？<span style={{fontSize:11,fontWeight:400,color:'var(--text-light)',marginLeft:4}}>(必填)</span>
                                 </div>
@@ -891,13 +2017,13 @@ function App() {
                                     {REFERRAL_OPTIONS.map(o=>(
                                         <button key={o} onClick={()=>toggleRef(o)} style={{
                                             padding:'9px 10px',borderRadius:10,fontSize:12,fontWeight:700,
-                                            border: referral.includes(o)?'2px solid var(--accent)':'1.5px solid var(--surface2)',
-                                            background: referral.includes(o)?'var(--accent)':'var(--white)',
+                                            border: referral.includes(o)?'2px solid var(--accent)':'1.5px solid var(--border)',
+                                            background: referral.includes(o)?'var(--accent)':'var(--card)',
                                             color: referral.includes(o)?'#fff':'var(--text-mid)',
                                             cursor:'pointer',display:'flex',alignItems:'center',gap:6,
                                             transition:'all 0.15s'
                                         }}>
-                                            <div style={{width:12,height:12,borderRadius:3,border:referral.includes(o)?'1.5px solid rgba(255,255,255,0.5)':'1.5px solid var(--surface2)',background:referral.includes(o)?'rgba(255,255,255,0.25)':'transparent',flexShrink:0}}/>
+                                            <div style={{width:12,height:12,borderRadius:3,border:referral.includes(o)?'1.5px solid rgba(255,255,255,0.3)':'1.5px solid var(--border)',background:referral.includes(o)?'rgba(255,255,255,0.15)':'transparent',flexShrink:0}}/>
                                             {o}
                                         </button>
                                     ))}
@@ -906,7 +2032,7 @@ function App() {
                             </div>
 
                             <button onClick={trySubmit} className="btn-primary">確認送出</button>
-                            <button onClick={()=>setConfirm(false)} style={{width:'100%',marginTop:10,padding:10,background:'var(--surface)',border:'none',borderRadius:12,fontSize:13,fontWeight:600,color:'var(--text-mid)',cursor:'pointer'}}>返回修改</button>
+                            <button onClick={()=>setConfirm(false)} style={{width:'100%',marginTop:10,padding:11,background:'var(--surface)',border:'none',borderRadius:12,fontSize:13,fontWeight:600,color:'var(--text-mid)',cursor:'pointer'}}>返回修改</button>
                         </div>
                     </div>
                 )}
@@ -914,69 +2040,124 @@ function App() {
         );
     }
 
-    /* ━━━ 結果頁 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ─────────── RESULT ─────────── */
     if (step==='result') {
         const s = sortedTypes();
+        const domId   = s[0]?.id || 'blue';
+        const domInfo = TYPE_INFO[domId];
+        const dynStyle = {
+            '--accent':      domInfo.barColor,
+            '--accent-dark': domInfo.darkColor,
+            '--accent-pale': domInfo.bgColor,
+            '--border':      domInfo.borderColor,
+        };
         return (
             <Shell>
-                {/* 結果 Header */}
-                <div className="top-header" style={{paddingBottom:28}}>
-                    <div style={{width:48,height:48,background:'rgba(255,255,255,0.12)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 12px',border:'1px solid rgba(255,255,255,0.2)'}}>
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <div style={dynStyle}>
+                <div className="top-header" style={{paddingBottom:32, background: domInfo.bgColor, borderBottom:`1px solid ${domInfo.borderColor}`}}>
+                    {/* Dominant colour strip at top */}
+                    <div style={{position:'absolute',top:0,left:0,width:'100%',height:6,background:`linear-gradient(90deg,${TYPE_INFO.red.barColor},${TYPE_INFO.orange.barColor},${TYPE_INFO.green.barColor},${TYPE_INFO.blue.barColor})`}}/>
+
+                    <div style={{width:52,height:52,background:`${domInfo.barColor}18`,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 14px',border:`1.5px solid ${domInfo.borderColor}`}}>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={domInfo.barColor} strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
 
                     {mode==='quiz' ? <>
-                        <div style={{fontSize:12,color:'rgba(255,255,255,0.55)',marginBottom:6,letterSpacing:1}}>您的心智光譜</div>
-                        <div style={{fontSize:28,fontWeight:900,color:'#fff',marginBottom:4}}>{info.label}</div>
-                        <div style={{fontSize:13,color:'rgba(255,255,255,0.6)',marginBottom:14}}>說明已寄至您的信箱</div>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:8}}>
+                            <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                                {s.map(t=>(
+                                    <div key={t.id} style={{width:5, height: t.id===domId?22:Math.round(8+scores[t.id]/30*10), background:TYPE_INFO[t.id].barColor, borderRadius:'2px 2px 0 0', transition:'height 0.4s ease'}}/>
+                                ))}
+                            </div>
+                            <div style={{fontSize:11,letterSpacing:'2px',color:domInfo.barColor,fontWeight:700,textTransform:'uppercase'}}>您的心智光譜</div>
+                        </div>
+                        <div style={{fontSize:22,fontWeight:900,color:'var(--text-dark)',marginBottom:6,lineHeight:1.3}}>{info.title}</div>
+                        <div style={{fontSize:13,color:'var(--text-mid)',marginBottom:16}}>資料已成功提交！說明將寄至您的信箱</div>
                         <div style={{maxWidth:300,margin:'0 auto'}}>
-                            <ScoreBar label="開創型（紅）" score={scores.red}    color="#D63030"/>
-                            <ScoreBar label="關懷型（橙）" score={scores.orange} color="#F5914A"/>
-                            <ScoreBar label="協調型（綠）" score={scores.green}  color="#4CAF7D"/>
-                            <ScoreBar label="分析型（藍）" score={scores.blue}   color="#80B8E8"/>
+                            <ScoreBar label="開創型（紅）" score={scores.red}    color="var(--red)"/>
+                            <ScoreBar label="關懷型（橙）" score={scores.orange} color="var(--orange)"/>
+                            <ScoreBar label="協調型（綠）" score={scores.green}  color="var(--green)"/>
+                            <ScoreBar label="分析型（藍）" score={scores.blue}   color="var(--blue)"/>
                         </div>
                     </> : <>
-                        <div style={{fontSize:12,color:'rgba(255,255,255,0.55)',marginBottom:6,letterSpacing:1}}>領取成功</div>
-                        <div style={{fontSize:26,fontWeight:900,color:'#fff',marginBottom:6}}>心智光譜說明</div>
-                        <div style={{fontSize:13,color:'rgba(255,255,255,0.6)'}}>說明已寄至 {email}</div>
+                        <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:8}}>
+                            <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                                <div style={{width:5,height:14,background:'var(--red)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:9,background:'var(--orange)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:18,background:'var(--green)',borderRadius:'2px 2px 0 0'}}/>
+                                <div style={{width:5,height:12,background:'var(--blue)',borderRadius:'2px 2px 0 0'}}/>
+                            </div>
+                            <div style={{fontSize:11,letterSpacing:'2px',color:domInfo.barColor,fontWeight:700,textTransform:'uppercase'}}>領取成功</div>
+                        </div>
+                        <div style={{fontSize:26,fontWeight:900,color:'var(--text-dark)',marginBottom:6}}>心智光譜說明</div>
+                        <div style={{fontSize:13,color:'var(--text-mid)'}}>說明已寄至 {email}</div>
                     </>}
-                    <SpectrumStrip/>
                 </div>
 
                 <div className="content">
-                    {/* 型別說明（只在 quiz 模式顯示） */}
+                    {/* Type info sections */}
                     {mode==='quiz' && info && (
                         <div style={{marginBottom:16}}>
                             <div className="type-section" style={{borderLeftColor:'var(--red)'}}>
-                                <div style={{fontSize:11,fontWeight:700,color:'var(--red)',letterSpacing:1.5,marginBottom:6}}>壓力下的表現</div>
-                                <div style={{fontSize:14,color:'var(--text-dark)',lineHeight:1.7}}>{info.stress}</div>
+                                <div style={{fontSize:11,fontWeight:700,color:'var(--red)',letterSpacing:1.5,marginBottom:7,textTransform:'uppercase'}}>壓力下的表現</div>
+                                <div style={{fontSize:14,color:'var(--text-dark)',lineHeight:1.75}}>{info.stress}</div>
                             </div>
                             <div className="type-section" style={{borderLeftColor:'var(--blue)'}}>
-                                <div style={{fontSize:11,fontWeight:700,color:'var(--blue)',letterSpacing:1.5,marginBottom:6}}>您的優勢</div>
-                                <div style={{fontSize:14,color:'var(--text-dark)',lineHeight:1.7}}>{info.strength}</div>
+                                <div style={{fontSize:11,fontWeight:700,color:'var(--blue)',letterSpacing:1.5,marginBottom:7,textTransform:'uppercase'}}>您的優勢</div>
+                                <div style={{fontSize:14,color:'var(--text-dark)',lineHeight:1.75}}>{info.strength}</div>
                             </div>
                             <div className="type-section" style={{borderLeftColor:'var(--green)'}}>
-                                <div style={{fontSize:11,fontWeight:700,color:'var(--green)',letterSpacing:1.5,marginBottom:6}}>覺知練習</div>
-                                <div style={{fontSize:14,color:'var(--text-dark)',lineHeight:1.7}}>{info.practice}</div>
+                                <div style={{fontSize:11,fontWeight:700,color:'var(--green)',letterSpacing:1.5,marginBottom:7,textTransform:'uppercase'}}>覺知練習</div>
+                                <div style={{fontSize:14,color:'var(--text-dark)',lineHeight:1.75}}>{info.practice}</div>
                             </div>
                         </div>
                     )}
 
-                    {/* 直接領取模式的說明 */}
+                    {/* 分齡建議 */}
+                    {mode==='quiz' && childAge && AGE_TIPS[childAge] && (
+                        <div className="card fade-up" style={{padding:'22px',marginBottom:16,borderTop:'3px solid var(--accent)'}}>
+                            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:14}}>
+                                <div style={{width:32,height:32,background:'var(--accent-pale)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.2" strokeLinecap="round"><path d="M12 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="M19 21v-2a7 7 0 0 0-14 0v2"/></svg>
+                                </div>
+                                <div>
+                                    <div style={{fontSize:13,fontWeight:900,color:'var(--text-dark)'}}>
+                                        {AGE_GROUPS.find(a=>a.key===childAge)?.label} 適齡練習
+                                    </div>
+                                    <div style={{fontSize:11,color:'var(--accent)',fontWeight:700}}>
+                                        {AGE_GROUPS.find(a=>a.key===childAge)?.sublabel}
+                                    </div>
+                                </div>
+                            </div>
+                            <div style={{display:'flex',flexDirection:'column',gap:10}}>
+                                {AGE_TIPS[childAge].map((tip,i)=>(
+                                    <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
+                                        <div style={{width:20,height:20,borderRadius:'50%',background:'var(--accent)',color:'#fff',fontSize:11,fontWeight:800,display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0,marginTop:1}}>
+                                            {i+1}
+                                        </div>
+                                        <div style={{fontSize:13,color:'var(--text-dark)',lineHeight:1.7}}>{tip}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+
                     {mode==='direct' && (
-                        <div className="card" style={{textAlign:'center',padding:'24px 20px',marginBottom:16}}>
-                            <div style={{fontSize:36,marginBottom:12}}>📬</div>
-                            <div style={{fontSize:16,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>說明已寄出！</div>
-                            <div style={{fontSize:14,color:'var(--text-mid)',lineHeight:1.7}}>
-                                請至 <span style={{fontWeight:700,color:'var(--accent)'}}>{email}</span> 查收<br/>
+                        <div className="card" style={{textAlign:'center',padding:'28px 22px',marginBottom:16}}>
+                            <div style={{width:56,height:56,background:'var(--surface)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 14px',border:'1.5px solid var(--border)'}}>
+                                <Ico.Inbox/>
+                            </div>
+                            <div style={{fontSize:17,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>說明已寄出！</div>
+                            <div style={{fontSize:14,color:'var(--text-mid)',lineHeight:1.8}}>
+                                請至 <span style={{fontWeight:800,color:'var(--charcoal)'}}>{email}</span> 查收<br/>
                                 若未收到，請檢查垃圾郵件信箱
                             </div>
                         </div>
                     )}
 
-                    {/* 行動按鈕 */}
+                    {/* LINE */}
                     <a href={LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer"
-                       style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,width:'100%',background:'#06C755',color:'#fff',borderRadius:14,padding:'15px',fontWeight:700,fontSize:15,textDecoration:'none',marginBottom:10,boxShadow:'0 4px 12px rgba(6,199,85,0.25)'}}>
+                       style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,width:'100%',background:'#06C755',color:'#fff',borderRadius:14,padding:'15px',fontWeight:700,fontSize:15,textDecoration:'none',marginBottom:10,boxShadow:'0 4px 16px rgba(6,199,85,0.28)'}}>
                         <Ico.Line/> 加入 LINE，接收更多資訊
                     </a>
 
@@ -987,96 +2168,218 @@ function App() {
                         </button>
                     )}
 
-                    <a href={CHILD_VERSION_URL} target="_blank" rel="noopener noreferrer"
-                       style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,width:'100%',background:'var(--surface)',color:'var(--text-mid)',border:'1.5px solid var(--surface2)',borderRadius:14,padding:'13px',fontWeight:700,fontSize:14,textDecoration:'none',marginBottom:10}}>
+                    {/* 帶孩子測驗 */}
+                    <button onClick={() => setShowChildApp(true)}
+                       style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,width:'100%',background:'var(--card)',color:'var(--text-mid)',border:'1.5px solid var(--border)',borderRadius:14,padding:'13px',fontWeight:700,fontSize:14,cursor:'pointer',marginBottom:10,boxShadow:'0 1px 6px rgba(45,45,45,0.06)'}}>
                         <Ico.Smile/> 帶孩子也來測測看 →
-                    </a>
+                    </button>
 
-                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:10}}>
-                        <button onClick={()=>setShowSS(true)}
-                            style={{background:'var(--surface)',color:'var(--text-mid)',border:'1.5px solid var(--surface2)',borderRadius:12,padding:'12px',fontWeight:700,fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:6}}>
-                            <Ico.Camera/> 截圖保存
-                        </button>
-                        <button onClick={()=>window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(QUIZ_SHARE_URL)}`,'_blank')}
-                            style={{background:'var(--surface)',color:'var(--text-mid)',border:'1.5px solid var(--surface2)',borderRadius:12,padding:'12px',fontWeight:700,fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:6}}>
-                            <Ico.Share/> 分享測驗
-                        </button>
-                    </div>
+                    {/* 親子底色配對 */}
+                    {(()=>{
+                        const PAIR_DATA = {
+                            'red-red':    { title:'🔴 紅色家長 × 🔴 紅色孩子', headline:'兩把火，誰來掌控方向？', body:'你們都渴望「被看見、有影響力」。當兩個紅色相遇，家裡能量爆棚，但也容易變成主導權之爭。孩子的頂撞不是挑釁，而是在問：「我，是否被你看見？」', tip:'賦予孩子真實的選擇權——「你覺得怎樣做比較好？」讓他在你的主導下仍有參與感與重要性。' },
+                            'red-orange': { title:'🔴 紅色家長 × 🟠 橙色孩子', headline:'你在推進，孩子在等一句「我看見你了」。', body:'橙色孩子的燃料是情感安全。你快速催促時，他感受到的不是效率，而是「我的感受不重要」。連結感斷了，配合度也跟著消失。', tip:'先說「我知道你盡力了」，再談下一步。情感安全穩了，孩子才聽得進去。' },
+                            'red-green':  { title:'🔴 紅色家長 × 🟢 綠色孩子', headline:'你衝，孩子在確認「這裡安全嗎？」', body:'綠色孩子的慢不是懶，是他的自我保護機制。當世界變動太快，他會放慢腳步確保安全。你愈催，他愈縮。', tip:'提前預告、給清楚的步驟，讓他知道「接下來會發生什麼」，安全感有了，他自然會動。' },
+                            'red-blue':   { title:'🔴 紅色家長 × 🔵 藍色孩子', headline:'你要行動，孩子要先理解全貌。', body:'藍色孩子的遲疑不是優柔寡斷，而是在反覆確認「我是否真的理解了？」說明規則時，同時說清楚「為什麼」，孩子不是不配合，而是不理解。', tip:'願意花 30 秒解釋邏輯，孩子的執行力會讓你刮目相看。' },
+                            'orange-red': { title:'🟠 橙色家長 × 🔴 紅色孩子', headline:'孩子需要舞台，你需要邊界。', body:'紅色孩子渴望主導感與被看見，橙色家長容易因為孩子的強勢而情緒受傷。孩子的衝勁不是在否定你，是他在確認自己是否有影響力。', tip:'先認可他的能量：「你很有想法！」再溫和說出你的感受，情感安全建立了，孩子才願意聽你說。' },
+                            'orange-orange': { title:'🟠 橙色家長 × 🟠 橙色孩子', headline:'滿滿的愛，需要一點邊界才不會燒傷彼此。', body:'你們都把「連結感」當燃料，情感豐沛、家庭溫度高。但橙色孩子情緒被放大時，你也容易跟著捲進去，變成兩個人一起崩潰。', tip:'練習告訴孩子：「我愛你，但你的情緒是你的功課，我陪你，不替你扛。」讓孩子改變是因為理解，而不是內疚。' },
+                            'orange-green': { title:'🟠 橙色家長 × 🟢 綠色孩子', headline:'你給愛，孩子需要的是空間。', body:'綠色孩子的燃料是穩定與節奏。你頻繁關心時，他感受到的是壓力，而不是愛。他的沉默不是冷漠，是在確認「這裡真的安全嗎？」', tip:'用固定的小儀式取代隨時關注，例如睡前固定 10 分鐘聊天。穩定感本身，就是最好的愛的語言。' },
+                            'orange-blue': { title:'🟠 橙色家長 × 🔵 藍色孩子', headline:'你說的愛，孩子用另一種語言在回應你。', body:'橙色用情感表達愛，藍色用邏輯表達愛。孩子的冷靜不是不在乎，是他正在用自己的方式理解這段關係。避免用「你讓我很難過」來要求改變，那只會讓他更退縮。', tip:'用「一起做一件事」取代「一起聊感受」——拼圖、討論問題、研究話題，是藍色孩子最自在的親近方式。' },
+                            'green-red':  { title:'🟢 綠色家長 × 🔴 紅色孩子', headline:'孩子像火，你像土——其實你能接住他。', body:'紅色孩子的衝勁與頂撞讓你不安，但你的穩定正是他最需要的底氣。問題是你習慣沉默退讓，孩子感受不到你的底線，反而會愈來愈試探。', tip:'溫和但清楚地說出你的底線：「這件事我需要你做到。」穩定不等於沒有原則。' },
+                            'green-orange': { title:'🟢 綠色家長 × 🟠 橙色孩子', headline:'孩子情緒來了，你的穩定是最好的容器。', body:'橙色孩子的情緒豐沛，容易讓習慣和諧的你不知所措。你想讓事情平靜，孩子需要的是被接住。你的退讓有時讓孩子更焦慮——因為他找不到安全的邊界。', tip:'先確認感受：「我知道你現在很難受。」情感安全穩了，再清楚說出期待的下一步。' },
+                            'green-green': { title:'🟢 綠色家長 × 🟢 綠色孩子', headline:'最和諧的家，也需要練習說出口。', body:'你們都重視穩定、不愛衝突，家裡氣氛平和。但綠色的沉默有時藏著沒說出口的需求，雙方都在等對方先開口，問題就這樣被和平地擱置了。', tip:'一次只調整一件事，不要同時要求太多。建立固定的「說真話時間」，讓表達主張成為家裡的安全習慣。' },
+                            'green-blue': { title:'🟢 綠色家長 × 🔵 藍色孩子', headline:'一個守節奏，一個求確定，其實是很穩的組合。', body:'你不強迫，孩子不情緒化，這對組合天生穩定。摩擦通常來自孩子直接指出「你這樣不對」，而你選擇沉默忍下。久了，你的底線他不知道，他的邏輯你覺得冷。', tip:'鼓勵孩子的批判性思考，同時溫和說出你的感受與底線——說出來，才是真正的安全。' },
+                            'blue-red':   { title:'🔵 藍色家長 × 🔴 紅色孩子', headline:'你分析局勢，孩子要你看見他的衝勁。', body:'紅色孩子渴望影響力與被認可，藍色家長習慣先評估再行動。當你說「等一下，我們先想清楚」，孩子感受到的是「我的熱情被澆熄了」。', tip:'先說「你的想法很有力！」再一起討論計劃。認可在前，邏輯在後，孩子才聽得進你的分析。' },
+                            'blue-orange': { title:'🔵 藍色家長 × 🟠 橙色孩子', headline:'孩子需要的不是答案，是你在他身邊。', body:'橙色孩子情緒來了，你習慣分析原因、給解決方案。但他需要的不是邏輯，是「你有沒有感受到我？」你的理性在他眼裡有時像距離。', tip:'先停下分析，說一句「我在這裡，你說」。情感連結建立後，你的建議才有機會被聽見。' },
+                            'blue-green': { title:'🔵 藍色家長 × 🟢 綠色孩子', headline:'兩個安靜的人，需要一個說話的理由。', body:'你們都不強求、重邏輯或穩定，家裡少有衝突。但也容易因為太安靜，彼此都不確定對方真正的感受與需求。孩子的慢在你眼裡有時像消極。', tip:'建立固定的「一對一時間」，多問「你今天最喜歡的一件事是什麼？」讓連結在平靜中慢慢加深。' },
+                            'blue-blue':  { title:'🔵 藍色家長 × 🔵 藍色孩子', headline:'理性的家，最容易缺一句不需要理由的「你很好」。', body:'你們都獨立、重邏輯、不黏人，彼此尊重空間。但藍色孩子在追求完美的背後，高度敏感於「混亂與不確定」。確定性來自「我知道怎麼變好」，而不是「我不能再錯」。', tip:'聚焦在修正方法，而不是標準本身。偶爾設一個「不講道理時間」，就是抱一下、說你很棒，不分析，只是愛他。' },
+                        };
+                        const parentKey = domId; // red / orange / green / blue
+                        const [childColor, setChildColor] = React.useState(null);
+                        const [pairOpen, setPairOpen] = React.useState(false);
+                        const pairKey = childColor ? `${parentKey}-${childColor}` : null;
+                        const pairResult = pairKey ? PAIR_DATA[pairKey] : null;
+                        const colorBtns = [
+                            { id:'red',    label:'🔴 紅色', color:'#D63030', bg:'#FFF0F0' },
+                            { id:'orange', label:'🟠 橙色', color:'#E8600A', bg:'#FFF0E6' },
+                            { id:'green',  label:'🟢 綠色', color:'#2E8B5A', bg:'#F0FAF4' },
+                            { id:'blue',   label:'🔵 藍色', color:'#3A70B0', bg:'#EEF4FF' },
+                        ];
+                        return (
+                            <div style={{marginBottom:10}}>
+                                <button onClick={()=>setPairOpen(o=>!o)}
+                                    style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,width:'100%',background:'var(--accent-pale)',color:'var(--accent)',border:`1.5px solid var(--accent)`,borderRadius:14,padding:'13px',fontWeight:700,fontSize:14,cursor:'pointer',boxShadow:'0 1px 6px rgba(45,45,45,0.06)'}}>
+                                    💞 查看親子底色配對
+                                </button>
+                                {pairOpen && (
+                                    <div style={{marginTop:10,background:'var(--card)',borderRadius:14,padding:'18px',border:'1.5px solid var(--border)',boxShadow:'0 2px 12px rgba(45,45,45,0.07)'}}>
+                                        <div style={{fontSize:13,fontWeight:700,color:'var(--text-dark)',marginBottom:10,textAlign:'center'}}>孩子是哪種底色？</div>
+                                        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:14}}>
+                                            {colorBtns.map(c=>(
+                                                <button key={c.id} onClick={()=>setChildColor(c.id)}
+                                                    style={{padding:'10px 6px',borderRadius:10,border:`2px solid ${childColor===c.id?c.color:'var(--border)'}`,background:childColor===c.id?c.bg:'var(--surface)',color:childColor===c.id?c.color:'var(--text-mid)',fontWeight:700,fontSize:13,cursor:'pointer',transition:'all 0.15s'}}>
+                                                    {c.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        {pairResult && (
+                                            <div style={{background:'var(--surface)',borderRadius:12,padding:'16px',border:'1px solid var(--border)'}}>
+                                                <div style={{fontSize:13,fontWeight:900,color:'var(--text-dark)',marginBottom:6}}>{pairResult.title}</div>
+                                                <div style={{fontSize:13,fontWeight:700,color:'var(--accent)',marginBottom:8}}>「{pairResult.headline}」</div>
+                                                <div style={{fontSize:13,color:'var(--text-dark)',lineHeight:1.75,marginBottom:10}}>{pairResult.body}</div>
+                                                <div style={{background:'var(--accent-pale)',borderRadius:10,padding:'12px',borderLeft:`3px solid var(--accent)`}}>
+                                                    <div style={{fontSize:11,fontWeight:700,color:'var(--accent)',marginBottom:4,letterSpacing:1}}>💡 建議</div>
+                                                    <div style={{fontSize:13,color:'var(--text-dark)',lineHeight:1.7}}>{pairResult.tip}</div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })()}
 
-                    <button onClick={reset} className="btn-ghost" style={{color:'var(--text-light)'}}>
+                    {/* 分享成果 */}
+                    {(()=>{
+                        const shareUrl  = name ? `${QUIZ_SHARE_URL}?ref=${encodeURIComponent(name)}` : QUIZ_SHARE_URL;
+                        const shareText = `我是「${domInfo.label}」家長！\n在教養壓力下，我的直覺反應揭露了我的底色。\n你是哪種底色的家長？快來測測看！\n${shareUrl}`;
+                        const lineUrl   = `https://line.me/R/msg/text/?${encodeURIComponent(shareText)}`;
+                        const doCopy = async () => {
+                            try { await navigator.clipboard.writeText(shareUrl); setCopied(true); setTimeout(()=>setCopied(false),2000); }
+                            catch(e) {}
+                        };
+                        return (
+                            <div style={{marginBottom:10}}>
+                                {/* 平台快捷列 */}
+                                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+                                    {/* LINE */}
+                                    <a href={lineUrl} target="_blank" rel="noopener noreferrer"
+                                        style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:5,padding:'14px 4px',background:'#06C755',borderRadius:14,textDecoration:'none',color:'#fff',boxShadow:'0 3px 10px rgba(6,199,85,0.30)'}}>
+                                        <Ico.Line/>
+                                        <span style={{fontSize:11,fontWeight:700}}>LINE 分享</span>
+                                    </a>
+                                    {/* 複製連結 */}
+                                    <button onClick={doCopy}
+                                        style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:5,padding:'14px 4px',background:copied?'#2E8B5A':'var(--surface)',borderRadius:14,border:`1.5px solid ${copied?'#2E8B5A':'var(--border-mid)'}`,cursor:'pointer',transition:'all 0.2s',color:copied?'#fff':'var(--text-dark)',boxShadow:copied?'0 3px 10px rgba(46,139,90,0.28)':'0 1px 4px rgba(99,102,241,0.08)'}}>
+                                        {copied ? <Ico.Check/> : <Ico.Copy/>}
+                                        <span style={{fontSize:11,fontWeight:700}}>{copied?'已複製':'複製連結'}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        );
+                    })()}
+
+                    {/* 截圖 */}
+                    <button onClick={()=>setShowSS(true)}
+                        style={{width:'100%',background:'var(--card)',color:'var(--text-mid)',border:'1.5px solid var(--border)',borderRadius:12,padding:'12px',fontWeight:700,fontSize:13,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',gap:6,boxShadow:'0 1px 4px rgba(45,45,45,0.05)',marginBottom:10}}>
+                        <Ico.Camera/> 截圖保存
+                    </button>
+
+                    <button onClick={reset} className="btn-ghost">
                         <Ico.Restart/> 重新開始
                     </button>
+
+                    {/* 品牌 LOGO footer */}
+                    <div style={{textAlign:'center',marginTop:12,paddingTop:16,borderTop:'1px solid var(--border)'}}>
+                        <img
+                            src="https://i.ibb.co/4RTWqrWB/LOGO-1.jpg"
+                            alt="台灣展威文化教育"
+                            style={{height:28,width:'auto',maxWidth:'60%',objectFit:'contain',opacity:0.75,display:'block',margin:'0 auto'}}
+                        />
+                    </div>
                 </div>
 
-                {/* 截圖提示 */}
+                {/* Screenshot hint modal */}
                 {showSS && (
-                    <div style={{position:'fixed',inset:0,background:'rgba(10,18,32,0.75)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:99,padding:20}}
+                    <div style={{position:'fixed',inset:0,background:'rgba(0,0,0,0.7)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:99,padding:20}}
                          onClick={()=>setShowSS(false)}>
-                        <div className="card pop-in" style={{maxWidth:300,width:'100%',padding:'28px 24px',textAlign:'center'}} onClick={e=>e.stopPropagation()}>
-                            <div style={{fontSize:36,marginBottom:12}}>📸</div>
+                        <div className="card pop-in" style={{maxWidth:300,width:'100%',padding:'32px 24px',textAlign:'center'}} onClick={e=>e.stopPropagation()}>
+                            <div style={{width:56,height:56,background:'var(--surface)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 14px',border:'1.5px solid var(--border)'}}>
+                                <Ico.Camera/>
+                            </div>
                             <div style={{fontSize:17,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>請截圖保存</div>
-                            <div style={{fontSize:14,color:'var(--text-mid)',lineHeight:1.7,marginBottom:20}}>
+                            <div style={{fontSize:14,color:'var(--text-mid)',lineHeight:1.75,marginBottom:22}}>
                                 請使用手機截圖功能，<br/>保存您的測驗結果。
                             </div>
-                            <button onClick={()=>setShowSS(false)} className="btn-primary" style={{fontSize:15}}>我知道了</button>
+                            <button onClick={()=>setShowSS(false)} className="btn-primary">我知道了</button>
                         </div>
                     </div>
                 )}
+              </div>{/* end dynStyle wrapper */}
             </Shell>
         );
     }
 
-    /* ━━━ 歷史紀錄查詢 ━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ─────────── LOOKUP ─────────── */
     if (step==='lookup') return (
         <Shell>
             <div className="top-header">
-                <div className="title-label" style={{fontSize:11,letterSpacing:'3px',color:'rgba(255,255,255,0.5)',marginBottom:8,fontWeight:700}}>歷史紀錄查詢</div>
-                <div className="title-main" style={{fontSize:24,fontWeight:900,color:'#fff'}}>查詢過往測驗紀錄</div>
-                <div className="title-sub" style={{fontSize:13,color:'rgba(255,255,255,0.6)',marginTop:8,lineHeight:1.6}}>請填寫當時測驗所填的資料</div>
                 <SpectrumStrip/>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center',gap:10,marginBottom:10}}>
+                    <div style={{display:'flex',alignItems:'flex-end',gap:3}}>
+                        <div style={{width:5,height:14,background:'var(--red)',borderRadius:'2px 2px 0 0'}}/>
+                        <div style={{width:5,height:9,background:'var(--orange)',borderRadius:'2px 2px 0 0'}}/>
+                        <div style={{width:5,height:18,background:'var(--green)',borderRadius:'2px 2px 0 0'}}/>
+                        <div style={{width:5,height:12,background:'var(--blue)',borderRadius:'2px 2px 0 0'}}/>
+                    </div>
+                    <div style={{fontSize:11,letterSpacing:'2px',color:'var(--accent)',fontWeight:700,textTransform:'uppercase'}}>歷史紀錄查詢</div>
+                </div>
+                <div style={{fontSize:26,fontWeight:900,color:'var(--text-dark)',marginBottom:8}}>查詢過往測驗紀錄</div>
+                <div style={{fontSize:13,color:'var(--text-mid)',lineHeight:1.6}}>請填寫當時測驗所填的資料</div>
             </div>
 
             <div className="content">
-                {/* 身份選擇 */}
+                {/* Step 1: Choose identity */}
                 {!lookWho && lookResult === null && (
                     <div style={{marginBottom:16}}>
-                        <div style={{fontSize:13,fontWeight:700,color:'var(--text-mid)',marginBottom:12,textAlign:'center'}}>請選擇您要查詢哪一筆紀錄</div>
+                        <div style={{fontSize:13,fontWeight:700,color:'var(--text-mid)',marginBottom:14,textAlign:'center'}}>請選擇您要查詢哪一筆紀錄</div>
                         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginBottom:12}}>
-                            <button onClick={()=>setLookWho('adult')} style={{
-                                padding:'20px 12px',borderRadius:14,border:'1.5px solid var(--surface2)',
-                                background:'var(--white)',cursor:'pointer',textAlign:'center',transition:'all 0.15s',
-                                boxShadow:'0 1px 4px rgba(26,39,64,0.06)'
+                            <button onClick={()=>setLookWho('adult')} className="identity-card" style={{
+                                padding:'24px 12px',borderRadius:20,border:'1.5px solid var(--border)',
+                                background:'var(--card)',cursor:'pointer',textAlign:'center',transition:'all 0.15s',
+                                boxShadow:'0 2px 10px rgba(45,45,45,0.06)'
                             }}>
-                                <div style={{fontSize:28,marginBottom:8}}>🧑</div>
+                                <div style={{width:56,height:56,background:'var(--surface)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 12px',border:'1.5px solid var(--border)',color:'var(--text-dark)'}}>
+                                    <Ico.PersonAdult/>
+                                </div>
                                 <div style={{fontSize:15,fontWeight:800,color:'var(--text-dark)',marginBottom:4}}>家長紀錄</div>
                                 <div style={{fontSize:11,color:'var(--text-light)'}}>以 Email 查詢</div>
                             </button>
-                            <button onClick={()=>setLookWho('child')} style={{
-                                padding:'20px 12px',borderRadius:14,border:'1.5px solid var(--surface2)',
-                                background:'var(--white)',cursor:'pointer',textAlign:'center',transition:'all 0.15s',
-                                boxShadow:'0 1px 4px rgba(26,39,64,0.06)'
+                            <button onClick={()=>setLookWho('child')} className="identity-card" style={{
+                                padding:'24px 12px',borderRadius:20,border:'1.5px solid var(--border)',
+                                background:'var(--card)',cursor:'pointer',textAlign:'center',transition:'all 0.15s',
+                                boxShadow:'0 2px 10px rgba(45,45,45,0.06)'
                             }}>
-                                <div style={{fontSize:28,marginBottom:8}}>🧒</div>
+                                <div style={{width:56,height:56,background:'#F0FAF4',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 12px',border:'1.5px solid rgba(46,139,90,0.2)',color:'#2E8B5A'}}>
+                                    <Ico.PersonChild/>
+                                </div>
                                 <div style={{fontSize:15,fontWeight:800,color:'var(--text-dark)',marginBottom:4}}>孩子紀錄</div>
-                                <div style={{fontSize:11,color:'var(--text-light)'}}>以孩子信箱查詢</div>
+                                <div style={{fontSize:11,color:'var(--text-light)'}}>以暱稱查詢</div>
                             </button>
                         </div>
                     </div>
                 )}
 
-                {lookWho && (lookResult === null || lookResult === 'loading') ? (
-                    <div className="card" style={{padding:'24px 20px'}}>
-                        {/* 身份提示列 */}
-                        <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:18,paddingBottom:14,borderBottom:'1px solid var(--surface2)'}}>
-                            <div style={{fontSize:22}}>{lookWho==='adult'?'🧑':'🧒'}</div>
+                {/* Step 2: Fill in form */}
+                {lookWho && (lookResult === null || lookResult === 'loading') && (
+                    <div className="card" style={{padding:'24px 22px'}}>
+                        {/* Identity header */}
+                        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18,paddingBottom:14,borderBottom:'1px solid var(--border)'}}>
+                            <div style={{width:36,height:36,borderRadius:'50%',background:lookWho==='adult'?'var(--surface)':'var(--green-pale)',display:'flex',alignItems:'center',justifyContent:'center',border:lookWho==='adult'?'1.5px solid var(--border)':'1.5px solid rgba(30,132,73,0.2)',color:lookWho==='adult'?'var(--text-dark)':'var(--green)',flexShrink:0}}>
+                                {lookWho==='adult' ? <Ico.PersonAdult/> : <Ico.PersonChild/>}
+                            </div>
                             <div>
                                 <div style={{fontSize:14,fontWeight:800,color:'var(--text-dark)'}}>{lookWho==='adult'?'家長版紀錄':'孩子版紀錄'}</div>
-                                <button onClick={()=>{setLookWho(null);setLookErr('');setLookResult(null);setLookNick('');setLookEmail('');setLookChild('');}} style={{fontSize:11,color:'var(--text-light)',background:'none',border:'none',cursor:'pointer',padding:0,marginTop:2}}>切換身份 →</button>
+                                <button onClick={()=>{setLookWho(null);setLookErr('');setLookResult(null);setLookNick('');setLookEmail('');setLookChild('');}}
+                                    style={{fontSize:11,color:'var(--text-light)',background:'none',border:'none',cursor:'pointer',padding:0,marginTop:2}}>
+                                    切換身份 →
+                                </button>
                             </div>
                         </div>
 
+                        {/* Nickname */}
                         <div style={{marginBottom:14}}>
-                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>當時填寫的暱稱</label>
+                            <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:7}}>當時填寫的暱稱</label>
                             <div className="input-wrap">
                                 <span className="input-icon"><Ico.User/></span>
                                 <input type="text" className="input-field" placeholder="例如：王小明"
@@ -1084,10 +2387,10 @@ function App() {
                             </div>
                         </div>
 
-                        {/* 家長：填 Email；孩子：填孩子信箱 */}
+                        {/* Email / Child email */}
                         {lookWho==='adult' ? (
                             <div style={{marginBottom:22}}>
-                                <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>
+                                <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:7}}>
                                     家長 Email
                                     <span style={{fontSize:11,fontWeight:400,color:'var(--text-light)',marginLeft:4}}>（當時填寫的信箱）</span>
                                 </label>
@@ -1098,84 +2401,105 @@ function App() {
                                 </div>
                             </div>
                         ) : (
-                            <div style={{marginBottom:22}}>
-                                <label style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'block',marginBottom:6}}>
-                                    孩子測驗信箱
-                                </label>
-                                <div className="input-wrap">
-                                    <span className="input-icon"><Ico.Smile/></span>
-                                    <input type="email" className="input-field" placeholder="孩子的 Email"
-                                        value={lookChild} onChange={e=>setLookChild(e.target.value)}/>
+                            <div style={{background:'var(--surface)',borderRadius:12,padding:'12px 14px',marginBottom:22,border:'1px solid var(--border)'}}>
+                                <div style={{fontSize:12,fontWeight:700,color:'var(--text-mid)',display:'flex',alignItems:'center',gap:6}}>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+                                    孩子版紀錄只需填寫暱稱即可查詢
                                 </div>
                             </div>
                         )}
 
-                        {lookErr && <div style={{fontSize:12,color:'#D63030',marginBottom:12,fontWeight:600,padding:'8px 12px',background:'#FFF5F5',borderRadius:8}}>⚠ {lookErr}</div>}
+                        {lookErr && (
+                            <div style={{fontSize:12,color:'#D63030',marginBottom:12,fontWeight:600,padding:'10px 12px',background:'#FFF5F5',borderRadius:10,border:'1px solid #FECACA',display:'flex',alignItems:'center',gap:6}}>
+                                <Ico.Warning/> {lookErr}
+                            </div>
+                        )}
 
                         <button className="btn-primary" onClick={doLookup} disabled={lookResult==='loading'}
-                            style={{opacity: lookResult==='loading'?0.7:1}}>
+                            style={{opacity:lookResult==='loading'?0.7:1}}>
                             {lookResult==='loading'
-                                ? <><span style={{display:'inline-block',width:16,height:16,border:'2px solid rgba(255,255,255,0.4)',borderTopColor:'#fff',borderRadius:'50%',animation:'spin 0.7s linear infinite'}}/> 查詢中…</>
-                                : <><Ico.Search/> 立即查詢紀錄</>
-                            }
+                                ? <><span style={{display:'inline-block',width:16,height:16,border:'2px solid rgba(255,255,255,0.3)',borderTopColor:'#fff',borderRadius:'50%',animation:'spin 0.7s linear infinite'}}/> 查詢中…</>
+                                : <><Ico.Search/> 立即查詢紀錄</>}
                         </button>
                     </div>
-                ) : (lookResult && lookResult !== 'loading' && lookResult.error) ? (
-                    <div className="card" style={{padding:'24px 20px',textAlign:'center'}}>
-                        <div style={{fontSize:36,marginBottom:12}}>😕</div>
-                        <div style={{fontSize:16,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>查無紀錄</div>
-                        <div style={{fontSize:14,color:'var(--text-mid)',lineHeight:1.7,marginBottom:20}}>
+                )}
+
+                {/* Error / Not found */}
+                {lookResult && lookResult !== 'loading' && lookResult.error && (
+                    <div className="card" style={{padding:'28px 22px',textAlign:'center'}}>
+                        <div style={{width:64,height:64,background:'var(--surface)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',margin:'0 auto 14px',border:'1.5px solid var(--border)',color:'var(--text-light)'}}>
+                            <Ico.SearchOff/>
+                        </div>
+                        <div style={{fontSize:17,fontWeight:800,color:'var(--text-dark)',marginBottom:8}}>查無紀錄</div>
+                        <div style={{fontSize:14,color:'var(--text-mid)',lineHeight:1.75,marginBottom:22,whiteSpace:'pre-line'}}>
                             {lookResult.error === 'missing parameters' || lookResult.error === 'not found'
                                 ? '找不到符合的測驗紀錄，\n請確認填寫的資料是否正確。'
                                 : lookResult.error}
                         </div>
                         <button className="btn-outline" onClick={()=>setLookResult(null)}>重新查詢</button>
                     </div>
-                ) : (lookResult && lookResult !== 'loading' && !lookResult.error) ? (
+                )}
+
+                {/* Success result — array of records */}
+                {lookResult && lookResult !== 'loading' && lookResult.records && (
                     <div>
-                        {/* 查詢成功 */}
-                        <div className="card" style={{padding:'20px',marginBottom:12,background:'var(--green-pale)',border:'1.5px solid #9BE3BF'}}>
-                            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:12}}>
-                                <div style={{width:32,height:32,background:'var(--green)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                                    <Ico.Check/>
-                                </div>
-                                <div style={{fontSize:16,fontWeight:800,color:'var(--green)'}}>找到您的紀錄</div>
+                        {/* Header */}
+                        <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,padding:'14px 16px',background:'var(--green-pale)',borderRadius:16,border:'1.5px solid #9BE3BF'}}>
+                            <div style={{width:32,height:32,background:'var(--green)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"><polyline points="20 6 9 17 4 12"/></svg>
                             </div>
-                            <div style={{fontSize:13,color:'var(--text-mid)',lineHeight:2}}>
-                                <div><span style={{fontWeight:700,color:'var(--text-dark)'}}>姓名：</span>{lookResult.nickname || lookResult.name || '—'}</div>
-                                <div><span style={{fontWeight:700,color:'var(--text-dark)'}}>測驗日期：</span>{lookResult.submittedAt ? new Date(lookResult.submittedAt).toLocaleDateString('zh-TW') : lookResult.date || '—'}</div>
-                                {lookResult.mode !== 'direct' && lookResult.totalScore !== undefined && (
-                                    <div><span style={{fontWeight:700,color:'var(--text-dark)'}}>總分：</span>{lookResult.totalScore}</div>
-                                )}
+                            <div>
+                                <div style={{fontSize:15,fontWeight:800,color:'var(--green)'}}>找到 {lookResult.records.length} 筆紀錄</div>
+                                <div style={{fontSize:11,color:'var(--green)',opacity:0.7,marginTop:1}}>依時間由新到舊排列</div>
                             </div>
                         </div>
 
-                        {/* 分數 */}
-                        {lookResult.mode !== 'direct' && (lookResult.red !== undefined) && (
-                            <div className="card" style={{padding:'20px',marginBottom:12}}>
-                                <div style={{fontSize:13,fontWeight:700,color:'var(--text-mid)',marginBottom:12}}>心智光譜分布</div>
-                                {[
-                                    {key:'red',   label:'開創型（紅）', color:'#D63030'},
-                                    {key:'orange',label:'關懷型（橙）', color:'#E8600A'},
-                                    {key:'green', label:'協調型（綠）', color:'#2E8B5A'},
-                                    {key:'blue',  label:'分析型（藍）', color:'#3A70B0'},
-                                ].map(t=>(
-                                    <div key={t.key} style={{marginBottom:10}}>
-                                        <div style={{display:'flex',justifyContent:'space-between',fontSize:13,fontWeight:700,color:'var(--text-dark)',marginBottom:4}}>
-                                            <span>{t.label}</span>
-                                            <span style={{color:t.color}}>{lookResult[t.key] || 0}</span>
+                        {/* Each record */}
+                        {lookResult.records.map((r, i) => {
+                            const sc = {
+                                red:    Number(r.scores?.red    ?? r.red    ?? 0),
+                                orange: Number(r.scores?.orange ?? r.orange ?? 0),
+                                green:  Number(r.scores?.green  ?? r.green  ?? 0),
+                                blue:   Number(r.scores?.blue   ?? r.blue   ?? 0),
+                            };
+                            const domId = Object.entries(sc).sort((a,b)=>b[1]-a[1])[0]?.[0] || 'blue';
+                            const typeLabel = {red:'開創型（紅）', orange:'關懷型（橙）', green:'協調型（綠）', blue:'分析型（藍）'};
+                            const typeColor = {red:'#D63030', orange:'#E8600A', green:'#2E8B5A', blue:'#3A70B0'};
+                            const typeBg    = {red:'#FFF0F0', orange:'#FFF0E6', green:'#F0FAF4', blue:'#EEF4FF'};
+                            return (
+                                <div key={i} className="card" style={{marginBottom:12,padding:'20px',borderTop:`3px solid ${typeColor[domId]}`}}>
+                                    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+                                        <div style={{display:'inline-flex',alignItems:'center',gap:6,background:typeBg[domId],borderRadius:20,padding:'4px 12px'}}>
+                                            <div style={{width:8,height:8,borderRadius:'50%',background:typeColor[domId]}}/>
+                                            <span style={{fontSize:12,fontWeight:800,color:typeColor[domId]}}>{typeLabel[domId]}</span>
                                         </div>
-                                        <div style={{height:6,background:'var(--surface2)',borderRadius:4,overflow:'hidden'}}>
-                                            <div style={{height:'100%',background:t.color,width:`${((lookResult[t.key]||0)/30)*100}%`,borderRadius:4,transition:'width 1s ease-out'}}/>
-                                        </div>
+                                        <div style={{fontSize:11,color:'var(--text-light)',fontWeight:600}}>{r.date || '—'}</div>
                                     </div>
-                                ))}
-                            </div>
-                        )}
+                                    {[
+                                        {key:'red',   label:'開創型（紅）', color:'#D63030'},
+                                        {key:'orange',label:'關懷型（橙）', color:'#E8600A'},
+                                        {key:'green', label:'協調型（綠）', color:'#2E8B5A'},
+                                        {key:'blue',  label:'分析型（藍）', color:'#3A70B0'},
+                                    ].map(t=>(
+                                        <div key={t.key} style={{marginBottom:9}}>
+                                            <div style={{display:'flex',justifyContent:'space-between',fontSize:12,fontWeight:700,color:'var(--text-dark)',marginBottom:4}}>
+                                                <span>{t.label}</span>
+                                                <span style={{color:t.color,fontVariantNumeric:'tabular-nums'}}>{sc[t.key]}</span>
+                                            </div>
+                                            <div style={{height:5,background:'var(--surface)',borderRadius:4,overflow:'hidden',border:'1px solid var(--border)'}}>
+                                                <div style={{height:'100%',background:t.color,width:`${(sc[t.key]/30)*100}%`,borderRadius:4,transition:'width 1s ease-out'}}/>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            );
+                        })}
 
-                        <button className="btn-outline" onClick={()=>{setLookResult(null);setLookWho(null);setLookNick('');setLookEmail('');setLookChild('');}} style={{marginBottom:8}}>再查一筆</button>
+                        <button className="btn-outline" onClick={()=>{setLookResult(null);setLookWho(null);setLookNick('');setLookEmail('');setLookChild('');}} style={{marginBottom:8}}>
+                            再查一筆
+                        </button>
                     </div>
-                ) : null}
+                )}
 
                 <button onClick={reset} className="btn-ghost"><Ico.ChevronL/> 返回首頁</button>
             </div>
