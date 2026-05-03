@@ -1,4 +1,4 @@
-<!-- 心智光譜測驗 v7.08 -->
+<!-- 心智光譜測驗 v7.09 -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -1775,7 +1775,7 @@ function App() {
                         <Ico.Search/> 查詢過往紀錄
                     </button>
                 </div>
-                <div style={{textAlign:'center',padding:'12px 0 4px',fontSize:10,color:'var(--text-light)',letterSpacing:'1px'}}>v7.08</div>
+                <div style={{textAlign:'center',padding:'12px 0 4px',fontSize:10,color:'var(--text-light)',letterSpacing:'1px'}}>v7.09</div>
             </div>
         </Shell>
     );
@@ -1961,7 +1961,7 @@ function App() {
                     {/* Options — table-row style */}
                     <div style={{background:'var(--card)',paddingBottom:8}}>
                         {OPTIONS.map((o,i)=>{
-                            const letters = ['1','2','3','4','5'];
+                            const letters = ['5','4','3','2','1'];
                             const selected = answers[qIdx+1] === o.score;
                             return (
                                 <button key={o.score}
