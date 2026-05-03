@@ -52,6 +52,7 @@
 
         body, html {
             height: 100%;
+            overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
             background: var(--bg);
             -webkit-user-select: none;
@@ -90,6 +91,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-y: auto;
             background: var(--bg);
         }
 
@@ -1183,7 +1185,7 @@ function ChildApp({ onBack }) {
             <div className="relative z-10 flex flex-col items-center">
               <div className="relative bg-gray-800 p-1.5 rounded-2xl border-b-4 border-r-4 border-gray-900 shadow-xl">
                 <div className="bg-gray-700 p-1 rounded-xl border-2 border-gray-600 shadow-inner">
-                  <div className="relative bg-white rounded-lg overflow-hidden border-2 border-black shadow-[inset_0_0_20px_rgba(0,0,0,0.12)]" style={{width:'min(210px,62vw)',height:'min(170px,52vw)'}}>
+                  <div className="relative bg-white rounded-lg overflow-hidden border-2 border-black shadow-[inset_0_0_20px_rgba(0,0,0,0.12)]" style={{width:'min(240px,70vw)',height:'min(195px,60vw)'}}>
                     <div className="absolute inset-0 z-20 pointer-events-none opacity-10" style={{backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px'}}></div>
                     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/20 to-transparent pointer-events-none z-20"></div>
                     {!isZhuyinMode && (
@@ -1224,7 +1226,7 @@ function ChildApp({ onBack }) {
                 {isZhuyinMode ? (
                   renderZhuyinBlock(question.zhuyin)
                 ) : (
-                  <p className="w-full text-xl leading-relaxed font-bold text-gray-900 tracking-wide text-center">
+                  <p className="w-full text-2xl leading-relaxed font-bold text-gray-900 tracking-wide text-center">
                     {question.text}
                   </p>
                 )}
@@ -1571,6 +1573,12 @@ function App() {
     };
 
     const runEngineer = () => {
+        if (engPwd === '259') {
+            const rid = Math.floor(Math.random()*9000)+1000;
+            setName(`測試員_${rid}`); setEmail(`test${rid}@example.com`); setPhone('0900000000');
+            setMode('quiz'); setQIdx(0); setShowEng(false); setEngPwd(''); setStep('quiz');
+            return;
+        }
         if (engPwd !== '63811') { setShowEng(false); setEngPwd(''); return; }
         const rid = Math.floor(Math.random()*9000)+1000;
         let ta={}, tt=0, ts={red:0,orange:0,green:0,blue:0};
@@ -1846,24 +1854,19 @@ function App() {
     if (step==='quiz') return (
         <Shell>
             <div style={{background:'var(--card)',height:'100vh',width:'100%',display:'flex',flexDirection:'column',overflow:'hidden'}}>
-                {/* Progress header */}
-                <div style={{background:'var(--accent-pale)',width:'100%',flexShrink:0,borderBottom:'1px solid var(--border)'}}>
-                    <div style={{maxWidth:480,margin:'0 auto',padding:'12px 18px 10px'}}>
-                        {/* Counter + label */}
-                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+                {/* Question + Options (with inline progress bar) */}
+                <div style={{flex:1,width:'100%',maxWidth:480,margin:'0 auto',overflowY:'auto'}} className="no-bar">
+                  <div style={{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center'}}>
+                    {/* Progress bar — inline, above question */}
+                    <div style={{padding:'0 20px 10px'}}>
+                        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
                             <span style={{fontSize:11,fontWeight:700,color:'var(--text-light)',letterSpacing:'1px',textTransform:'uppercase'}}>整體進度</span>
                             <span style={{fontSize:11,fontWeight:700,color:'#6366F1',fontFamily:'monospace'}}>{qIdx+1} / {QUESTIONS.length}</span>
                         </div>
-                        {/* Progress bar — style5 inspired */}
                         <div style={{height:5,background:'var(--border)',border:'1px solid var(--border-mid)',borderRadius:0,overflow:'hidden'}}>
                             <div style={{height:'100%',background:'#6366F1',width:`${progress}%`,transition:'width 0.3s ease'}}/>
                         </div>
                     </div>
-                </div>
-
-                {/* Question + Options */}
-                <div style={{flex:1,width:'100%',maxWidth:480,margin:'0 auto',overflowY:'auto'}} className="no-bar">
-                  <div style={{minHeight:'100%',display:'flex',flexDirection:'column',justifyContent:'center'}}>
                     {/* Question card */}
                     <div className={navDir==='back' ? 'slide-in-back' : 'slide-in'} key={`q-${qIdx}-${navDir}`} style={{background:'var(--card)',padding:'16px 20px 0'}}>
                         <div style={{fontSize:25,fontWeight:700,color:'var(--text-dark)',lineHeight:1.55,paddingBottom:12,paddingTop:4,borderBottom:'2px solid var(--border)',minHeight:'clamp(80px,14vh,120px)',width:'100%',boxSizing:'border-box',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center'}}>
