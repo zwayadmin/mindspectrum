@@ -613,6 +613,71 @@ function ScoreBar({ label, score, color }) {
     );
 }
 
+/* ── 親子底色配對元件 ── */
+const PAIR_DATA = {
+    'red-red':      { title:'🔴 紅色家長 × 🔴 紅色孩子', headline:'兩把火，誰來掌控方向？', body:'你們都渴望「被看見、有影響力」。當兩個紅色相遇，家裡能量爆棚，但也容易變成主導權之爭。孩子的頂撞不是挑釁，而是在問：「我，是否被你看見？」', tip:'賦予孩子真實的選擇權——「你覺得怎樣做比較好？」讓他在你的主導下仍有參與感與重要性。' },
+    'red-orange':   { title:'🔴 紅色家長 × 🟠 橙色孩子', headline:'你在推進，孩子在等一句「我看見你了」。', body:'橙色孩子的燃料是情感安全。你快速催促時，他感受到的不是效率，而是「我的感受不重要」。連結感斷了，配合度也跟著消失。', tip:'先說「我知道你盡力了」，再談下一步。情感安全穩了，孩子才聽得進去。' },
+    'red-green':    { title:'🔴 紅色家長 × 🟢 綠色孩子', headline:'你衝，孩子在確認「這裡安全嗎？」', body:'綠色孩子的慢不是懶，是他的自我保護機制。當世界變動太快，他會放慢腳步確保安全。你愈催，他愈縮。', tip:'提前預告、給清楚的步驟，讓他知道「接下來會發生什麼」，安全感有了，他自然會動。' },
+    'red-blue':     { title:'🔴 紅色家長 × 🔵 藍色孩子', headline:'你要行動，孩子要先理解全貌。', body:'藍色孩子的遲疑不是優柔寡斷，而是在反覆確認「我是否真的理解了？」說明規則時，同時說清楚「為什麼」，孩子不是不配合，而是不理解。', tip:'願意花 30 秒解釋邏輯，孩子的執行力會讓你刮目相看。' },
+    'orange-red':   { title:'🟠 橙色家長 × 🔴 紅色孩子', headline:'孩子需要舞台，你需要邊界。', body:'紅色孩子渴望主導感與被看見，橙色家長容易因為孩子的強勢而情緒受傷。孩子的衝勁不是在否定你，是他在確認自己是否有影響力。', tip:'先認可他的能量：「你很有想法！」再溫和說出你的感受，情感安全建立了，孩子才願意聽你說。' },
+    'orange-orange':{ title:'🟠 橙色家長 × 🟠 橙色孩子', headline:'滿滿的愛，需要一點邊界才不會燒傷彼此。', body:'你們都把「連結感」當燃料，情感豐沛、家庭溫度高。但橙色孩子情緒被放大時，你也容易跟著捲進去，變成兩個人一起崩潰。', tip:'練習告訴孩子：「我愛你，但你的情緒是你的功課，我陪你，不替你扛。」' },
+    'orange-green': { title:'🟠 橙色家長 × 🟢 綠色孩子', headline:'你給愛，孩子需要的是空間。', body:'綠色孩子的燃料是穩定與節奏。你頻繁關心時，他感受到的是壓力，而不是愛。他的沉默不是冷漠，是在確認「這裡真的安全嗎？」', tip:'用固定的小儀式取代隨時關注，例如睡前固定 10 分鐘聊天。穩定感本身，就是最好的愛的語言。' },
+    'orange-blue':  { title:'🟠 橙色家長 × 🔵 藍色孩子', headline:'你說的愛，孩子用另一種語言在回應你。', body:'橙色用情感表達愛，藍色用邏輯表達愛。孩子的冷靜不是不在乎，是他正在用自己的方式理解這段關係。', tip:'用「一起做一件事」取代「一起聊感受」——拼圖、討論問題、研究話題，是藍色孩子最自在的親近方式。' },
+    'green-red':    { title:'🟢 綠色家長 × 🔴 紅色孩子', headline:'孩子像火，你像土——其實你能接住他。', body:'紅色孩子的衝勁與頂撞讓你不安，但你的穩定正是他最需要的底氣。問題是你習慣沉默退讓，孩子感受不到你的底線，反而會愈來愈試探。', tip:'溫和但清楚地說出你的底線：「這件事我需要你做到。」穩定不等於沒有原則。' },
+    'green-orange': { title:'🟢 綠色家長 × 🟠 橙色孩子', headline:'孩子情緒來了，你的穩定是最好的容器。', body:'橙色孩子的情緒豐沛，容易讓習慣和諧的你不知所措。你的退讓有時讓孩子更焦慮——因為他找不到安全的邊界。', tip:'先確認感受：「我知道你現在很難受。」情感安全穩了，再清楚說出期待的下一步。' },
+    'green-green':  { title:'🟢 綠色家長 × 🟢 綠色孩子', headline:'最和諧的家，也需要練習說出口。', body:'你們都重視穩定、不愛衝突，家裡氣氛平和。但綠色的沉默有時藏著沒說出口的需求，雙方都在等對方先開口，問題就這樣被和平地擱置了。', tip:'建立固定的「說真話時間」，讓表達主張成為家裡的安全習慣。' },
+    'green-blue':   { title:'🟢 綠色家長 × 🔵 藍色孩子', headline:'一個守節奏，一個求確定，其實是很穩的組合。', body:'你不強迫，孩子不情緒化，這對組合天生穩定。摩擦通常來自孩子直接指出「你這樣不對」，而你選擇沉默忍下。久了，你的底線他不知道。', tip:'鼓勵孩子的批判性思考，同時溫和說出你的感受與底線——說出來，才是真正的安全。' },
+    'blue-red':     { title:'🔵 藍色家長 × 🔴 紅色孩子', headline:'你分析局勢，孩子要你看見他的衝勁。', body:'紅色孩子渴望影響力與被認可，藍色家長習慣先評估再行動。當你說「等一下，我們先想清楚」，孩子感受到的是「我的熱情被澆熄了」。', tip:'先說「你的想法很有力！」再一起討論計劃。認可在前，邏輯在後，孩子才聽得進你的分析。' },
+    'blue-orange':  { title:'🔵 藍色家長 × 🟠 橙色孩子', headline:'孩子需要的不是答案，是你在他身邊。', body:'橙色孩子情緒來了，你習慣分析原因、給解決方案。但他需要的不是邏輯，是「你有沒有感受到我？」', tip:'先停下分析，說一句「我在這裡，你說」。情感連結建立後，你的建議才有機會被聽見。' },
+    'blue-green':   { title:'🔵 藍色家長 × 🟢 綠色孩子', headline:'兩個安靜的人，需要一個說話的理由。', body:'你們都不強求，家裡少有衝突。但也容易因為太安靜，彼此都不確定對方真正的感受與需求。', tip:'建立固定的「一對一時間」，多問「你今天最喜歡的一件事是什麼？」讓連結在平靜中慢慢加深。' },
+    'blue-blue':    { title:'🔵 藍色家長 × 🔵 藍色孩子', headline:'理性的家，最容易缺一句不需要理由的「你很好」。', body:'你們都獨立、重邏輯、不黏人，彼此尊重空間。但藍色孩子在追求完美的背後，高度敏感於「混亂與不確定」。', tip:'聚焦在修正方法，而不是標準本身。偶爾設一個「不講道理時間」，就是抱一下、說你很棒，不分析，只是愛他。' },
+};
+
+function PairMatcher({ parentKey, accentColor, borderColor, bgColor }) {
+    const [childColor, setChildColor] = React.useState(null);
+    const [pairOpen, setPairOpen] = React.useState(false);
+    const pairKey = childColor ? `${parentKey}-${childColor}` : null;
+    const pairResult = pairKey ? PAIR_DATA[pairKey] : null;
+    const colorBtns = [
+        { id:'red',    label:'🔴 紅色', color:'#D63030', bg:'#FFF0F0' },
+        { id:'orange', label:'🟠 橙色', color:'#E8600A', bg:'#FFF0E6' },
+        { id:'green',  label:'🟢 綠色', color:'#2E8B5A', bg:'#F0FAF4' },
+        { id:'blue',   label:'🔵 藍色', color:'#3A70B0', bg:'#EEF4FF' },
+    ];
+    return (
+        <div style={{marginBottom:10}}>
+            <button onClick={()=>setPairOpen(o=>!o)}
+                style={{display:'flex',alignItems:'center',justifyContent:'center',gap:8,width:'100%',background:bgColor,color:accentColor,border:`1.5px solid ${accentColor}`,borderRadius:14,padding:'13px',fontWeight:700,fontSize:14,cursor:'pointer'}}>
+                💞 查看親子底色配對
+            </button>
+            {pairOpen && (
+                <div style={{marginTop:10,background:'var(--card)',borderRadius:14,padding:'18px',border:`1.5px solid ${borderColor}`}}>
+                    <div style={{fontSize:13,fontWeight:700,color:'var(--text-dark)',marginBottom:10,textAlign:'center'}}>孩子是哪種底色？</div>
+                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:14}}>
+                        {colorBtns.map(c=>(
+                            <button key={c.id} onClick={()=>setChildColor(c.id)}
+                                style={{padding:'10px 6px',borderRadius:10,border:`2px solid ${childColor===c.id?c.color:'var(--border)'}`,background:childColor===c.id?c.bg:'var(--surface)',color:childColor===c.id?c.color:'var(--text-mid)',fontWeight:700,fontSize:13,cursor:'pointer',transition:'all 0.15s'}}>
+                                {c.label}
+                            </button>
+                        ))}
+                    </div>
+                    {pairResult && (
+                        <div style={{background:'var(--surface)',borderRadius:12,padding:'16px',border:'1px solid var(--border)'}}>
+                            <div style={{fontSize:13,fontWeight:900,color:'var(--text-dark)',marginBottom:6}}>{pairResult.title}</div>
+                            <div style={{fontSize:13,fontWeight:700,color:accentColor,marginBottom:8}}>「{pairResult.headline}」</div>
+                            <div style={{fontSize:13,color:'var(--text-dark)',lineHeight:1.75,marginBottom:10}}>{pairResult.body}</div>
+                            <div style={{background:bgColor,borderRadius:10,padding:'12px',borderLeft:`3px solid ${accentColor}`}}>
+                                <div style={{fontSize:11,fontWeight:700,color:accentColor,marginBottom:4,letterSpacing:1}}>💡 建議</div>
+                                <div style={{fontSize:13,color:'var(--text-dark)',lineHeight:1.7}}>{pairResult.tip}</div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+}
+
 /* ── Desktop detection (stable, computed once) ── */
 const isDesktop = window.innerWidth >= 768;
 
