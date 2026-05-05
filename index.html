@@ -1,4 +1,4 @@
-<!-- 心智光譜測驗 v7.11 -->
+<!-- 心智光譜測驗 v7.12 -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -921,6 +921,10 @@ function ChildApp({ onBack }) {
   const [selectedScore, setSelectedScore] = useState(null);
   const [isZhuyinMode, setIsZhuyinMode] = useState(false);
 
+  // 工程師模式（隱藏入口，密碼 63811 → 自動填隨機資料 + 跳結果頁）
+  const [showEngineerModal, setShowEngineerModal] = useState(false);
+  const [engineerPassword, setEngineerPassword] = useState('');
+
   useEffect(() => {
     MONSTER_DATA.forEach(monster => {
       const img = new Image();
@@ -1112,6 +1116,46 @@ function ChildApp({ onBack }) {
     setScene('intro');
   };
 
+  // 工程師模式：密碼正確 → 自動填隨機 24 題答案 → 直接跳結果頁
+  const handleEngineerSubmit = () => {
+    if (engineerPassword !== '63811') {
+      setShowEngineerModal(false);
+      setEngineerPassword('');
+      return;
+    }
+    const rid = Math.floor(Math.random() * 9000) + 1000;
+    const td = { name: `測試員_${rid}`, role: '孩子', session: '', parentCheck: true };
+
+    let ta = {};
+    let scores = { fire: 0, electric: 0, grass: 0, water: 0 };
+    BASE_RPG_DATA.forEach(q => {
+      const s = Math.floor(Math.random() * 5) + 1;
+      ta[q.id] = s;
+      scores[q.type] += s;
+    });
+
+    const types = [
+      { id: 'fire',     score: scores.fire },
+      { id: 'electric', score: scores.electric },
+      { id: 'grass',    score: scores.grass },
+      { id: 'water',    score: scores.water }
+    ];
+    types.sort((a, b) => b.score - a.score);
+    const winnerTypeId = types[0].id;
+    const pool = RESULT_MONSTER_POOLS[winnerTypeId];
+    const randomPoke = pool[Math.floor(Math.random() * pool.length)];
+
+    setUserData(td);
+    setQuizAnswers(ta);
+    setFinalResult({ scores: types, mainTypeId: winnerTypeId, subTypeId: types[1].id, pokemon: randomPoke });
+    setResultPokemon(randomPoke);
+
+    setShowStartModal(false);
+    setShowEngineerModal(false);
+    setEngineerPassword('');
+    setScene('dex');
+  };
+
   if (scene === 'intro') {
     return (
       <div className={`h-full w-full ${introBgClass} flex flex-col items-center justify-center p-6 text-white relative transition-colors duration-1000`} style={{fontFamily:"'DotGothic16', sans-serif"}}>
@@ -1158,7 +1202,35 @@ function ChildApp({ onBack }) {
             Pixel Art Monsters © 2026
           </div>
           <button onClick={() => onBack && onBack()} style={{fontSize:11,color:'rgba(255,255,255,0.5)',background:'none',border:'none',cursor:'pointer',marginTop:4}}>← 返回首頁</button>
+          <button type="button" onClick={() => setShowEngineerModal(true)} style={{fontSize:9,color:'rgba(255,255,255,0.25)',background:'none',border:'none',cursor:'pointer',marginLeft:10,marginTop:4}}>工程師</button>
         </div>
+
+        {showEngineerModal && (
+          <div className="fixed inset-0 bg-black/85 z-[60] flex items-center justify-center p-4 animate-pop-in" onClick={() => { setShowEngineerModal(false); setEngineerPassword(''); }}>
+            <div className="bg-white border-4 border-black p-6 rounded-xl max-w-xs w-full relative shadow-[8px_8px_0_rgba(0,0,0,0.5)]" onClick={e => e.stopPropagation()} style={{fontFamily:"'DotGothic16', sans-serif"}}>
+              <button onClick={() => { setShowEngineerModal(false); setEngineerPassword(''); }} className="absolute top-2 right-3 text-gray-500 hover:text-black font-bold text-xl leading-none">✕</button>
+              <h3 className="text-base font-black mb-4 text-center text-gray-900 tracking-wider">工程師測試模式</h3>
+              <input
+                type="password"
+                className="w-full p-3 bg-gray-100 border-2 border-black mb-4 text-center tracking-[0.3em] font-bold focus:bg-white outline-none"
+                placeholder="請輸入密碼"
+                value={engineerPassword}
+                onChange={e => setEngineerPassword(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') handleEngineerSubmit(); }}
+                autoFocus
+              />
+              <button
+                onClick={handleEngineerSubmit}
+                className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-black py-3 border-4 border-yellow-700 rounded-lg active:translate-y-1 shadow-[4px_4px_0_#000] tracking-widest text-sm"
+              >
+                ▶ 生成隨機資料
+              </button>
+              <p className="text-[10px] text-gray-400 mt-3 text-center leading-relaxed">
+                通過後將自動填寫隨機 24 題答案<br/>並直接跳到結果頁
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -1450,33 +1522,37 @@ function ChildApp({ onBack }) {
           <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 animate-pop-in">
             <div className="bg-white border-4 border-black p-6 rounded-xl max-w-sm w-full relative">
               <button onClick={() => setShowGuideModal(false)} className="absolute top-2 right-2 text-gray-500 hover:text-black font-bold text-2xl"></button>
-              <h3 className="text-xl font-black text-indigo-700 mb-4 text-center border-b-2 border-indigo-100 pb-2">給學生的覺知小語</h3>
+              <h3 className="text-xl font-black text-indigo-700 mb-4 text-center border-b-2 border-indigo-100 pb-2">給你的覺知小語</h3>
               <div className="space-y-4 text-gray-700 leading-relaxed font-medium">
-                <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-4 text-center">
+                <div className="bg-indigo-50 border-2 border-indigo-200 rounded-xl p-4 text-center space-y-3">
                   <p className="text-base font-black text-indigo-900 leading-relaxed">
-                    「你不是哪一種顏色，<br/>你只是正在用這一種方式面對世界。」
+                    「每一種顏色都很特別，就像你一樣。」
+                  </p>
+                  <p className="text-base font-black text-indigo-900 leading-relaxed">
+                    「相信自己，你就是最閃亮的那道光。」
                   </p>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  在 AI 時代，正確答案不再稀缺——<br/>
-                  真正重要的是：你能不能<span className="font-black text-gray-900">看見自己</span>、<span className="font-black text-gray-900">理解自己</span>，並一步步成為更穩定的自己。
+                  這個測驗沒有最好的顏色，也沒有分數高低——<br/>
+                  它只是幫你<span className="font-black text-gray-900">認識自己</span>，讓你知道：<br/>
+                  遇到事情的時候，你的心裡在想什麼。
                 </p>
-                <div className="border-t-2 border-dashed border-gray-200 pt-3 space-y-2">
-                  <p className="text-xs font-black text-gray-500 tracking-widest">★ 覺知三步驟 ★</p>
-                  <div className="flex items-start gap-2">
-                    <span className="text-base"></span>
-                    <p className="text-sm"><span className="font-black">覺察：</span>注意到自己現在的反應</p>
+                <div className="border-t-2 border-dashed border-gray-200 pt-3 space-y-3">
+                  <p className="text-xs font-black text-gray-500 tracking-widest">★ 三個小練習 ★</p>
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg leading-none">🔍</span>
+                    <p className="text-sm"><span className="font-black text-indigo-700">注意一下：</span>「我現在有什麼感覺？」</p>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-base"></span>
-                    <p className="text-sm"><span className="font-black">暫停：</span>在反應前給自己一個呼吸的空間</p>
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg leading-none">🌬️</span>
+                    <p className="text-sm"><span className="font-black text-indigo-700">停一下：</span>先深呼吸一口氣，不要急。</p>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-base"></span>
-                    <p className="text-sm"><span className="font-black">選擇：</span>用自己想要的方式回應</p>
+                  <div className="flex items-start gap-3">
+                    <span className="text-lg leading-none">💡</span>
+                    <p className="text-sm"><span className="font-black text-indigo-700">想一想：</span>「我可以怎麼做，會更好？」</p>
                   </div>
                 </div>
-                <p className="text-xs text-center text-gray-400 font-bold">每一次練習，都讓你更靠近那個最棒的自己 </p>
+                <p className="text-xs text-center text-gray-400 font-bold">每練習一次，你就更了解自己一點點！</p>
               </div>
               <button onClick={() => setShowGuideModal(false)} className="w-full bg-gray-800 text-white font-bold py-3 mt-6 rounded-lg active:bg-black">我知道了！</button>
             </div>
@@ -1732,7 +1808,7 @@ function App() {
                         <Ico.Search/> 查詢過往紀錄
                     </button>
                 </div>
-                <div style={{textAlign:'center',padding:'12px 0 4px',fontSize:10,color:'var(--text-light)',letterSpacing:'1px'}}>v7.11</div>
+                <div style={{textAlign:'center',padding:'12px 0 4px',fontSize:10,color:'var(--text-light)',letterSpacing:'1px'}}>v7.12</div>
             </div>
         </Shell>
     );
