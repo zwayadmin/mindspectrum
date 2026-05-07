@@ -1,4 +1,4 @@
-<!-- 心智光譜測驗 v7.16 (家長版填完 24 題自動 POST 寫入 Sheet) -->
+<!-- 心智光譜測驗 v7.17 (家長版填完 24 題自動 POST 寫入 Sheet) -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -514,6 +514,139 @@
 </head>
 <body>
 <div id="root"></div>
+
+<!-- ════════════════════════════════════════════════════════
+     SubmitQueue v1.1 — 心智光譜提交排隊模組
+     v1.1 修正：
+       - localStorage 容量保護（最多 50 筆）
+       - setConcurrency() 真的可動態調整
+       - 失敗到底時保留 localStorage（下次開頁可重試）
+     用法：把 fetch(URL, ...) 換成 SubmitQueue.add(URL, payload)
+     ════════════════════════════════════════════════════════ -->
+<script>
+const SubmitQueue = (() => {
+  let CONCURRENCY     = 2;        // 同時最多幾個請求（可由 setConcurrency 動態調整）
+  const MAX_RETRIES   = 3;
+  const BASE_DELAY_MS = 1500;
+  const MAX_PERSIST   = 50;       // localStorage 最多保留筆數
+  const STORAGE_KEY   = 'msq_pending';
+
+  let queue = [];
+  let running = 0;
+  let online = navigator.onLine;
+
+  const callbacks = {
+    onSuccess: (uid) => console.log('[Queue] OK uid:', uid),
+    onFail:    (uid, err) => console.warn('[Queue] FAIL uid:', uid, err),
+    onRetry:   (uid, n)  => console.log('[Queue] retry uid:', uid, '#', n),
+    onQueued:  (uid, len) => console.log('[Queue] queued uid:', uid, 'q=', len),
+  };
+
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  async function execute(task) {
+    running++;
+    let attempt = 0;
+    while (attempt <= MAX_RETRIES) {
+      try {
+        await fetch(task.url, {
+          method:  'POST',
+          mode:    'no-cors',
+          cache:   'no-cache',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body:    JSON.stringify(task.payload),
+        });
+        // no-cors 拿不到 status，能 resolve 就視為成功
+        removePersisted(task.uid);
+        callbacks.onSuccess(task.uid);
+        break;
+      } catch (err) {
+        attempt++;
+        if (attempt > MAX_RETRIES) {
+          // v1.1：失敗到底保留 localStorage，下次開頁再試
+          callbacks.onFail(task.uid, err.message);
+          break;
+        }
+        callbacks.onRetry(task.uid, attempt);
+        await sleep(BASE_DELAY_MS * Math.pow(2, attempt - 1));
+      }
+    }
+    running--;
+    next();
+  }
+
+  function next() {
+    if (!online) return;
+    while (running < CONCURRENCY && queue.length > 0) {
+      execute(queue.shift());
+    }
+  }
+
+  function persist(task) {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      stored.push(task);
+      // v1.1：超過 MAX_PERSIST 就丟最舊的，避免 localStorage 爆
+      while (stored.length > MAX_PERSIST) stored.shift();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored));
+    } catch (_) {}
+  }
+
+  function removePersisted(uid) {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stored.filter(t => t.uid !== uid)));
+    } catch (_) {}
+  }
+
+  function loadPersisted() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      if (stored.length > 0) {
+        console.log('[Queue] load persisted:', stored.length);
+        stored.forEach(t => queue.push(t));
+        next();
+      }
+    } catch (_) {}
+  }
+
+  window.addEventListener('online',  () => { online = true;  console.log('[Queue] online');  next(); });
+  window.addEventListener('offline', () => { online = false; console.log('[Queue] offline'); });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPersisted);
+  } else {
+    loadPersisted();
+  }
+
+  return {
+    add(url, payload) {
+      const uid = payload.uid || ('msq_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7));
+      const task = {
+        uid,
+        url,
+        payload: { ...payload, uid, submittedAt: payload.submittedAt || new Date().toISOString() },
+        addedAt: Date.now(),
+      };
+      persist(task);
+      queue.push(task);
+      callbacks.onQueued(uid, queue.length);
+      next();
+      return uid;
+    },
+    status() { return { queued: queue.length, running, online, concurrency: CONCURRENCY }; },
+    on(event, fn) { if (callbacks[event] !== undefined) callbacks[event] = fn; return this; },
+    // v1.1：真的可調整並發數，且立刻嘗試填滿
+    setConcurrency(n) {
+      if (typeof n === 'number' && n >= 1) {
+        CONCURRENCY = n;
+        next();
+      }
+      return this;
+    },
+  };
+})();
+</script>
 
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
@@ -1104,20 +1237,16 @@ function ChildApp({ onBack }) {
         const totalScore = types.reduce((s, t) => s + t.score, 0);
         const scoreMap = {};
         types.forEach(t => scoreMap[t.id] = t.score);
-        fetch(CHILD_GOOGLE_SCRIPT_URL, {
-          method: 'POST', mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            nickname: userData.name, identity: "孩子",
-            email: "無", phone: "無", session: "無", parentCheck: "已確認",
-            totalScore, red: scoreMap.fire, orange: scoreMap.electric,
-            green: scoreMap.grass, blue: scoreMap.water,
-            answers: { ...quizAnswers, [q.id]: score },
-            resultPokemon: randomPoke.name,
-            uid: 'trainer_' + Math.random().toString(36).substr(2, 9),
-            submittedAt: new Date().toISOString()
-          })
-        }).catch(() => {});
+        // v7.17：改走 SubmitQueue，背景排隊送出，不阻塞畫面切換
+        SubmitQueue.add(CHILD_GOOGLE_SCRIPT_URL, {
+          nickname: userData.name, identity: "孩子",
+          email: "無", phone: "無", session: "無", parentCheck: "已確認",
+          totalScore, red: scoreMap.fire, orange: scoreMap.electric,
+          green: scoreMap.grass, blue: scoreMap.water,
+          answers: { ...quizAnswers, [q.id]: score },
+          resultPokemon: randomPoke.name,
+          uid: 'trainer_' + Math.random().toString(36).substr(2, 9),
+        });
         setScene('dex');
         setIsTransitioning(false);
       }
@@ -1149,20 +1278,10 @@ function ChildApp({ onBack }) {
       uid: 'trainer_' + Math.random().toString(36).substr(2, 9),
       submittedAt: new Date().toISOString()
     };
-    const submitPromise = fetch(CHILD_GOOGLE_SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(sheetData)
-    });
-    const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve("timeout"), 3000));
-    try {
-      await Promise.race([submitPromise, timeoutPromise]);
-      setScene('dex');
-    } catch (error) {
-      console.error(error);
-      alert("連線不穩定，但您可以繼續查看分析結果！");
-      setScene('dex');
-    } finally { setLoading(false); }
+    // v7.17：改走 SubmitQueue，立刻送出（背景排隊），畫面不卡
+    SubmitQueue.add(CHILD_GOOGLE_SCRIPT_URL, sheetData);
+    setScene('dex');
+    setLoading(false);
   };
 
   const handleRestart = () => {
@@ -1217,6 +1336,21 @@ function ChildApp({ onBack }) {
     setQuizAnswers(ta);
     setFinalResult({ scores: types, mainTypeId: winnerTypeId, subTypeId: types[1].id, pokemon: randomPoke });
     setResultPokemon(randomPoke);
+
+    // v7.17：補上之前漏掉的送出 — 工程師測試資料也要進試算表
+    const totalScore = types.reduce((s, t) => s + t.score, 0);
+    const scoreMap = { fire: scores.fire, electric: scores.electric, grass: scores.grass, water: scores.water };
+    SubmitQueue.add(CHILD_GOOGLE_SCRIPT_URL, {
+      nickname: td.name, identity: "孩子(工程師測試)",
+      email: "無", phone: "無", session: "無", parentCheck: "已確認",
+      totalScore,
+      red: scoreMap.fire, orange: scoreMap.electric,
+      green: scoreMap.grass, blue: scoreMap.water,
+      answers: ta,
+      resultPokemon: randomPoke.name,
+      uid: 'trainer_eng_' + Math.random().toString(36).substr(2, 9),
+    });
+    console.log('[孩子版] 工程師模式已加入排隊送出');
 
     setShowStartModal(false);
     setShowEngineerModal(false);
@@ -1756,19 +1890,14 @@ function App() {
                         blue: sc.blue,
                         email: email,
                         phone: phone,
-                        childAge: childAge || '',  // v7.16：改用標準欄位名 childAge（與進階版一致）
+                        childAge: childAge || '',  // v7.17：改用標準欄位名 childAge（與進階版一致）
                         answers: updated,
                         uid: uid,
                         submittedAt: new Date().toISOString()
                     };
-                    fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        cache: 'no-cache',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(sheetData)
-                    });
-                    console.log('[心智光譜] 已自動送出測驗結果至 Google Sheet');
+                    // v7.17：改走 SubmitQueue（背景排隊、離線暫存、自動補送）
+                    SubmitQueue.add(GOOGLE_SCRIPT_URL, sheetData);
+                    console.log('[心智光譜] 已加入排隊送出至 Google Sheet');
                 } catch (err) {
                     console.error('[心智光譜] 送出失敗:', err);
                 }
@@ -1796,20 +1925,14 @@ function App() {
         setName(testName); setEmail(testEmail);
         setPhone(testPhone); setAnswers(ta); setTotal(tt); setScores(ts);
 
-        // ⭐ 工程師模式也自動送出（驗證後端）
-        try {
-            fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST', mode: 'no-cors', cache: 'no-cache',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({
-                    nickname: testName, identity: '家長(工程師測試)',
-                    totalScore: tt, red: ts.red, orange: ts.orange, green: ts.green, blue: ts.blue,
-                    email: testEmail, phone: testPhone, childAge: childAge || '',  // v7.16
-                    answers: ta, uid: uid, submittedAt: new Date().toISOString()
-                })
-            });
-            console.log('[心智光譜] 工程師模式已送出測試資料');
-        } catch (err) { console.error('[心智光譜] 送出失敗:', err); }
+        // v7.17：工程師模式改走 SubmitQueue
+        SubmitQueue.add(GOOGLE_SCRIPT_URL, {
+            nickname: testName, identity: '家長(工程師測試)',
+            totalScore: tt, red: ts.red, orange: ts.orange, green: ts.green, blue: ts.blue,
+            email: testEmail, phone: testPhone, childAge: childAge || '',
+            answers: ta, uid: uid,
+        });
+        console.log('[心智光譜] 工程師模式已加入排隊送出');
 
         setMode('quiz'); setShowEng(false); setEngPwd(''); setStep('result');
     };
@@ -1924,7 +2047,7 @@ function App() {
                         <Ico.Search/> 查詢過往紀錄
                     </button>
                 </div>
-                <div style={{textAlign:'center',padding:'12px 0 4px',fontSize:10,color:'var(--text-light)',letterSpacing:'1px'}}>v7.16</div>
+                <div style={{textAlign:'center',padding:'12px 0 4px',fontSize:10,color:'var(--text-light)',letterSpacing:'1px'}}>v7.17</div>
             </div>
         </Shell>
     );
@@ -2316,7 +2439,7 @@ function App() {
                         );
                     })()}
 
-                    {/* v7.16：移除「截圖保存」按鈕（依設計需求） */}
+                    {/* v7.17：移除「截圖保存」按鈕（依設計需求） */}
 
                     <button onClick={reset} className="btn-ghost">
                         <Ico.Restart/> 重新開始
