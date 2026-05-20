@@ -439,12 +439,17 @@
         .zhuyin-grid {
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             row-gap: 4px;
             column-gap: 2px;
             max-width: 100%;
             margin: 0 auto;
+            box-sizing: border-box;
+            padding: 0 4px;
+        }
+        .zhuyin-grid.zhuyin-mode-on {
+            justify-content: flex-start;
         }
         .zhuyin-char-block {
             display: inline-flex;
@@ -1828,10 +1833,10 @@ function ChildApp({ onBack, onSwitchToParent }) {
             <div className="bg-white border-[3px] border-black py-3 px-4 shadow-[4px_4px_0_#000] rounded-2xl mx-1 mb-2 relative">
               <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-0 h-0" style={{ borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderBottom: '10px solid white' }} />
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-0 h-0" style={{ borderLeft: '13px solid transparent', borderRight: '13px solid transparent', borderBottom: '13px solid black', zIndex: -1 }} />
-              <div className={`w-full flex justify-center items-center ${isZhuyinMode ? 'zhuyin-grid zhuyin-mode-on' : ''}`} style={{ minHeight: '3.6em', fontWeight: "700", opacity: "1", textAlign: "center", gap: "0px", alignItems: "center", letterSpacing: "-1.7px", margin: "0px", borderWidth: "0px", height: "81px", width: "424px", justifyContent: "flex-start" }}>
+              <div className={`w-full flex justify-center items-center ${isZhuyinMode ? 'zhuyin-grid zhuyin-mode-on' : ''}`} style={{ minHeight: '3.6em' }}>
                 {isZhuyinMode ?
                 renderZhuyinBlock(question.zhuyin) :
-                <p className="text-xl leading-relaxed font-black text-gray-900 tracking-wide text-center py-1 mx-auto" style={{ fontFamily: "'Noto Sans TC',sans-serif", textWrap: 'balance', maxWidth: '95%' }}>
+                <p className="text-xl leading-relaxed font-black text-gray-900 tracking-wide py-1" style={{ fontFamily: "'Noto Sans TC',sans-serif", textAlign: 'left', maxWidth: '95%' }}>
                     {question.text}
                   </p>
                 }
