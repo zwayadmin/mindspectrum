@@ -743,6 +743,40 @@ async function msCounterRpc(fn, body) {
   return res.json();
 }
 
+// 拉霸機式數字：每個位數像滾輪轉動後停在目標數字（由左至右依序定位）
+function SlotDigit({ digit, delay }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const target = 5 * 10 + digit; // 轉 5 圈後停在目標位數
+    el.style.transition = 'none';
+    el.style.transform = 'translateY(0)';
+    void el.offsetHeight; // 強制 reflow，確保每次都從頭轉
+    requestAnimationFrame(() => {
+      el.style.transition = 'transform 1.7s cubic-bezier(.16,.84,.28,1) ' + delay + 'ms';
+      el.style.transform = 'translateY(-' + target + 'em)';
+    });
+  }, [digit, delay]);
+  const reel = [];
+  for (let i = 0; i <= 59; i++) reel.push(i % 10);
+  return (
+    <span style={{ display: 'inline-block', height: '1em', lineHeight: '1em', overflow: 'hidden', verticalAlign: '-0.12em', fontVariantNumeric: 'tabular-nums' }}>
+      <span ref={ref} style={{ display: 'flex', flexDirection: 'column', willChange: 'transform' }}>
+        {reel.map((n, i) => <span key={i} style={{ height: '1em', lineHeight: '1em' }}>{n}</span>)}
+      </span>
+    </span>);
+}
+function SlotNumber({ value }) {
+  const chars = Number(value || 0).toLocaleString().split('');
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'flex-end' }}>
+      {chars.map((c, i) => /[0-9]/.test(c) ?
+      <SlotDigit key={i} digit={+c} delay={i * 140} /> :
+      <span key={i} style={{ display: 'inline-block' }}>{c}</span>)}
+    </span>);
+}
+
 const TYPE_INFO = {
   red: { label: "紅色・開創型", title: "紅色家長：追求效率的「小英雄守護者」", stress: "習慣說「快點」、「我說了算」、「為什麼還沒做好？」", strength: "具備極強的行動力、突破力與主導感。", practice: "練習「三秒鐘留白」。強迫自己閉嘴三秒，改問：「我現在是想解決問題，還是想接住這個孩子？」", barColor: "#D63030", darkColor: "#9B2121", bgColor: "#FFF0F0", borderColor: "rgba(214,48,48,0.18)" },
   orange: { label: "橙色・關懷型", title: "橙色家長：渴望連結的「共情大師」", stress: "容易情緒波動，會說「你這樣讓媽媽很難過」、「你為什麼不理我？」", strength: "天生的雷達，對情感與連結有高度精準的感受力。", practice: "練習「劃分心理邊界」。告訴自己：「孩子的情緒是他的，我的愛不會因為他的情緒而改變。」", barColor: "#E8600A", darkColor: "#B84A00", bgColor: "#FFF0E6", borderColor: "rgba(232,96,10,0.18)" },
@@ -2622,7 +2656,7 @@ function App() {
                 {siteStats && siteStats.tests != null &&
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, margin: '10px 0 2px', color: 'var(--text-light)', fontSize: 12.5, fontWeight: 600 }}>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                    <span>已有 <span style={{ color: 'var(--text-dark)', fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}>{Number(siteStats.tests).toLocaleString()}</span> 人完成測驗</span>
+                    <span>已有 <span style={{ color: 'var(--text-dark)', fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}><SlotNumber value={siteStats.tests} /></span> 人完成測驗</span>
                 </div>}
 
                 <div style={{ textAlign: 'center', padding: '4px 0', fontSize: 10, color: 'var(--text-light)', letterSpacing: '2px', fontWeight: 600 }}>RELEASE 3.0 · 2026</div>
