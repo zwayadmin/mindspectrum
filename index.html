@@ -2340,19 +2340,15 @@ function App() {
   const [siteStats, setSiteStats] = useState(null); // { visits, tests }
   const testCountedRef = useRef(false);
 
-  // 來訪人數：每次造訪 +1（同一 session 只加一次），並讀回兩個計數顯示
+  // 讀取「累積完成測驗人數」（只讀，不累加來訪）
   useEffect(() => {
     let alive = true;
     (async () => {
       try {
-        if (!sessionStorage.getItem('ms_visited')) {
-          sessionStorage.setItem('ms_visited', '1');
-          try { await msCounterRpc('ms_bump_counter', { counter_name: 'visits' }); } catch (e) {}
-        }
         const rows = await msCounterRpc('ms_get_counters');
         if (!alive) return;
         const m = {};(rows || []).forEach((r) => {m[r.name] = r.value;});
-        setSiteStats({ visits: m.visits, tests: m.tests });
+        setSiteStats({ tests: m.tests });
       } catch (e) {/* 計數失敗一律靜默，不影響測驗 */}
     })();
     return () => {alive = false;};
@@ -2562,26 +2558,6 @@ function App() {
                         </div>
           )}
                 </div>
-                {/* 社群實證：累積來訪 / 完成數（取自 Supabase 計數器，載入失敗則整列靜默隱藏） */}
-                {siteStats && (siteStats.visits != null || siteStats.tests != null) &&
-        <div style={{ display: 'flex', gap: 8, marginTop: 8, animation: 'fadeUp .55s cubic-bezier(.22,.68,0,1.15) .48s both' }}>
-                    {siteStats.visits != null &&
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, background: 'var(--card)', borderRadius: 14, padding: '12px 6px', border: '1px solid var(--border)', boxShadow: '0 2px 8px rgba(99,102,241,0.05)' }}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
-                        <div style={{ textAlign: 'left' }}>
-                            <div style={{ fontSize: 19, fontWeight: 900, color: 'var(--text-dark)', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{Number(siteStats.visits).toLocaleString()}</div>
-                            <div style={{ fontSize: 10, color: 'var(--text-light)', marginTop: 4, fontWeight: 600, letterSpacing: '0.5px' }}>累積來訪人次</div>
-                        </div>
-                    </div>}
-                    {siteStats.tests != null &&
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 9, background: 'var(--card)', borderRadius: 14, padding: '12px 6px', border: '1px solid var(--border)', boxShadow: '0 2px 8px rgba(99,102,241,0.05)' }}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                        <div style={{ textAlign: 'left' }}>
-                            <div style={{ fontSize: 19, fontWeight: 900, color: 'var(--text-dark)', lineHeight: 1, fontVariantNumeric: 'tabular-nums' }}>{Number(siteStats.tests).toLocaleString()}</div>
-                            <div style={{ fontSize: 10, color: 'var(--text-light)', marginTop: 4, fontWeight: 600, letterSpacing: '0.5px' }}>人完成測驗</div>
-                        </div>
-                    </div>}
-                </div>}
             </div>
 
             {/* Content */}
@@ -2642,9 +2618,12 @@ function App() {
 
                 {/* old duplicate stats removed */}
 
-                <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-mid)', textAlign: 'center', lineHeight: 1.85, marginBottom: 14, padding: '0 8px' }}>
-                    
-                </p>
+                {/* 累積完成測驗人數（取自 Supabase，置底、輕量；載入失敗則靜默隱藏） */}
+                {siteStats && siteStats.tests != null &&
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, margin: '10px 0 2px', color: 'var(--text-light)', fontSize: 12.5, fontWeight: 600 }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                    <span>已有 <span style={{ color: 'var(--text-dark)', fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}>{Number(siteStats.tests).toLocaleString()}</span> 人完成測驗</span>
+                </div>}
 
                 <div style={{ textAlign: 'center', padding: '4px 0', fontSize: 10, color: 'var(--text-light)', letterSpacing: '2px', fontWeight: 600 }}>RELEASE 3.0 · 2026</div>
             </div>
