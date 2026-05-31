@@ -773,7 +773,7 @@ function SlotNumber({ value }) {
     <span style={{ display: 'inline-flex', alignItems: 'flex-end' }}>
       {chars.map((c, i) => /[0-9]/.test(c) ?
       <SlotDigit key={i} digit={+c} delay={i * 140} /> :
-      <span key={i} style={{ display: 'inline-block' }}>{c}</span>)}
+      <span key={i} style={{ display: 'inline-block', fontSize: '0.8em', fontWeight: 400, margin: '0 0.01em', opacity: 0.85 }}>{c}</span>)}
     </span>);
 }
 
