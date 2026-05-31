@@ -1161,36 +1161,36 @@ function Shell({ children }) {
 const CHILD_GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxWvf1ulhsDkTdMT0Pckea-L32Q31Az-g09LrjIbfOBcMWg1k8Gnt9bumCQ4Id1bcdq/exec";
 
 const MONSTER_DATA = [
-{ id: 0, name: "嗶嗶小子", noun: "高頻能量 嗶嗶小子", img: "https://i.ibb.co/zW10PLVL/Beep-Boop.png", type: "fire", zhuyin: "<ruby>嗶<rt>ㄅㄧˋ</rt></ruby><ruby>嗶<rt>ㄅㄧˋ</rt></ruby><ruby>小<rt>ㄒㄧㄠˇ</rt></ruby><ruby>子<rt>ㄗˇ</rt></ruby>" },
-{ id: 1, name: "火花史萊姆", noun: "躁動火花 史萊姆", img: "https://i.ibb.co/Pz6QfL3t/Spark-Slime.png", type: "fire", zhuyin: "<ruby>火<rt>ㄏㄨㄛˇ</rt></ruby><ruby>花<rt>ㄏㄨㄚ</rt></ruby><ruby>史<rt>ㄕˇ</rt></ruby><ruby>萊<rt>ㄌㄞˊ</rt></ruby><ruby>姆<rt>ㄇㄨˇ</rt></ruby>" },
-{ id: 2, name: "迪斯可球怪", noun: "閃耀舞廳 迪斯可球", img: "https://i.ibb.co/F4psYTDw/Disco-Orb.png", type: "electric", zhuyin: "<ruby>迪<rt>ㄉㄧˊ</rt></ruby><ruby>斯<rt>ㄙ</rt></ruby><ruby>可<rt>ㄎㄜˇ</rt></ruby><ruby>球<rt>ㄑㄧㄡˊ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
-{ id: 3, name: "擴音喇叭鳥", noun: "聲波轟炸 擴音鳥", img: "https://i.ibb.co/fVSwHqyq/Megaphone-Bird-WAAAA.png", type: "fire", zhuyin: "<ruby>擴<rt>ㄎㄨㄛˋ</rt></ruby><ruby>音<rt>ㄧㄣ</rt></ruby><ruby>喇<rt>ㄌㄚˇ</rt></ruby><ruby>叭<rt>ㄅㄚ</rt></ruby><ruby>鳥<rt>ㄋㄧㄠˇ</rt></ruby>" },
-{ id: 4, name: "火箭衝衝", noun: "極速升空 火箭衝衝", img: "https://i.ibb.co/cKJmfk3G/Rocket-Zoom.png", type: "fire", zhuyin: "<ruby>火<rt>ㄏㄨㄛˇ</rt></ruby><ruby>箭<rt>ㄐㄧㄢˋ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby>" },
-{ id: 5, name: "苔石龜", noun: "靜謐磐石 苔石龜", img: "https://i.ibb.co/7xN8V7Cr/Mossy-Pebble-Turtle.png", type: "grass", zhuyin: "<ruby>苔<rt>ㄊㄞˊ</rt></ruby><ruby>石<rt>ㄕˊ</rt></ruby><ruby>龜<rt>ㄍㄨㄟ</rt></ruby>" },
-{ id: 6, name: "書本蟲", noun: "博學多聞 書本蟲", img: "https://i.ibb.co/SXnb5XNG/Bookwyrm.png", type: "water", zhuyin: "<ruby>書<rt>ㄕㄨ</rt></ruby><ruby>本<rt>ㄅㄣˇ</rt></ruby><ruby>蟲<rt>ㄔㄨㄥˊ</rt></ruby>" },
-{ id: 7, name: "隱形斗篷幽靈", noun: "羞澀隱者 斗篷幽靈", img: "https://i.ibb.co/wr7Tbs6p/Cloak-Ghost.png", type: "water", zhuyin: "<ruby>隱<rt>ㄧㄣˇ</rt></ruby><ruby>形<rt>ㄒㄧㄥˊ</rt></ruby><ruby>斗<rt>ㄉㄡˇ</rt></ruby><ruby>篷<rt>ㄆㄥˊ</rt></ruby><ruby>幽<rt>ㄧㄡ</rt></ruby><ruby>靈<rt>ㄌㄧㄥˊ</rt></ruby>" },
-{ id: 8, name: "雲朵瞌睡蟲", noun: "夢境漂浮 瞌睡蟲", img: "https://i.ibb.co/xSqyX047/Cloud-Snoozer.png", type: "grass", zhuyin: "<ruby>雲<rt>ㄩㄣˊ</rt></ruby><ruby>朵<rt>ㄉㄨㄛˇ</rt></ruby><ruby>瞌<rt>ㄎㄜ</rt></ruby><ruby>睡<rt>ㄕㄨㄟˋ</rt></ruby><ruby>蟲<rt>ㄔㄨㄥˊ</rt></ruby>" },
-{ id: 9, name: "冰塊方塊", noun: "絕對零度 冰塊方塊", img: "https://i.ibb.co/FqbkZZSM/Ice-Cube.png", type: "water", zhuyin: "<ruby>冰<rt>ㄅㄧㄥ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby>" },
-{ id: 10, name: "愛心雨雲", noun: "溫柔雨露 愛心雨雲", img: "https://i.ibb.co/MDC7DX86/Heart-Rain-Cloud.png", type: "electric", zhuyin: "<ruby>愛<rt>ㄞˋ</rt></ruby><ruby>心<rt>ㄒㄧㄣ</rt></ruby><ruby>雨<rt>ㄩˇ</rt></ruby><ruby>雲<rt>ㄩㄣˊ</rt></ruby>" },
-{ id: 11, name: "擁抱棉花糖", noun: "甜美療癒 棉花糖", img: "https://i.ibb.co/6c81zn40/Hug-Mallow.png", type: "electric", zhuyin: "<ruby>擁<rt>ㄩㄥˇ</rt></ruby><ruby>抱<rt>ㄅㄠˋ</rt></ruby><ruby>棉<rt>ㄇㄧㄢˊ</rt></ruby><ruby>花<rt>ㄏㄨㄚ</rt></ruby><ruby>糖<rt>ㄊㄤˊ</rt></ruby>" },
-{ id: 12, name: "變色情緒果凍", noun: "七彩波動 情緒果凍", img: "https://i.ibb.co/Df1pZ0wz/Mood-Jelly.png", type: "electric", zhuyin: "<ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>色<rt>ㄙㄜˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>緒<rt>ㄒㄩˋ</rt></ruby><ruby>果<rt>ㄍㄨㄛˇ</rt></ruby><ruby>凍<rt>ㄉㄨㄥˋ</rt></ruby>" },
-{ id: 13, name: "淚眼洋蔥", noun: "敏感內心 淚眼洋蔥", img: "https://i.ibb.co/m5grrmFM/Teeny-Onion.png", type: "electric", zhuyin: "<ruby>淚<rt>ㄌㄟˋ</rt></ruby><ruby>眼<rt>ㄧㄢˇ</rt></ruby><ruby>洋<rt>ㄧㄤˊ</rt></ruby><ruby>蔥<rt>ㄘㄨㄥ</rt></ruby>" },
-{ id: 14, name: "暖暖茶壺", noun: "暖心時刻 暖暖茶壺", img: "https://i.ibb.co/fdgXqcvN/Care-Pot.png", type: "electric", zhuyin: "<ruby>暖<rt>ㄋㄨㄢˇ</rt></ruby><ruby>暖<rt>ㄋㄨㄢˇ</rt></ruby><ruby>茶<rt>ㄔㄚˊ</rt></ruby><ruby>壺<rt>ㄏㄨˊ</rt></ruby>" },
-{ id: 15, name: "計算機機器人", noun: "精確運算 計算機", img: "https://i.ibb.co/Ld0dybyr/Calc-Bot-OK.png", type: "water", zhuyin: "<ruby>計<rt>ㄐㄧˋ</rt></ruby><ruby>算<rt>ㄙㄨㄢˋ</rt></ruby><ruby>機<rt>ㄐㄧ</rt></ruby><ruby>機<rt>ㄐㄧ</rt></ruby><ruby>器<rt>ㄑㄧˋ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby>" },
-{ id: 16, name: "齒輪貓頭鷹", noun: "精密結構 齒輪梟", img: "https://i.ibb.co/ycFcFwcp/Gear-Owl.png", type: "water", zhuyin: "<ruby>齒<rt>ㄔˇ</rt></ruby><ruby>輪<rt>ㄌㄨㄣˊ</rt></ruby><ruby>貓<rt>ㄇㄠ</rt></ruby><ruby>頭<rt>ㄊㄡˊ</rt></ruby><ruby>鷹<rt>ㄧㄥ</rt></ruby>" },
-{ id: 17, name: "聰明大腦", noun: "智慧中樞 聰明大腦", img: "https://i.ibb.co/PvF5cbZ4/Brainy-Float.png", type: "water", zhuyin: "<ruby>聰<rt>ㄘㄨㄥ</rt></ruby><ruby>明<rt>ㄇㄧㄥˊ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby><ruby>腦<rt>ㄋㄠˇ</rt></ruby>" },
-{ id: 18, name: "俄羅斯方塊獸", noun: "完美秩序 方塊獸", img: "https://i.ibb.co/hJcwzJqn/Tetris-Mon.png", type: "grass", zhuyin: "<ruby>俄<rt>ㄜˊ</rt></ruby><ruby>羅<rt>ㄌㄨㄛˊ</rt></ruby><ruby>斯<rt>ㄙ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby><ruby>獸<rt>ㄕㄡˋ</rt></ruby>" },
-{ id: 19, name: "檢查清單板", noun: "計畫通 檢查清單", img: "https://i.ibb.co/Jw8y8yvN/Checklist-Board.png", type: "grass", zhuyin: "<ruby>檢<rt>ㄐㄧㄢˇ</rt></ruby><ruby>查<rt>ㄔㄚˊ</rt></ruby><ruby>清<rt>ㄑㄧㄥ</rt></ruby><ruby>單<rt>ㄉㄢ</rt></ruby><ruby>板<rt>ㄅㄢˇ</rt></ruby>" },
-{ id: 20, name: "星空夢想家", noun: "無限星河 夢想家", img: "https://i.ibb.co/5WsXxH1L/Starry-Dreamer.png", type: "water", zhuyin: "<ruby>星<rt>ㄒㄧㄥ</rt></ruby><ruby>空<rt>ㄎㄨㄥ</rt></ruby><ruby>夢<rt>ㄇㄥˋ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>家<rt>ㄐㄧㄚ</rt></ruby>" },
-{ id: 21, name: "顏料潑灑怪", noun: "創意爆發 顏料怪", img: "https://i.ibb.co/rKdG2Bqd/Splat-Phantom.png", type: "fire", zhuyin: "<ruby>顏<rt>ㄧㄢˊ</rt></ruby><ruby>料<rt>ㄌㄧㄠˋ</rt></ruby><ruby>潑<rt>ㄆㄛ</rt></ruby><ruby>灑<rt>ㄙㄚˇ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
-{ id: 22, name: "飄浮大眼睛", noun: "洞察先機 大眼怪", img: "https://i.ibb.co/msDNCP5/Floating-Eye-dea.png", type: "water", zhuyin: "<ruby>飄<rt>ㄆㄧㄠ</rt></ruby><ruby>浮<rt>ㄈㄨˊ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby><ruby>眼<rt>ㄧㄢˇ</rt></ruby><ruby>睛<rt>ㄐㄧㄥ</rt></ruby>" },
-{ id: 23, name: "抽象拼貼獸", noun: "獨特視角 拼貼獸", img: "https://i.ibb.co/LzpmV7DS/Abstract-Collage.png", type: "fire", zhuyin: "<ruby>抽<rt>ㄔㄡ</rt></ruby><ruby>象<rt>ㄒㄧㄤˋ</rt></ruby><ruby>拼<rt>ㄆㄧㄣ</rt></ruby><ruby>貼<rt>ㄊㄧㄝ</rt></ruby><ruby>獸<rt>ㄕㄡˋ</rt></ruby>" },
-{ id: 24, name: "音符蝌蚪", noun: "美妙旋律 音符蝌蚪", img: "https://i.ibb.co/B2wcjQzM/Musical-Tadpole.png", type: "electric", zhuyin: "<ruby>音<rt>ㄧㄣ</rt></ruby><ruby>符<rt>ㄈㄨˊ</rt></ruby><ruby>蝌<rt>ㄎㄜ</rt></ruby><ruby>蚪<rt>ㄉㄡˇ</rt></ruby>" },
-{ id: 25, name: "發抖果凍", noun: "謹慎小心 發抖果凍", img: "https://i.ibb.co/NgYRHNBM/Shiver-Jelly.png", type: "grass", zhuyin: "<ruby>發<rt>ㄈㄚ</rt></ruby><ruby>抖<rt>ㄉㄡˇ</rt></ruby><ruby>果<rt>ㄍㄨㄛˇ</rt></ruby><ruby>凍<rt>ㄉㄨㄥˋ</rt></ruby>" },
-{ id: 26, name: "寄居蟹堡壘", noun: "絕對防禦 寄居蟹", img: "https://i.ibb.co/TBp5wcHz/Hermit-Fortress.png", type: "grass", zhuyin: "<ruby>寄<rt>ㄐㄧˋ</rt></ruby><ruby>居<rt>ㄐㄩ</rt></ruby><ruby>蟹<rt>ㄒㄧㄝˋ</rt></ruby><ruby>堡<rt>ㄅㄠˇ</rt></ruby><ruby>壘<rt>ㄌㄟˇ</rt></ruby>" },
-{ id: 27, name: "問號尾巴", noun: "探索未知 問號狐", img: "https://i.ibb.co/1GvXcq61/Question-Tail.png", type: "water", zhuyin: "<ruby>問<rt>ㄨㄣˋ</rt></ruby><ruby>號<rt>ㄏㄠˋ</rt></ruby><ruby>尾<rt>ㄨㄟˇ</rt></ruby><ruby>巴<rt>ㄅㄚ˙</rt></ruby>" },
-{ id: 28, name: "變形怪百變怪", noun: "適應萬變 百變怪", img: "https://i.ibb.co/70JWg1T/Ditto-Blob.png", type: "electric", zhuyin: "<ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>形<rt>ㄒㄧㄥˊ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby><ruby>百<rt>ㄅㄞˇ</rt></ruby><ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
-{ id: 29, name: "警報仙人掌", noun: "高度警戒 仙人掌", img: "https://i.ibb.co/XkMc5Gxd/Alarm-Cactus.png", type: "fire", zhuyin: "<ruby>警<rt>ㄐㄧㄥˇ</rt></ruby><ruby>報<rt>ㄅㄠˋ</rt></ruby><ruby>仙<rt>ㄒㄧㄢ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>掌<rt>ㄓㄤˇ</rt></ruby>" }];
+{ id: 0, name: "嗶嗶小子", noun: "高頻能量 嗶嗶小子", img: "monsters/Beep-Boop.gif", type: "fire", zhuyin: "<ruby>嗶<rt>ㄅㄧˋ</rt></ruby><ruby>嗶<rt>ㄅㄧˋ</rt></ruby><ruby>小<rt>ㄒㄧㄠˇ</rt></ruby><ruby>子<rt>ㄗˇ</rt></ruby>" },
+{ id: 1, name: "火花史萊姆", noun: "躁動火花 史萊姆", img: "monsters/Spark-Slime.gif", type: "fire", zhuyin: "<ruby>火<rt>ㄏㄨㄛˇ</rt></ruby><ruby>花<rt>ㄏㄨㄚ</rt></ruby><ruby>史<rt>ㄕˇ</rt></ruby><ruby>萊<rt>ㄌㄞˊ</rt></ruby><ruby>姆<rt>ㄇㄨˇ</rt></ruby>" },
+{ id: 2, name: "迪斯可球怪", noun: "閃耀舞廳 迪斯可球", img: "monsters/Disco-Orb.gif", type: "electric", zhuyin: "<ruby>迪<rt>ㄉㄧˊ</rt></ruby><ruby>斯<rt>ㄙ</rt></ruby><ruby>可<rt>ㄎㄜˇ</rt></ruby><ruby>球<rt>ㄑㄧㄡˊ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
+{ id: 3, name: "擴音喇叭鳥", noun: "聲波轟炸 擴音鳥", img: "monsters/Megaphone-Bird-WAAAA.gif", type: "fire", zhuyin: "<ruby>擴<rt>ㄎㄨㄛˋ</rt></ruby><ruby>音<rt>ㄧㄣ</rt></ruby><ruby>喇<rt>ㄌㄚˇ</rt></ruby><ruby>叭<rt>ㄅㄚ</rt></ruby><ruby>鳥<rt>ㄋㄧㄠˇ</rt></ruby>" },
+{ id: 4, name: "火箭衝衝", noun: "極速升空 火箭衝衝", img: "monsters/Rocket-Zoom.gif", type: "fire", zhuyin: "<ruby>火<rt>ㄏㄨㄛˇ</rt></ruby><ruby>箭<rt>ㄐㄧㄢˋ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby><ruby>衝<rt>ㄔㄨㄥ</rt></ruby>" },
+{ id: 5, name: "苔石龜", noun: "靜謐磐石 苔石龜", img: "monsters/Mossy-Pebble-Turtle.gif", type: "grass", zhuyin: "<ruby>苔<rt>ㄊㄞˊ</rt></ruby><ruby>石<rt>ㄕˊ</rt></ruby><ruby>龜<rt>ㄍㄨㄟ</rt></ruby>" },
+{ id: 6, name: "書本蟲", noun: "博學多聞 書本蟲", img: "monsters/Bookwyrm.gif", type: "water", zhuyin: "<ruby>書<rt>ㄕㄨ</rt></ruby><ruby>本<rt>ㄅㄣˇ</rt></ruby><ruby>蟲<rt>ㄔㄨㄥˊ</rt></ruby>" },
+{ id: 7, name: "隱形斗篷幽靈", noun: "羞澀隱者 斗篷幽靈", img: "monsters/Cloak-Ghost.gif", type: "water", zhuyin: "<ruby>隱<rt>ㄧㄣˇ</rt></ruby><ruby>形<rt>ㄒㄧㄥˊ</rt></ruby><ruby>斗<rt>ㄉㄡˇ</rt></ruby><ruby>篷<rt>ㄆㄥˊ</rt></ruby><ruby>幽<rt>ㄧㄡ</rt></ruby><ruby>靈<rt>ㄌㄧㄥˊ</rt></ruby>" },
+{ id: 8, name: "雲朵瞌睡蟲", noun: "夢境漂浮 瞌睡蟲", img: "monsters/Cloud-Snoozer.gif", type: "grass", zhuyin: "<ruby>雲<rt>ㄩㄣˊ</rt></ruby><ruby>朵<rt>ㄉㄨㄛˇ</rt></ruby><ruby>瞌<rt>ㄎㄜ</rt></ruby><ruby>睡<rt>ㄕㄨㄟˋ</rt></ruby><ruby>蟲<rt>ㄔㄨㄥˊ</rt></ruby>" },
+{ id: 9, name: "冰塊方塊", noun: "絕對零度 冰塊方塊", img: "monsters/Ice-Cube.gif", type: "water", zhuyin: "<ruby>冰<rt>ㄅㄧㄥ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby>" },
+{ id: 10, name: "愛心雨雲", noun: "溫柔雨露 愛心雨雲", img: "monsters/Heart-Rain-Cloud.gif", type: "electric", zhuyin: "<ruby>愛<rt>ㄞˋ</rt></ruby><ruby>心<rt>ㄒㄧㄣ</rt></ruby><ruby>雨<rt>ㄩˇ</rt></ruby><ruby>雲<rt>ㄩㄣˊ</rt></ruby>" },
+{ id: 11, name: "擁抱棉花糖", noun: "甜美療癒 棉花糖", img: "monsters/Hug-Mallow.gif", type: "electric", zhuyin: "<ruby>擁<rt>ㄩㄥˇ</rt></ruby><ruby>抱<rt>ㄅㄠˋ</rt></ruby><ruby>棉<rt>ㄇㄧㄢˊ</rt></ruby><ruby>花<rt>ㄏㄨㄚ</rt></ruby><ruby>糖<rt>ㄊㄤˊ</rt></ruby>" },
+{ id: 12, name: "變色情緒果凍", noun: "七彩波動 情緒果凍", img: "monsters/Mood-Jelly.gif", type: "electric", zhuyin: "<ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>色<rt>ㄙㄜˋ</rt></ruby><ruby>情<rt>ㄑㄧㄥˊ</rt></ruby><ruby>緒<rt>ㄒㄩˋ</rt></ruby><ruby>果<rt>ㄍㄨㄛˇ</rt></ruby><ruby>凍<rt>ㄉㄨㄥˋ</rt></ruby>" },
+{ id: 13, name: "淚眼洋蔥", noun: "敏感內心 淚眼洋蔥", img: "monsters/Teeny-Onion.gif", type: "electric", zhuyin: "<ruby>淚<rt>ㄌㄟˋ</rt></ruby><ruby>眼<rt>ㄧㄢˇ</rt></ruby><ruby>洋<rt>ㄧㄤˊ</rt></ruby><ruby>蔥<rt>ㄘㄨㄥ</rt></ruby>" },
+{ id: 14, name: "暖暖茶壺", noun: "暖心時刻 暖暖茶壺", img: "monsters/Care-Pot.gif", type: "electric", zhuyin: "<ruby>暖<rt>ㄋㄨㄢˇ</rt></ruby><ruby>暖<rt>ㄋㄨㄢˇ</rt></ruby><ruby>茶<rt>ㄔㄚˊ</rt></ruby><ruby>壺<rt>ㄏㄨˊ</rt></ruby>" },
+{ id: 15, name: "計算機機器人", noun: "精確運算 計算機", img: "monsters/Calc-Bot-OK.gif", type: "water", zhuyin: "<ruby>計<rt>ㄐㄧˋ</rt></ruby><ruby>算<rt>ㄙㄨㄢˋ</rt></ruby><ruby>機<rt>ㄐㄧ</rt></ruby><ruby>機<rt>ㄐㄧ</rt></ruby><ruby>器<rt>ㄑㄧˋ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby>" },
+{ id: 16, name: "齒輪貓頭鷹", noun: "精密結構 齒輪梟", img: "monsters/Gear-Owl.gif", type: "water", zhuyin: "<ruby>齒<rt>ㄔˇ</rt></ruby><ruby>輪<rt>ㄌㄨㄣˊ</rt></ruby><ruby>貓<rt>ㄇㄠ</rt></ruby><ruby>頭<rt>ㄊㄡˊ</rt></ruby><ruby>鷹<rt>ㄧㄥ</rt></ruby>" },
+{ id: 17, name: "聰明大腦", noun: "智慧中樞 聰明大腦", img: "monsters/Brainy-Float.gif", type: "water", zhuyin: "<ruby>聰<rt>ㄘㄨㄥ</rt></ruby><ruby>明<rt>ㄇㄧㄥˊ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby><ruby>腦<rt>ㄋㄠˇ</rt></ruby>" },
+{ id: 18, name: "俄羅斯方塊獸", noun: "完美秩序 方塊獸", img: "monsters/Tetris-Mon.gif", type: "grass", zhuyin: "<ruby>俄<rt>ㄜˊ</rt></ruby><ruby>羅<rt>ㄌㄨㄛˊ</rt></ruby><ruby>斯<rt>ㄙ</rt></ruby><ruby>方<rt>ㄈㄤ</rt></ruby><ruby>塊<rt>ㄎㄨㄞˋ</rt></ruby><ruby>獸<rt>ㄕㄡˋ</rt></ruby>" },
+{ id: 19, name: "檢查清單板", noun: "計畫通 檢查清單", img: "monsters/Checklist-Board.gif", type: "grass", zhuyin: "<ruby>檢<rt>ㄐㄧㄢˇ</rt></ruby><ruby>查<rt>ㄔㄚˊ</rt></ruby><ruby>清<rt>ㄑㄧㄥ</rt></ruby><ruby>單<rt>ㄉㄢ</rt></ruby><ruby>板<rt>ㄅㄢˇ</rt></ruby>" },
+{ id: 20, name: "星空夢想家", noun: "無限星河 夢想家", img: "monsters/Starry-Dreamer.gif", type: "water", zhuyin: "<ruby>星<rt>ㄒㄧㄥ</rt></ruby><ruby>空<rt>ㄎㄨㄥ</rt></ruby><ruby>夢<rt>ㄇㄥˋ</rt></ruby><ruby>想<rt>ㄒㄧㄤˇ</rt></ruby><ruby>家<rt>ㄐㄧㄚ</rt></ruby>" },
+{ id: 21, name: "顏料潑灑怪", noun: "創意爆發 顏料怪", img: "monsters/Splat-Phantom.gif", type: "fire", zhuyin: "<ruby>顏<rt>ㄧㄢˊ</rt></ruby><ruby>料<rt>ㄌㄧㄠˋ</rt></ruby><ruby>潑<rt>ㄆㄛ</rt></ruby><ruby>灑<rt>ㄙㄚˇ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
+{ id: 22, name: "飄浮大眼睛", noun: "洞察先機 大眼怪", img: "monsters/Floating-Eye-dea.gif", type: "water", zhuyin: "<ruby>飄<rt>ㄆㄧㄠ</rt></ruby><ruby>浮<rt>ㄈㄨˊ</rt></ruby><ruby>大<rt>ㄉㄚˋ</rt></ruby><ruby>眼<rt>ㄧㄢˇ</rt></ruby><ruby>睛<rt>ㄐㄧㄥ</rt></ruby>" },
+{ id: 23, name: "抽象拼貼獸", noun: "獨特視角 拼貼獸", img: "monsters/Abstract-Collage.gif", type: "fire", zhuyin: "<ruby>抽<rt>ㄔㄡ</rt></ruby><ruby>象<rt>ㄒㄧㄤˋ</rt></ruby><ruby>拼<rt>ㄆㄧㄣ</rt></ruby><ruby>貼<rt>ㄊㄧㄝ</rt></ruby><ruby>獸<rt>ㄕㄡˋ</rt></ruby>" },
+{ id: 24, name: "音符蝌蚪", noun: "美妙旋律 音符蝌蚪", img: "monsters/Musical-Tadpole.gif", type: "electric", zhuyin: "<ruby>音<rt>ㄧㄣ</rt></ruby><ruby>符<rt>ㄈㄨˊ</rt></ruby><ruby>蝌<rt>ㄎㄜ</rt></ruby><ruby>蚪<rt>ㄉㄡˇ</rt></ruby>" },
+{ id: 25, name: "發抖果凍", noun: "謹慎小心 發抖果凍", img: "monsters/Shiver-Jelly.gif", type: "grass", zhuyin: "<ruby>發<rt>ㄈㄚ</rt></ruby><ruby>抖<rt>ㄉㄡˇ</rt></ruby><ruby>果<rt>ㄍㄨㄛˇ</rt></ruby><ruby>凍<rt>ㄉㄨㄥˋ</rt></ruby>" },
+{ id: 26, name: "寄居蟹堡壘", noun: "絕對防禦 寄居蟹", img: "monsters/Hermit-Fortress.gif", type: "grass", zhuyin: "<ruby>寄<rt>ㄐㄧˋ</rt></ruby><ruby>居<rt>ㄐㄩ</rt></ruby><ruby>蟹<rt>ㄒㄧㄝˋ</rt></ruby><ruby>堡<rt>ㄅㄠˇ</rt></ruby><ruby>壘<rt>ㄌㄟˇ</rt></ruby>" },
+{ id: 27, name: "問號尾巴", noun: "探索未知 問號狐", img: "monsters/Question-Tail.gif", type: "water", zhuyin: "<ruby>問<rt>ㄨㄣˋ</rt></ruby><ruby>號<rt>ㄏㄠˋ</rt></ruby><ruby>尾<rt>ㄨㄟˇ</rt></ruby><ruby>巴<rt>ㄅㄚ˙</rt></ruby>" },
+{ id: 28, name: "變形怪百變怪", noun: "適應萬變 百變怪", img: "monsters/Ditto-Blob.gif", type: "electric", zhuyin: "<ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>形<rt>ㄒㄧㄥˊ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby><ruby>百<rt>ㄅㄞˇ</rt></ruby><ruby>變<rt>ㄅㄧㄢˋ</rt></ruby><ruby>怪<rt>ㄍㄨㄞˋ</rt></ruby>" },
+{ id: 29, name: "警報仙人掌", noun: "高度警戒 仙人掌", img: "monsters/Alarm-Cactus.gif", type: "fire", zhuyin: "<ruby>警<rt>ㄐㄧㄥˇ</rt></ruby><ruby>報<rt>ㄅㄠˋ</rt></ruby><ruby>仙<rt>ㄒㄧㄢ</rt></ruby><ruby>人<rt>ㄖㄣˊ</rt></ruby><ruby>掌<rt>ㄓㄤˇ</rt></ruby>" }];
 
 
 const getMonsterImg = (id) => MONSTER_DATA[id] ? MONSTER_DATA[id].img : MONSTER_DATA[0].img;
@@ -1851,7 +1851,7 @@ function ChildApp({ onBack, onSwitchToParent }) {
 
             <div className="relative bg-gradient-to-b from-gray-700 to-gray-900 p-1.5 rounded-xl border-b-4 border-r-4 border-gray-950 shadow-2xl">
               <div className="bg-gray-700 p-1 rounded-lg border-2 border-gray-600 shadow-inner">
-                <div className="relative bg-white rounded overflow-hidden border-2 border-black shadow-[inset_0_0_20px_rgba(0,0,0,0.15)]" style={{ width: 'clamp(180px,42vh,280px)', height: 'clamp(140px,32vh,210px)' }}>
+                <div className="relative bg-white rounded overflow-hidden border-2 border-black shadow-[inset_0_0_20px_rgba(0,0,0,0.15)]" style={{ width: 'clamp(260px,82vw,400px)', height: 'clamp(180px,42vh,270px)' }}>
                   {/* Scanlines */}
                   <div className="absolute inset-0 z-20 pointer-events-none opacity-10" style={{ backgroundImage: 'linear-gradient(transparent 50%, rgba(0,0,0,0.5) 50%)', backgroundSize: '100% 4px' }}></div>
                   {/* Battle stage glow */}
@@ -1860,7 +1860,7 @@ function ChildApp({ onBack, onSwitchToParent }) {
                   <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-20 h-2 bg-black/25 rounded-full blur-md animate-pulse"></div>
                   {/* Monster */}
                   <div className="w-full h-full flex items-center justify-center animate-float relative z-10">
-                    <img src={wildMonsterImg} className="w-4/5 h-4/5 object-contain" alt="Monster" style={{ imageRendering: 'pixelated' }} decoding="async" />
+                    <img src={wildMonsterImg} className="w-full h-full object-contain" alt="Monster" style={{ imageRendering: 'pixelated' }} decoding="async" />
                   </div>
                 </div>
                 {/* Monster name badge — below monster */}
@@ -1950,7 +1950,7 @@ function ChildApp({ onBack, onSwitchToParent }) {
           </div>
           <form className="p-6 space-y-4" onSubmit={handleFinalSubmit} noValidate>
             <div className="text-center mb-4">
-              {resultPokemon && <img src={resultPokemon.img} className="w-48 h-48 mx-auto animate-bounce-once object-contain" alt={resultPokemon.name} style={{ imageRendering: 'pixelated' }} decoding="async" />}
+              {resultPokemon && <img src={resultPokemon.img} className="w-64 h-auto mx-auto animate-bounce-once object-contain" alt={resultPokemon.name} style={{ imageRendering: 'pixelated' }} decoding="async" />}
               <div className="text-sm mt-4 p-4 bg-gray-50 rounded-xl border-2 border-gray-200 text-left shadow-sm">
                 <p className="font-bold text-center mb-2 text-gray-500 tracking-widest text-xs">您的光譜測驗結果為</p>
                 <div className={`text-xl font-bold text-center mb-1 ${mainType.color}`}>{mainType.typeName}</div>
@@ -2043,7 +2043,7 @@ function ChildApp({ onBack, onSwitchToParent }) {
             {/* Monster portrait */}
             <div style={{ padding: '18px 16px 14px', background: P.light, position: 'relative' }}>
               <div style={{
-                width: 180, height: 180, margin: '0 auto', position: 'relative',
+                width: 240, height: 240, margin: '0 auto', position: 'relative',
                 background: '#fff',
                 border: `4px solid ${P.dark}`,
                 borderRadius: '50%',
@@ -2055,7 +2055,7 @@ function ChildApp({ onBack, onSwitchToParent }) {
                 <div style={{ position: 'absolute', bottom: 18, left: 18, fontSize: 14, color: P.main, animation: 'pulse 2.5s ease infinite .4s' }}>★</div>
                 <div style={{ position: 'absolute', top: 30, left: 14, fontSize: 12, color: P.main, animation: 'pulse 1.8s ease infinite .8s' }}>✧</div>
                 <img src={pokemon.img} alt={pokemon.name} decoding="async"
-                style={{ width: 140, height: 140, objectFit: 'contain', imageRendering: 'pixelated', position: 'relative', zIndex: 2, mixBlendMode: 'multiply' }} />
+                style={{ width: 220, height: 220, objectFit: 'contain', imageRendering: 'pixelated', position: 'relative', zIndex: 2, mixBlendMode: 'multiply' }} />
               </div>
             </div>
 
