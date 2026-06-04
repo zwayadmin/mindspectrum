@@ -2668,7 +2668,7 @@ function App() {
                 </button>
 
                 {/* 我是成人 */}
-                <button onClick={() => {setAdultRole('adult');setMode('quiz');setStep('register');}} style={{
+                <button onClick={() => {setAdultRole('adult');setChildAge('無');setMode('quiz');setStep('register');}} style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', marginBottom: 8,
           background: 'linear-gradient(135deg,#FAF5FF,#F3E8FF)',
           border: '2px solid #C4B5FD', borderRadius: 16,
@@ -2788,8 +2788,8 @@ function App() {
                             </div>
                         </div>
 
-                        {/* 孩子年齡（quiz mode only, optional） */}
-                        {mode === 'quiz' &&
+                        {/* 孩子年齡（quiz mode only, optional；成人身份不顯示，childAge 已預設為「無」） */}
+                        {mode === 'quiz' && adultRole !== 'adult' &&
             <div style={{ marginBottom: 16 }}>
                                 <label style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-mid)', display: 'block', marginBottom: 8 }}>
                                     孩子的年齡
