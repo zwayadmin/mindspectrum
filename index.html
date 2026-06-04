@@ -2729,6 +2729,17 @@ function App() {
   /* ─────────── REGISTER ─────────── */
   if (step === 'register') return (
     <Shell>
+            <div style={{ padding: '12px 16px 0', display: 'flex' }}>
+                <button onClick={reset} style={{
+          display: 'inline-flex', alignItems: 'center', gap: 4,
+          fontSize: 13, fontWeight: 800, color: 'var(--text-dark)',
+          background: '#fff', border: '1.5px solid var(--border)',
+          borderRadius: 999, padding: '7px 14px 7px 10px', cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.06)', fontFamily: 'inherit'
+        }}>
+                    <Ico.ChevronL /> 返回
+                </button>
+            </div>
             <div className="top-header">
                 <SpectrumStrip />
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 10 }}>
@@ -2830,7 +2841,6 @@ function App() {
                     </form>
                 </div>
 
-                <button onClick={reset} className="btn-ghost" style={{ color: "rgb(0, 0, 0)" }}><Ico.ChevronL /> 返回</button>
 
                 <div style={{ textAlign: 'center', marginTop: 16 }}>
                     <button onClick={() => setShowEng(true)} style={{ fontSize: 10, color: 'var(--border)', background: 'none', border: 'none', cursor: 'pointer' }}>工程師</button>
