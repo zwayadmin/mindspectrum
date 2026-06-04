@@ -1914,7 +1914,7 @@ function ChildApp({ onBack, onSwitchToParent }) {
               <button
                 onClick={() => setIsZhuyinMode(!isZhuyinMode)}
                 className={`px-3 py-2 rounded-lg border-2 text-xs font-black transition-colors shadow-md flex-shrink-0 ${isZhuyinMode ? 'bg-yellow-400 border-yellow-600 text-black' : 'bg-white/10 border-white/30 text-white/90 hover:bg-white/20'}`}>
-                注音 {isZhuyinMode ? 'ON' : 'OFF'}
+                {isZhuyinMode ? '關閉注音' : '顯示注音'}
               </button>
             </div>
           </div>
