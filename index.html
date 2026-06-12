@@ -8,9 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://i.ibb.co">
     <link rel="preconnect" href="https://unpkg.com">
-    <link rel="dns-prefetch" href="https://i.ibb.co">
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=M+PLUS+Rounded+1c:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
@@ -1194,8 +1192,8 @@ const MONSTER_DATA = [
 
 const getMonsterImg = (id) => MONSTER_DATA[id] ? MONSTER_DATA[id].img : MONSTER_DATA[0].img;
 
-const INTRO_BG_URL = "https://i.ibb.co/gbPj3CZv/Gemini-Generated-Image-ghygqcghygqcghyg.png";
-const TALK_BG_URL = "https://i.ibb.co/YFDpZvGr/Gemini-Generated-Image-wq8l7vwq8l7vwq8l.png";
+const INTRO_BG_URL = "images/intro-bg.png";
+const TALK_BG_URL = "images/talk-bg.png";
 const INTRO_COLORS = ['bg-indigo-900', 'bg-red-900', 'bg-emerald-900', 'bg-slate-900', 'bg-purple-900', 'bg-cyan-900', 'bg-rose-900', 'bg-amber-900'];
 
 const QUESTIONS_DATA_SOURCE = [
@@ -2428,7 +2426,7 @@ function App() {
   const reset = () => {
     setStep('home');setMode('quiz');setName('');setEmail('');setPhone('');
     setQIdx(0);setAnswers({});setScores({ red: 0, orange: 0, green: 0, blue: 0 });
-    setTotal(0);setReferral([]);setRefErr(false);
+    setTotal(0);
     setShowSS(false);setShowEng(false);setEngPwd('');setBotTrap('');
     setLookNick('');setLookEmail('');setLookChild('');setLookResult(null);setLookErr('');setLookWho(null);
     setNavDir('fwd');setChildAge(null);setShowShare(false);setCopied(false);
@@ -2488,7 +2486,7 @@ function App() {
         try {
           const sheetData = {
             nickname: name,
-            identity: '家長',
+            identity: adultRole === 'teacher' ? '老師' : adultRole === 'adult' ? '成人' : '家長',
             totalScore: t,
             red: sc.red,
             orange: sc.orange,
