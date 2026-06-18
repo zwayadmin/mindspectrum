@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="心智光譜">
+  <title>心智光譜</title>
+  <rect x="2.25" y="16" width="5" height="12" rx="2.5" fill="#D63030"/>
+  <rect x="9.75" y="12" width="5" height="16" rx="2.5" fill="#E8600A"/>
+  <rect x="17.25" y="8" width="5" height="20" rx="2.5" fill="#2E8B5A"/>
+  <rect x="24.75" y="4" width="5" height="24" rx="2.5" fill="#3A70B0"/>
+</svg>
